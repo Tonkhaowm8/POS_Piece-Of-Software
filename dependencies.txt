@@ -3,4 +3,17 @@ npm install react
 npm install react-router-dom
 npm install styled-components
 
+
 Backend
+npm install express
+npm install http-proxy-middleware
+
+* YOU NEED TO RUN BOTH FRONTEND AND BACKEND *
+
+How to run:
+1. Go to POS_Piece-Of-Software\Backend
+2. node server.js
+3. Go to POS_Piece-Of-Software\Frontend\pos
+4. npm start
+
+If there's problem, contact Tonkhaow
