@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Routes, BrowserRouter } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Routes, BrowserRouter } from "react-router-dom";
+import Nav from './components/SideNav';
+import Routee from './Route';
 // import Dashboard from "./pages/Dashboard";
 // import Stock from './pages/Stock';
 
@@ -19,13 +21,7 @@ function App() {
     <div className="App">
       <h1>Hello from React Frontend!</h1>
       <p>Message from the backend: {backendMessage}</p>
-      {/* <BrowserRouter>
-        <Routes>
-          <Route index element={<Stock />} />
-          <Route path="/stock" element={<Stock />} />\
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </BrowserRouter> */}
+      <Nav />
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import React from "react";
-import Nav from "../components/Nav";
+import Nav from "../components/SideNav";
 
 
-function Dashboard() {
+function Dashboard(props) {
     return(
         <div>
             <Nav></Nav>
