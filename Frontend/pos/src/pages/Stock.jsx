@@ -4,8 +4,7 @@ import Nav from "../components/SideNav";
 
 function Stock(props) {
     return(
-        <div>
-            <Nav></Nav>
+        <div className="page">
             <h2>Stock page</h2>
         </div>
     );

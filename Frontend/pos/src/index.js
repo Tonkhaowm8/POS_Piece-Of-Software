@@ -3,14 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Dashboard from "./pages/Dashboard";
+import Stock from './pages/Stock';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 // import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Routee from './Route';
-import Dashboard from "./pages/Dashboard";
-import Stock from './pages/Stock';
+
 
 const router = createBrowserRouter([
   {
@@ -30,8 +31,8 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-    {/* {<App/>} */}
+    {/* <RouterProvider router={router} /> */}
+    {<App/>}
   </React.StrictMode>
 );
 

@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.mysidenav {
+  background-color: #1C0059 !important;
+}
+.page {
+  font-size: 5rem;
+  text-align: center;
+}

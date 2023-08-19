@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-// import { BrowserRouter as Router, Route, Routes, BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, BrowserRouter } from "react-router-dom";
 import Nav from './components/SideNav';
-import Routee from './Route';
-// import Dashboard from "./pages/Dashboard";
-// import Stock from './pages/Stock';
+import Dashboard from './pages/Dashboard';
+import Stock from './pages/Stock';
+// import Routee from './Route';
+
 
 function App() {
 
@@ -21,7 +22,15 @@ function App() {
     <div className="App">
       <h1>Hello from React Frontend!</h1>
       <p>Message from the backend: {backendMessage}</p>
-      <Nav />
+      {/* <Nav /> */}
+
+      <Router>
+        <Nav />
+        <Routes>
+          <Route path='/stock' index element={<Stock />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

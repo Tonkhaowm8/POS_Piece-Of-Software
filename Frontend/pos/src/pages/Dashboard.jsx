@@ -4,8 +4,7 @@ import Nav from "../components/SideNav";
 
 function Dashboard(props) {
     return(
-        <div>
-            <Nav></Nav>
+        <div className="page">
             <h2>Dashboard page</h2>
         </div>
     );
