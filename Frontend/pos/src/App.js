@@ -12,7 +12,7 @@ function App() {
   const [backendMessage, setBackendMessage] = useState('');
 
   useEffect(() => {
-    fetch('/api')
+    fetch('http://localhost:4000/api')
       .then(response => response.json())
       .then(data => setBackendMessage(data.message))
       .catch(error => console.error('Error fetching data:', error));
