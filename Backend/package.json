@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "aws-sdk": "^2.1449.0",
     "cors": "^2.8.5",
     "express": "^4.18.2"
   }
