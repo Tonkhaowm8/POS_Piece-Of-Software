@@ -2,7 +2,7 @@ const config = require("./credentials.json")
 const fs = require('fs')
 let cred = "hi"
 
-try{
+try {
   const jsonString = fs.readFileSync("./credentials.json");
   cred = JSON.parse(jsonString);
 } catch (err) {
@@ -11,7 +11,7 @@ try{
 }
 
 module.exports = {
-    aws_table_name: 'dynamodb-test',
+    aws_table_name: 'product',
     aws_local_config: {
       //Provide details for local configuration
     },
