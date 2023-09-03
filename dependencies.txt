@@ -7,6 +7,7 @@ npm install styled-components
 Backend
 npm install express
 npm install http-proxy-middleware
+npm i aws-sdk --save
 
 * YOU NEED TO RUN BOTH FRONTEND AND BACKEND *
 
