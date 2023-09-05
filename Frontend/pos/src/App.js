@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Routes, BrowserRouter } from "react-rou
 import Nav from './components/SideNav';
 import Dashboard from './pages/Dashboard';
 import Stock from './pages/Stock';
-// import Routee from './Route';
 
 
 function App() {

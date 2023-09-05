@@ -5,36 +5,36 @@ const router = express.Router()
 
 // READ ALL Users
 router.get('/items', async(req, res) => {
-    const { success, data } = await db.readAllItems()
+    const { success, data, error } = await db.readAllItems()
 
     if(success){
         return res.json({success, data})
     }
-    return res.status(500).json({success:false, messsage: "Error"})
+    return res.status(500).json({success: false, messsage: error})
 })
 
 // Get User by ID
 router.get('/item/:id', async(req, res) => {
     const { id } = req.params
-    const { success, data } = await db.getItemById(id)
+    const { success, data, error } = await db.getItemById(id)
     console.log(data)
     if(success){
         return res.json({success, data})
     }
 
-    return res.status(500).json({success: false, message: "Error"})
+    return res.status(500).json({success: false, message: error})
 })
 
 
 // Create User
 router.post('/item', async(req, res) => {
-    const { success, data } = await db.createOrUpdate(req.body)
+    const { success, data, error } = await db.createOrUpdate(req.body)
 
     if(success){
         return res.json({success, data})
     }
 
-    return res.status(500).json({success: false, message: 'Error'})
+    return res.status(500).json({success: false, message: error})
 })
 
 
@@ -44,24 +44,24 @@ router.put('/item/:id', async(req, res) => {
     const { id } = req.params
     user.id = parseInt(id)
 
-    const { success, data } = await db.createOrUpdate(user)
+    const { success, data, error} = await db.createOrUpdate(user)
 
     if(success){
         return res.json({success, data})
     }
 
-    return res.status(500).json({success: false, message: "Error"})
+    return res.status(500).json({success: false, message: error})
 })
 
 
 // Delete User by Id
 router.delete('/item/:id', async (req, res) => {
     const { id } = req.params
-    const { success, data } = await db.deleteItemById(id)
+    const { success, data, error} = await db.deleteItemById(id)
     if (success) {
       return res.json({ success, data })
     }
-    return res.status(500).json({ success: false, message: 'Error'})
+    return res.status(500).json({ success: false, message: error})
 })
   
 

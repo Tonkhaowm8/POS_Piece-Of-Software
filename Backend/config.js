@@ -1,4 +1,5 @@
 const config = require("./credentials.json")
+const AWS = require("aws-sdk")
 const fs = require('fs')
 let cred = "hi"
 
@@ -10,14 +11,15 @@ try {
   return;
 }
 
+AWS.config.update({
+  accessKeyId: (cred.ACCESS_KEY_ID),
+  secretAccessKey: (cred.SECRET_ACCESS_KEY),
+  region: 'us-east-1',
+})
+
+const db = new AWS.DynamoDB.DocumentClient()
+
 module.exports = {
+    db,
     aws_table_name: 'product',
-    aws_local_config: {
-      //Provide details for local configuration
-    },
-    aws_remote_config: {
-      accessKeyId: (cred.ACCESS_KEY_ID),
-      secretAccessKey: (cred.SECRET_ACCESS_KEY),
-      region: 'us-east-1',
-    }
 };
