@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import SideNav, {Toggle, NavItem, NavIcon, NavText} from '@trendmicro/react-sidenav';
 import { useNavigate } from "react-router-dom";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";  
+import logo_2 from './pos/public/logo_ 2.png';
 
 
 function Nav() {
