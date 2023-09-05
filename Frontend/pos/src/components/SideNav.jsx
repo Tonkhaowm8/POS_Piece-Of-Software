@@ -28,7 +28,20 @@ function Nav() {
                         <NavIcon><i class="fa-solid fa-database"></i></NavIcon>
                         <NavText>Stock</NavText>
                     </NavItem>
-                    <NavItem eventKey="Logout"> 
+                </SideNav.Nav>
+
+                <SideNav.Nav>
+                    <NavItem></NavItem>
+                    <NavItem></NavItem>
+                    <NavItem></NavItem>
+                    <NavItem></NavItem>
+                    <NavItem></NavItem>
+                    <NavItem></NavItem>
+                    <NavItem></NavItem>
+                    <NavItem></NavItem>
+                    <NavItem></NavItem>
+                    <NavItem></NavItem>
+                    <NavItem eventKey="Logout">
                         <NavIcon><i class="fa-solid fa-arrow-right-from-bracket"></i></NavIcon>
                         <NavText>Log out</NavText>
                     </NavItem>
