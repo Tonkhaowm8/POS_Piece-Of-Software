@@ -1,10 +1,9 @@
-const AWS = require('aws-sdk');
 const config = require('./config.js')
 
 // Create or Update items
 const createOrUpdate = async (data = {}) =>{
     const params = {
-        TableName: Table,
+        TableName: config.Table,
         Item: data
     }
 
@@ -19,10 +18,10 @@ const createOrUpdate = async (data = {}) =>{
 // Read all items
 const readAllItems = async()=>{
     const params = {
-        TableName: Table
+        TableName: config.Table
     }
 
-    try{
+    try {
         const { Items = [] } = await db.scan(params).promise()
         return { success: true, data: Items }
 
@@ -35,7 +34,7 @@ const readAllItems = async()=>{
 // Read Item by ID
 const getItemById = async (value, key = 'id') => {
     const params = {
-        TableName: Table,
+        TableName: config.Table,
         Key: {
             [key]: parseInt(value)
         }
@@ -51,7 +50,7 @@ const getItemById = async (value, key = 'id') => {
 // Delete item by ID
 const deleteItemById = async(value, key = 'id' ) => { 
     const params = {
-        TableName: Table,
+        TableName: config.Table,
         Key: {
             [key]: parseInt(value)
         }

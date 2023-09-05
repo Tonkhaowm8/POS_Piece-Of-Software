@@ -5,7 +5,7 @@ const router = express.Router()
 
 // READ ALL Users
 router.get('/items', async(req, res) => {
-    const { success, data } = await db.readAllUsers()
+    const { success, data } = await db.readAllItems()
 
     if(success){
         return res.json({success, data})
@@ -16,7 +16,7 @@ router.get('/items', async(req, res) => {
 // Get User by ID
 router.get('/item/:id', async(req, res) => {
     const { id } = req.params
-    const { success, data } = await db.getUserById(id)
+    const { success, data } = await db.getItemById(id)
     console.log(data)
     if(success){
         return res.json({success, data})
@@ -57,7 +57,7 @@ router.put('/item/:id', async(req, res) => {
 // Delete User by Id
 router.delete('/item/:id', async (req, res) => {
     const { id } = req.params
-    const { success, data } = await db.deleteUserById(id)
+    const { success, data } = await db.deleteItemById(id)
     if (success) {
       return res.json({ success, data })
     }
