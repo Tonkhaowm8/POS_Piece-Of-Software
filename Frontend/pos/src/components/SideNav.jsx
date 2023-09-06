@@ -18,7 +18,7 @@ function Nav() {
             }}
             className = 'mysidenav'
             >
-                <div class="logo">Stock Fck</div>
+                <div class="logo">Stock</div>
                 <SideNav.Toggle />
                 <SideNav.Nav defaultSelected="Stock">
                     <NavItem eventKey="Dashboard">
