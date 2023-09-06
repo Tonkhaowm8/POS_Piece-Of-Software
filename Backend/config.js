@@ -3,6 +3,7 @@ const AWS = require("aws-sdk")
 const fs = require('fs')
 let cred = "hi"
 
+
 try {
   const jsonString = fs.readFileSync("./credentials.json");
   cred = JSON.parse(jsonString);
