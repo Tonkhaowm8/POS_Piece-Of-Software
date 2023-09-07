@@ -4,36 +4,9 @@ import SideNav, {Toggle, NavItem, NavIcon, NavText} from '@trendmicro/react-side
 import { useNavigate } from "react-router-dom";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";  
 import SidebarItems from "./SideNavItems";
-// import logo_2 from './pos/public/logo_ 2.png';
+// import logo_2 from 'pos/src/logo_ 2.png';
 
-// const SidebarParent = styled.div`
-//   background: #c34a36;
-//   width: 250px;
-//   height: 100vh;
-// `;
 
-// const SidebarItem = styled.div`
-//   padding: 16px 24px;
-//   transition: all 0.25s ease-in-out;
-//   //Change the background color if 'active' prop is received
-//   background: ${props => props.active ? "#b15b00" : ""};
-//   margin: 4px 12px;
-//   border-radius: 4px;
-
-//   p {
-//     color: white;
-//     font-weight: bold;
-//     text-decoration: none;
-//   }
-
-//   &:hover {
-//     cursor:pointer;
-//   }
-
-//   &:hover:not(:first-child) {
-//     background: #c34a36;
-//   }
-// `;
 
 function Nav() {
     const navigate = useNavigate();
@@ -58,10 +31,12 @@ function Nav() {
                 }}
                 className = 'mysidenav'
                 >
-                <div class="logo">Stock</div>
+                <div class="logo">
+                    <img src={require('C:/Users/mrput/Documents/VSProject/POS_Piece-Of-Software/Frontend/pos/src/logo_ 2.png')} alt="Stock | Product" style={{height: 'auto', width: 'auto'}}/>
+                </div>
                 <SideNav.Toggle />
                 <SideNav.Nav defaultSelected="Stock">
-                    <NavItem eventKey="Dashboard">
+                    <NavItem eventKey="Dashboard" style={{margin: '45px 0px 0px'}}>
                         <NavIcon><i class="fa-solid fa-table-columns"></i></NavIcon>
                         <NavText>Dashboard</NavText>
                     </NavItem>
@@ -69,24 +44,13 @@ function Nav() {
                         <NavIcon><i class="fa-solid fa-database"></i></NavIcon>
                         <NavText>Stock</NavText>
                     </NavItem>
-                </SideNav.Nav>
-
-                <SideNav.Nav>
-                    <NavItem></NavItem>
-                    <NavItem></NavItem>
-                    <NavItem></NavItem>
-                    <NavItem></NavItem>
-                    <NavItem></NavItem>
-                    <NavItem></NavItem>
-                    <NavItem></NavItem>
-                    <NavItem></NavItem>
-                    <NavItem></NavItem>
-                    <NavItem></NavItem>
-                    <NavItem eventKey="Logout">
+                    <NavItem eventKey="Logout" style={{position: 'absolute', display: 'flex',bottom: 0}}>
                         <NavIcon><i class="fa-solid fa-arrow-right-from-bracket"></i></NavIcon>
                         <NavText>Log out</NavText>
                     </NavItem>
                 </SideNav.Nav>
+
+           
             </SideNav>
         </div>
     );

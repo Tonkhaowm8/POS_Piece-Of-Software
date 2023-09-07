@@ -10,7 +10,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 // import {BrowserRouter, Route, Switch} from "react-router-dom";
-import Routee from './Route';
 
 
 const router = createBrowserRouter([
