@@ -30,6 +30,7 @@ function Nav() {
                     navigate('/'+selected)
                 }}
                 className = 'mysidenav'
+                style = {{position: 'fixed'}}
                 >
                 <div class="logo">
                     <img src={require('C:/Users/mrput/Documents/VSProject/POS_Piece-Of-Software/Frontend/pos/src/logo_ 2.png')} alt="Stock | Product" style={{height: 'auto', width: 'auto'}}/>

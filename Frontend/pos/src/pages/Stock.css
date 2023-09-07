@@ -1,0 +1,18 @@
+.stock-background {
+    background-color: #ebebf5;
+}
+
+.margin-topnav {
+    background-color: white;
+    width: auto;
+    margin: auto;
+    padding: -5px 350px;
+}
+
+.col-sm {
+    overflow-x: hidden;
+}
+
+.uni1 .uni2 {
+    overflow: scroll;
+}
