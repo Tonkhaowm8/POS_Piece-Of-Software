@@ -50,8 +50,6 @@ function Nav() {
                         <NavText>Log out</NavText>
                     </NavItem>
                 </SideNav.Nav>
-
-           
             </SideNav>
         </div>
     );
