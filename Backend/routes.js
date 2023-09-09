@@ -12,7 +12,7 @@ router.get('/items', async (req, res) => {
 
     if (success) {
         // If the operation is successful, return JSON response with retrieved data
-        return res.json({ success, data });
+        return res.json(data[0]);
     }
 
     // If there's an error, return a 500 Internal Server Error with an error message

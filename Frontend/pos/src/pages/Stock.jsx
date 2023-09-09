@@ -11,6 +11,8 @@ function Stock(props) {
     useEffect(() => {
         axios.get('http://localhost:4000/api/items') // Specify the complete URL
             .then((response) => {
+                console.log(response.data);
+                console.log(setItems(response.data));
                 setItems(response.data); // Update state with the JSON data
             })
             .catch((error) => {
@@ -24,30 +26,20 @@ function Stock(props) {
                 <div class="margin-topnav">
                     <h3>All products</h3>
                 </div>
+                {/* <div>
+                    {Array.isArray(items)
+                        ? items.map(element => {
+                            return <h2>{element}</h2>;
+                        })
+                    : null}
+                </div> */}
                 <h2>Stock page</h2>
-                <h2>Stock page</h2>
-                <ul>
+                {/* <ul>
                 {items.map((item) => (
                         <li key={item.id}>{item.name}</li>
                     ))}
-                </ul>
-                <h2>Stock page</h2>
-                <h2>Stock page</h2>
-                <h2>Stock page</h2>
-                <h2>Stock page</h2>
-                <h2>Stock page</h2>
-                <h2>Stock page</h2>
-                <h2>Stock page</h2>
-                <h2>Stock page</h2>
-                <h2>Stock page</h2>
-                <h2>Stock page</h2>
-                <h2>Stock page</h2>
-                <h2>Stock page</h2>
-                <h2>Stock page</h2>
-                <h2>Stock page</h2>
-                <h2>Stock page</h2>
-                <h2>Stock page</h2>
-                <h2>Stock page</h2>
+                </ul> */}
+                
             </div>
             <div class="col-sm uni2">
                 <div class="margin-topnav">
