@@ -33,7 +33,7 @@ function Nav() {
                 style = {{position: 'fixed'}}
                 >
                 <div class="logo">
-                    <img src={require('C:/Users/mrput/Documents/VSProject/POS_Piece-Of-Software/Frontend/pos/src/logo_ 2.png')} alt="Stock | Product" style={{height: 'auto', width: 'auto'}}/>
+                    <img src={require('../../src/logo_ 2.png')} alt="Stock | Product" style={{height: 'auto', width: 'auto'}}/>
                 </div>
                 <SideNav.Toggle />
                 <SideNav.Nav defaultSelected="Stock">
