@@ -31,9 +31,10 @@ const readAllItems = async () => {
         // Perform a scan operation to retrieve all items from the DynamoDB table
         const { Items = [] } = await config.db.scan(params).promise();
         return { success: true, data: Items }; // Return success status and retrieved data
-    } catch (error) {
-        return { success: false, data: null, error: error.message }; // Return error if operation fails
     }
+     catch (error) {
+        return { success: false, data: null, error: error.message }; // Return error if operation fails
+    } 
 }
 
 // Function for reading an item from a database table by its ID
