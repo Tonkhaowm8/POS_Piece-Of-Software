@@ -6,6 +6,8 @@ import './Stock.css';
 
 
 function Stock(props) {
+    console.log("FCK");
+
     const [items, setItems] = useState([]);
 
     useEffect(() => {
