@@ -6,14 +6,8 @@ import './Stock.css';
 
 
 function Stock(props) {
-<<<<<<< HEAD
     // Define a variable to store the data
     let dataObject = {};
-=======
-    console.log("FCK");
-
-    const [items, setItems] = useState([]);
->>>>>>> 553ee4819c17dfcc428592c07c0459dbb8b62e8d
 
     // Fetch the data from the API URL
     fetch('http://localhost:4000/api/items')
