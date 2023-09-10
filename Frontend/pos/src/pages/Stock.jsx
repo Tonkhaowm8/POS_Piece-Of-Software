@@ -6,19 +6,30 @@ import './Stock.css';
 
 
 function Stock(props) {
-    const [items, setItems] = useState([]);
+    // Define a variable to store the data
+    let dataObject = {};
 
-    useEffect(() => {
-        axios.get('http://localhost:4000/api/items') // Specify the complete URL
-            .then((response) => {
-                console.log(response.data);
-                console.log(setItems(response.data));
-                setItems(response.data); // Update state with the JSON data
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-            });
-    }, []);
+    // Fetch the data from the API URL
+    fetch('http://localhost:4000/api/items')
+    .then((response) => {
+        // Check if the response status is OK (status code 200)
+        if (!response.ok) {
+        throw new Error('Network response was not ok');
+        }
+        // Parse the response body as JSON
+        return response.json();
+    })
+    .then((data) => {
+        // Assuming the response data is a single object
+        // Assign the data to the dataObject variable
+        dataObject = data;
+        
+        // Now, you can use the dataObject with the fetched data
+        console.log(dataObject);
+    })
+    .catch((error) => {
+        console.error('Error fetching data:', error);
+    });
 
     return(
         <div className="page"  class="stock-background row" >
