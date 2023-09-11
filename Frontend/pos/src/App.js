@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, BrowserRouter } from "react-router-dom";
 import Nav from './components/SideNav';
@@ -9,6 +10,7 @@ import Stock from './pages/Stock';
 function App() {
 
   const [backendMessage, setBackendMessage] = useState('');
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     fetch('http://localhost:4000/api')
@@ -18,16 +20,16 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
       <Router>
-        <header>HEADER</header>
-        <Nav />
+        <header><GiHamburgerMenu onClick={() => setExpanded(!expanded)}/></header>
+        <Nav show={expanded}/>
+
         <Routes>
-          <Route path='/stock' index element={<Stock />} />
-          <Route path='/dashboard' element={<Dashboard />} />
+          <Route index element={<Stock />}/>
+          <Route path='/stock' exact={true} component={Stock} />
+          <Route path='/dashboard' component={Dashboard}/>
         </Routes>
       </Router>
-    </div>
   );
 }
 

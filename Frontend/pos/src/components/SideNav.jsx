@@ -5,23 +5,24 @@ import SideNav, {Toggle, NavItem, NavIcon, NavText} from '@trendmicro/react-side
 import { useNavigate } from "react-router-dom";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";  
 import SidebarItems from "./SideNavItems";
-// import logo_2 from './logo_2.png';
 
 
-function Nav() {
-    const [expanded, setExpanded] = useState(false);
+
+function Nav({show}) {
+    
     const navigate = useNavigate();
 
-    const handleToggle = () => {
-        setExpanded(!expanded);
-    };
     return (
         <div className="sidenav">
-            <div className={`sidebar-container ${expanded ? 'expanded' : ''}`}>
-                <div className="mysidenav">
+            <div className={show ? "mysidenav active" : "mysidenav"}>
+                    <img src={require("C:/Users/mrput/Documents/VSProject/POS_Piece-Of-Software/Frontend/pos/src/components/logo_ 2.png")} 
+                    alt="logo"
+                    className="logo"
+                    />
                     <ul class="fa-ul">
-                        <li><span class="fa-li"><i class="fa-solid fa-table-columns"></i></span>Dashboard</li>
-                        <li><span class="fa-li"><i class="fa-solid fa-database"></i></span>Stock</li>
+                        <li><span class="fa-li"><i class="fa-solid fa-table-columns"></i></span><a href="/">Dashboard</a></li>
+                        <li><span class="fa-li"><i class="fa-solid fa-database"></i></span><a href="/">Stock</a></li>
+                        <li><span class="fa-li"><i class="fa-solid fa-arrow-right-from-bracket"></i></span>Log out</li>
                     </ul>
                 </div>
 
@@ -51,7 +52,6 @@ function Nav() {
                         </NavItem>
                     </SideNav.Nav>
                 </SideNav> */}
-            </div>
         </div>
     );
 }
