@@ -4,7 +4,7 @@ import SideNav, {Toggle, NavItem, NavIcon, NavText} from '@trendmicro/react-side
 import { useNavigate } from "react-router-dom";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";  
 import SidebarItems from "./SideNavItems";
-import logo_2 from '../logo_2.png';
+// import logo_2 from './logo_2.png';
 
 
 function Nav() {
@@ -17,10 +17,6 @@ function Nav() {
     return (
         <div className="top_navbar">
             <div className={`sidebar-container ${expanded ? 'expanded' : ''}`}>
-                <div className="logo">
-                    {/* <img src={require("src/components/logo_2.png")} alt="Stock | Product" style={{ height: 'auto', width: 'auto' }} /> */}
-                    <img src={require("C:/Users/mrput/Documents/VSProject/POS_Piece-Of-Software/Frontend/pos/public/logo_2.png")} alt="Stock | Product" style={{ height: 'auto', width: 'auto' }} />
-                </div>
                 <SideNav
                     onSelect={selected => {
                         console.log(selected);
@@ -28,6 +24,9 @@ function Nav() {
                     }}
                     className='mysidenav'
                 >
+                    <div className="logo">
+                        <img className="logo" src={require("C:/Users/mrput/Documents/VSProject/POS_Piece-Of-Software/Frontend/pos/src/components/logo_ 2.png")} alt="Stock | Product" style={{ height: 'auto', width: 'auto' }} />
+                    </div>
                     <SideNav.Toggle onClick={handleToggle} />
                     <SideNav.Nav defaultSelected="Stock">
                         <NavItem eventKey="Dashboard" style={{ margin: '45px 0px 0px' }}>
