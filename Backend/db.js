@@ -15,7 +15,7 @@ const createOrUpdate = async (data = {}) => {
         await config.db.put(params).promise();
         return { success: true }; // Return success status
     } catch (error) {
-        return { success: false, error: error.message }; // Return error if operation fails
+        return { success: false, error: error.message, data: data }; // Return error if operation fails
     }
 }
 

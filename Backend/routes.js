@@ -35,15 +35,15 @@ router.get('/item/:id', async (req, res) => {
 
 // Route to create an item
 router.post('/item', async (req, res) => {
-    const { success, data, error } = await db.createOrUpdate(req.body); // Call 'createOrUpdate' with the request body
-
+    
+    const { success, error, data} = await db.createOrUpdate(req.body); // Call 'createOrUpdate' with the request body
     if (success) {
         // If the operation is successful, return JSON response with the created item data
         return res.json({ success, data });
     }
 
     // If there's an error, return a 500 Internal Server Error with an error message
-    return res.status(500).json({ success: false, message: error });
+    return res.status(500).json({ success: false, message: error, data: data});
 });
 
 // Route to update an item by ID

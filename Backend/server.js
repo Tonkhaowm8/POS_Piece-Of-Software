@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 const app = express();
 const PORT = process.env.PORT || 4000;
 const cors = require('cors');
@@ -10,6 +11,8 @@ app.use(cors());
 //app.get('/api', (req, res) => {
 //  res.json({ message: 'Hello from the backend!' });
 //});
+
+app.use(bodyParser.json())
 
 app.use('/api', items)
 
