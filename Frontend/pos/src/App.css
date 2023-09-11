@@ -39,8 +39,30 @@
 
 .mysidenav {
   background-color: #1C0059 !important;
+  position: absolute;
+  width: 240px;
+  height: 95vh;
+  padding: 0 30px;
+
 }
 .page {
   font-size: 5rem;
   text-align: center;
+}
+
+header {
+  padding: 30px;
+  background-color: #011627;
+  height: 50px;
+}
+
+ul {
+  padding: 0;
+}
+
+ul li {
+  display: block;
+  list-style-type: none;
+  color: #eaecef;
+  padding: 10px 15px;
 }

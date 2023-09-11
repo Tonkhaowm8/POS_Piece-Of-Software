@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
+import {Sidebar, InputItem, DropdownItem, Icon, Item, Logo, LogoText} from 'react-sidebar-ui'
 import SideNav, {Toggle, NavItem, NavIcon, NavText} from '@trendmicro/react-sidenav';
 import { useNavigate } from "react-router-dom";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";  
@@ -15,9 +16,16 @@ function Nav() {
         setExpanded(!expanded);
     };
     return (
-        <div className="top_navbar">
+        <div className="sidenav">
             <div className={`sidebar-container ${expanded ? 'expanded' : ''}`}>
-                <SideNav
+                <div className="mysidenav">
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"><i class="fa-solid fa-table-columns"></i></span>Dashboard</li>
+                        <li><span class="fa-li"><i class="fa-solid fa-database"></i></span>Stock</li>
+                    </ul>
+                </div>
+
+                {/* <SideNav
                     onSelect={selected => {
                         console.log(selected);
                         navigate('/' + selected);
@@ -42,7 +50,7 @@ function Nav() {
                             <NavText>Log out</NavText>
                         </NavItem>
                     </SideNav.Nav>
-                </SideNav>
+                </SideNav> */}
             </div>
         </div>
     );
