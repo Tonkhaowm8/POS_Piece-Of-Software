@@ -1,5 +1,9 @@
 .App {
-  text-align: center;
+  text-align: justify;
+}
+
+body {
+  overflow: hidden;
 }
 
 .App-logo {
@@ -37,10 +41,62 @@
   }
 }
 
+.logo {
+  width: fit-content;
+  overflow: auto;
+  margin: 15px 0px;
+  pointer-events: none;
+  cursor: default;
+}
+
 .mysidenav {
   background-color: #1C0059 !important;
+  position: absolute;
+  width: 280px;
+  height: 95vh;
+  padding: 0 20px;
+  left: -100%;
+  transition: all 0.3s;
 }
+
+.mysidenav.active {
+  left: 0;
+}
+
 .page {
   font-size: 5rem;
   text-align: center;
+}
+
+header {
+  padding: 30px;
+  color: #eaecef;
+  background-color: #011627;
+  height: 80px;
+}
+
+header svg {
+  font-size: 25px;
+}
+
+ul {
+  padding: 0;
+  height: 50px;
+}
+
+ul li {
+  display: block;
+  list-style-type: none;
+  color: #eaecef;
+  padding: 10px 15px;
+  margin: 15px 0;
+}
+
+ul li:nth-child(3) {
+  bottom: -400px;
+}
+
+ul li:hover,
+ul li i.active {
+  background: #172b4d;
 }
