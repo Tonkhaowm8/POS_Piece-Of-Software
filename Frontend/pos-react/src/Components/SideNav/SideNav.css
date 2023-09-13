@@ -1,5 +1,4 @@
 
-
 .logo {
     width: fit-content;
     overflow: auto;
@@ -8,55 +7,15 @@
     cursor: default;
 }
 
-.mysidenav {
-    background-color: #1C0059 !important;
-    position: absolute;
-    width: 280px;
-    height: 95vh;
-    padding: 0 20px;
-    left: -100%;
-    transition: all 0.3s;
-    color: white;
+.sidenav {
+    display: flex;
 }
 
-.mysidenav.active {
-    left: 0;
+.fal-ul {
+    padding: 150px;
 }
 
-.page {
-    font-size: 5rem;
-    text-align: center;
-}
-
-header {
-    padding: 30px;
+.Link {
+    text-decoration: none;
     color: #eaecef;
-    background-color: #011627;
-    height: 80px;
-}
-
-header svg {
-    font-size: 25px;
-}
-
-ul {
-    padding: 0;
-    height: 50px;
-}
-
-ul li {
-    display: block;
-    list-style-type: none;
-    color: #eaecef;
-    padding: 10px 15px;
-    margin: 15px 0;
-}
-
-ul li:nth-child(3) {
-    bottom: -400px;
-}
-
-ul li:hover,
-ul li i.active {
-    background: #172b4d;
 }

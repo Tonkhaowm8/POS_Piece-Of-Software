@@ -2,51 +2,13 @@
   text-align: justify;
 }
 
+main {
+  width: 100%;
+  padding: 20px;
+}
+
 body {
   overflow: hidden;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.logo {
-  width: fit-content;
-  overflow: auto;
-  margin: 15px 0px;
-  pointer-events: none;
-  cursor: default;
 }
 
 .mysidenav {
@@ -69,10 +31,10 @@ body {
 }
 
 header {
-  padding: 30px;
+  padding: 25px;
   color: #eaecef;
   background-color: #011627;
-  height: 60px;
+  height: 15px;
 }
 
 header svg {

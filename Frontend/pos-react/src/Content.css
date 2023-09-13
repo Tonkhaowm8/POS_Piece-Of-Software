@@ -1,0 +1,8 @@
+.contentt {
+    margin-left: 0;
+    transition: all 0.3s;
+  }
+  
+.contentt.active {
+margin-left: 250px;
+}

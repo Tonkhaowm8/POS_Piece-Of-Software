@@ -45,11 +45,11 @@ function Stock(props) {
                     </p>
                 </div>
             </div>
-            <div class="col-sm uni2">
+            {/* <div class="col-sm uni2">
                 <div class="margin-topnav">
                     <h3>Carts</h3>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }
