@@ -20,11 +20,11 @@ const createOrUpdate = async (data = {}) => {
 }
 
 // Function for reading all items from a database table
-const readAllItems = async () => {
+const readAllItems = async (table) => {
 
     // Define the parameters for the scan operation
     const params = {
-        TableName: config.aws_table_name, // Specify the name of the AWS DynamoDB table from the config
+        TableName: table, // Specify the name of the AWS DynamoDB table from the config
     }
 
     try {
@@ -38,15 +38,25 @@ const readAllItems = async () => {
 }
 
 // Function for reading an item from a database table by its ID
-const getItemById = async (value, key = 'id') => {
-
+const getItemById = async (value, key, table) => {
+    let params = 0
     // Define the parameters for the get operation using the specified key
-    const params = {
-        TableName: config.aws_table_name, // Specify the name of the AWS DynamoDB table from the config
-        Key: {
-            [key]: parseInt(value), // Use the provided value as the key to retrieve the item
+    try{
+         params = {
+            TableName: table, // Specify the name of the AWS DynamoDB table from the config
+            Key: {
+                [key]: parseInt(value), // Use the provided value as the key to retrieve the item
+            }
+        }
+    } catch {
+         params = {
+            TableName: table, // Specify the name of the AWS DynamoDB table from the config
+            Key: {
+                [key]: value, // Use the provided value as the key to retrieve the item
+            }
         }
     }
+    
 
     try {
         // Perform a get operation to retrieve the item from the DynamoDB table
@@ -58,7 +68,7 @@ const getItemById = async (value, key = 'id') => {
 }
 
 // Function for deleting an item from a database table by its ID
-const deleteItemById = async (value, key = 'id') => {
+const deleteItemById = async (value, key = 'ID') => {
     
     // Define the parameters for the delete operation using the specified key
     const params = {
@@ -83,4 +93,4 @@ module.exports = {
     readAllItems,
     getItemById,
     deleteItemById
-}
+} 

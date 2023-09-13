@@ -8,7 +8,7 @@ const router = express.Router();
 // Route to READ ALL items
 router.get('/items', async (req, res) => {
     // Call the 'readAllItems' function from the database module
-    const { success, data, error } = await db.readAllItems();
+    const { success, data, error } = await db.readAllItems("product");
 
     if (success) {
         // If the operation is successful, return JSON response with retrieved data
@@ -22,7 +22,7 @@ router.get('/items', async (req, res) => {
 // Route to get an item by ID
 router.get('/item/:id', async (req, res) => {
     const { id } = req.params; // Extract the 'id' parameter from the URL
-    const { success, data, error } = await db.getItemById(id); // Call 'getItemById' with the extracted ID
+    const { success, data, error } = await db.getItemById(id, 'id', 'product'); // Call 'getItemById' with the extracted ID
 
     if (success) {
         // If the operation is successful, return JSON response with retrieved data
@@ -77,5 +77,25 @@ router.delete('/item/:id', async (req, res) => {
     return res.status(500).json({ success: false, message: error });
 });
 
+// USER API
+
+
+
+router.get('/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    const { success, data, error } = await db.getItemById(username, 'username', 'user'); // Call 'getItemById' with the extracted ID
+
+    if (success) {
+        // If the operation is successful, return JSON response with retrieved data
+        return res.json({ success, data });
+    }
+
+    // If there's an error, return a 500 Internal Server Error with an error message
+    return res.status(500).json({ success: false, message: error });
+});
+
 // Export the Express router for use in other parts of the application
 module.exports = router;
+
+
