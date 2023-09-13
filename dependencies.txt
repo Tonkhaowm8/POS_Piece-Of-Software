@@ -4,7 +4,6 @@ npm install react-router-dom
 npm install styled-components
 npm install react-icons
 npm i react-sidebar
-npm install react-sidebar-ui
 
 
 Backend

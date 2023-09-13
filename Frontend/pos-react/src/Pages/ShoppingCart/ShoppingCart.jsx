@@ -1,7 +1,7 @@
 import React from 'react';
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";  
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 const Sidebar = styled(SideNav)`
   height: 100vh;
