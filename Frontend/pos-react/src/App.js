@@ -22,13 +22,14 @@ function App() {
   return (
       <Router>
         <header><GiHamburgerMenu onClick={() => setExpanded(!expanded)}/></header>
-        <Nav show={expanded}/>
+        <Nav show={expanded}>
+          <Routes>
+            <Route index element={<Stock />}/>
+            <Route path='/stock' element={<Stock />} />
+            <Route path='/dashboard' element={<Dashboard/>}/>
+          </Routes>
+        </Nav>
 
-        <Routes>
-          <Route index element={<Stock />}/>
-          <Route path='/stock' element={<Stock />} />
-          <Route path='/dashboard' element={<Dashboard/>}/>
-        </Routes>
       </Router>
   );
 }

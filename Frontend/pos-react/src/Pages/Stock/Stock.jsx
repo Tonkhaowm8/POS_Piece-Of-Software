@@ -28,7 +28,7 @@ function Stock(props) {
     }, []); // The empty dependency array ensures this effect runs once on component mount
 
     return (
-        <div className="page" class="stock-background row">
+        <div className="page" class="stock-Background row">
             <div class="col-sm uni1">
                 <div class="margin-topnav">
                     <h3>All products</h3>

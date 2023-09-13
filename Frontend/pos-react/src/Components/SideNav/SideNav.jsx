@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 // import styled from 'styled-components';
 // import {Sidebar, InputItem, DropdownItem, Icon, Item, Logo, LogoText} from 'react-sidebar-ui'
-
+import { GiHamburgerMenu } from 'react-icons/gi';
+// import './SideNav.css';
 import SideNav, {Toggle, NavItem, NavIcon, NavText} from '@trendmicro/react-sidenav';
 import { useNavigate, NavLink } from "react-router-dom";
 // import "@trendmicro/react-sidenav/dist/react-sidenav.css";  
@@ -10,6 +11,11 @@ import SidebarItems from "./SideNavItems";
 
 
 function Nav({show}) {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleSidebar = () => {
+        setIsOpen(!isOpen);
+    };
     
     const navigate = useNavigate();
 

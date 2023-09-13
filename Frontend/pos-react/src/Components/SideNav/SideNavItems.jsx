@@ -1,19 +1,15 @@
 const SidebarItems = [
     {
-        name: "THE ITALIAN JOB",
-        route: '/'
-    },
-    {
         name: "Dashboard",
-        route: '/dashboard',
+        path: '/dashboard',
     },
     {
         name: "Stock",
-        route: '/Stock'
+        path: '/Stock'
     },
     {
         name: "Logout",
-        route: '/Logout'
+        path: '/Logout'
     },
 ];
 
