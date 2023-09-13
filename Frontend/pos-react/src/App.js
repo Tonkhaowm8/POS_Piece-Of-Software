@@ -26,8 +26,8 @@ function App() {
 
         <Routes>
           <Route index element={<Stock />}/>
-          <Route path='/stock' exact={true} component={Stock} />
-          <Route path='/dashboard' component={Dashboard}/>
+          <Route path='/stock' element={<Stock />} />
+          <Route path='/dashboard' element={<Dashboard/>}/>
         </Routes>
       </Router>
   );
