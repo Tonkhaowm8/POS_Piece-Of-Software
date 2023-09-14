@@ -6,20 +6,6 @@ body {
   overflow: hidden;
 }
 
-.mysidenav {
-  background-color: #1C0059 !important;
-  position: absolute;
-  width: 280px;
-  height: 95vh;
-  padding: 0 20px;
-  left: -100%;
-  transition: all 0.3s;
-}
-
-.mysidenav.active {
-  left: 0;
-}
-
 .page {
   font-size: 5rem;
   text-align: center;
