@@ -81,7 +81,7 @@ router.delete('/item/:id', async (req, res) => {
 
 
 
-router.get('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     const { success, data, error } = await db.getItemById(username, 'username', 'user'); // Call 'getItemById' with the extracted ID
@@ -92,7 +92,7 @@ router.get('/login', async (req, res) => {
     }
 
     // If there's an error, return a 500 Internal Server Error with an error message
-    return res.status(500).json({ success: false, message: error });
+    return res.status(500).json({ success: false, message: error, data: data, body: req.body });
 });
 
 // Export the Express router for use in other parts of the application

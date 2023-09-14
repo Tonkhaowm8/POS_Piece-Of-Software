@@ -39,31 +39,30 @@ const readAllItems = async (table) => {
 
 // Function for reading an item from a database table by its ID
 const getItemById = async (value, key, table) => {
-    let params = 0
+    let params = ''
     // Define the parameters for the get operation using the specified key
     try{
-         params = {
-            TableName: table, // Specify the name of the AWS DynamoDB table from the config
-            Key: {
-                [key]: parseInt(value), // Use the provided value as the key to retrieve the item
-            }
-        }
-    } catch {
          params = {
             TableName: table, // Specify the name of the AWS DynamoDB table from the config
             Key: {
                 [key]: value, // Use the provided value as the key to retrieve the item
             }
         }
-    }
-    
-
-    try {
-        // Perform a get operation to retrieve the item from the DynamoDB table
-        const { Item = {} } = await config.db.get(params).promise();
-        return { success: true, data: Item }; // Return success status and retrieved data
-    } catch (error) {
-        return { success: false, data: null, error: error.message }; // Return error if operation fails
+    } catch (error){
+         params = {
+            TableName: table, // Specify the name of the AWS DynamoDB table from the config
+            Key: {
+                [key]: value // Use the provided value as the key to retrieve the item
+            }
+        }
+    } finally {
+        try {
+            // Perform a get operation to retrieve the item from the DynamoDB table
+            const { Item = {} } = await config.db.get(params).promise();
+            return { success: true, data: Item }; // Return success status and retrieved data
+        } catch (error) {
+            return { success: false, data: null, error: error.message }; // Return error if operation fails
+        }
     }
 }
 
