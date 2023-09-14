@@ -29,7 +29,7 @@ function Stock(props) {
 
     return (
         <div className="page" class="stock-Background row">
-            <div class="col-sm uni1">
+            <div class="col-sm">
                 <div class="margin-topnav">
                     <h3>All products</h3>
                 </div>

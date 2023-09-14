@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import './App.css';
-import './Content.css'
 import { BrowserRouter as Router, Route, Routes, BrowserRouter } from "react-router-dom";
 import Nav from './Components/SideNav/SideNav.jsx';
 import Dashboard from './Pages/Dashboard/Dashboard.jsx';

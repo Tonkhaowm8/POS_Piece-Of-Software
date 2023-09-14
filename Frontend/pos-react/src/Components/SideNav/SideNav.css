@@ -1,3 +1,11 @@
+main {
+    width: 100%;
+    padding: 20px;
+}
+
+.sidenav {
+    display: flex;
+}
 
 .logo {
     width: fit-content;
@@ -7,8 +15,15 @@
     cursor: default;
 }
 
-.sidenav {
-    display: flex;
+.contentt {
+    flex-grow: 1;
+    padding: 0px 100px; /* Add padding to the content area */
+    margin-left: 250px;
+    transition: all 0.3s;
+  }
+  
+.contentt.active {
+    margin-left: -80px;
 }
 
 .fal-ul {
