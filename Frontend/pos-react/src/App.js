@@ -39,6 +39,7 @@ function App() {
           </Routes>
           <Nav show={expanded}>
             <Routes>
+                <Route path='/' element={<Logout />} />
                 <Route path='/stock' element={<Stock />} />
                 <Route path='/dashboard' element={<Dashboard/>}/>
                 <Route path='/logout' element={<Logout/>}/>
