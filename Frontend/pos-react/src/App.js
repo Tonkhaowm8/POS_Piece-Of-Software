@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes, BrowserRouter } from "react-rou
 import Nav from './Components/SideNav/SideNav.jsx';
 import Dashboard from './Pages/Dashboard/Dashboard.jsx';
 import Stock from './Pages/Stock/Stock';
-
+import Login from './Pages/Login/Login';
 
 function App() {
 
@@ -28,6 +28,7 @@ function App() {
             <Routes>
                 <Route path='/stock' element={<Stock />} />
                 <Route path='/dashboard' element={<Dashboard/>}/>
+                <Route path='/login' element={<Login />} />
             </Routes>
           </Nav>
 

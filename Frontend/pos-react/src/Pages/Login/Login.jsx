@@ -1,6 +1,7 @@
 import React from "react";
-import Nav from "../components/SideNav";
 import './Login.css';
+import Nav from "../../Components/SideNav/SideNav.jsx";
+
 function Login(props) {
     return(
         <div class="big">
