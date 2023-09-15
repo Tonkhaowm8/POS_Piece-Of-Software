@@ -8,6 +8,7 @@ import Stock from './Pages/Stock/Stock.jsx';
 import {
   createBrowserRouter,
   RouterProvider,
+  BrowserRouter,
 } from "react-router-dom";
 // import {BrowserRouter, Route, Switch} from "react-router-dom";
 
