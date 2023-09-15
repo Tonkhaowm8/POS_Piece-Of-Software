@@ -17,3 +17,18 @@
 .uni1 .uni2 {
     overflow: scroll;
 }
+
+.card-container {
+    width: 100%;
+    max-height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: scroll;
+    -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+  }
+  
+.card-container::-webkit-scrollbar {
+    width: 0.4em;
+    display: none;
+}

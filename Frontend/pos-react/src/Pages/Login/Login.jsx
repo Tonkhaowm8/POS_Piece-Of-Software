@@ -44,6 +44,7 @@ function Login(props) {
                         </div>
                     </form>
                     <br></br>
+                    {/* Change this later on when the backend function comes: password condition things */}
                     <button class="reg-btn" onClick={navigateStock}>Sign in</button>
                 </div>
                 {/* <div class="div-reg"><span >Don't have an account? </span><a href="" >Sign up</a></div> */}

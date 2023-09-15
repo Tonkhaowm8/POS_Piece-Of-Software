@@ -23,7 +23,6 @@ main {
 
 .logo {
     width: fit-content;
-    overflow: auto;
     margin: 15px 0px;
     pointer-events: none;
     cursor: default;

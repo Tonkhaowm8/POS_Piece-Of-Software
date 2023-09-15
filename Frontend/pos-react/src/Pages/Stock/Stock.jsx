@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../../Components/SideNav/SideNav.jsx";
 import RightSidebar from '../ShoppingCart/ShoppingCart.jsx';
 import './Stock.css';
 
@@ -29,27 +28,23 @@ function Stock(props) {
 
     return (
         <div className="page" class="stock-Background row">
-            <div class="col-sm">
-                <div class="margin-topnav">
-                    <h3>All products</h3>
+            <div className="scrollable-content">
+                <div className="dropdown">
+                    <h2>Dropdown Title</h2>
                 </div>
-                {/* Display the dataObject */}
-                <div>
-                    <h2>Stock page</h2>
-                    {/* Access properties of dataObject */}
-                    <p>
-                        Product Name: {dataObject["Product Name"]} <br></br>
-                        Stock: {dataObject.Stock} <br></br>
-                        Price: {dataObject.Price} <br></br>
-                        ID: {dataObject.id} <br></br>
-                    </p>
+                <div className="button-container">
+                    <button className="button">Button 1</button>
+                    <button className="button">Button 2</button>
+                </div>
+                <div className="card-container">
+                    {Array.from({ length: 9 }).map((_, index) => (
+                        <div key={index} className="card">
+                        <h3>Item {index + 1}</h3>
+                        <p>Description of Item {index + 1}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
-            {/* <div class="col-sm uni2">
-                <div class="margin-topnav">
-                    <h3>Carts</h3>
-                </div>
-            </div> */}
         </div>
     );
 }

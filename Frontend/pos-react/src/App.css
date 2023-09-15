@@ -2,9 +2,9 @@
   text-align: justify;
 }
 
-body {
+/* body {
   overflow: hidden;
-}
+} */
 
 .page {
   font-size: 5rem;
@@ -12,6 +12,7 @@ body {
 }
 
 header {
+  overflow: hidden;
   padding: 25px;
   color: #eaecef;
   background-color: #011627;
