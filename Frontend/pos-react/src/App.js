@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import './App.css';
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useHistory } from "react-router-dom";
 import Nav from './Components/SideNav/SideNav.jsx';
 import Dashboard from './Pages/Dashboard/Dashboard.jsx';
 import Stock from './Pages/Stock/Stock';
 import Login from './Pages/Login/Login';
+import Logout from './Pages/Logout/Logout';
 
 function App() {
 
-  const location = useLocation();
   const [backendMessage, setBackendMessage] = useState('');
   const [expanded, setExpanded] = useState(false);
 
@@ -20,29 +20,42 @@ function App() {
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
-  // Conditionally render the header based on the current route
-  const renderHeader = location.pathname !== '/login';
 
   return (
       <div className='app'>
         <Router>
-          {renderHeader && ( // Conditionally render the header
-            <header>
-              <GiHamburgerMenu onClick={() => setExpanded(!expanded)} />
-            </header>
-          )}
+          <Routes>
+            {/* Conditionally render the header that header would appear on every page except for login */}
+            {['/stock', '/dashboard'].map((path) => (
+              <Route
+                key={path}
+                path={path}
+                element={<AppHeader expanded={expanded} setExpanded={setExpanded} />}
+              />
+            ))}
+            <Route path="/stock" element={<Stock />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
           <Nav show={expanded}>
             <Routes>
                 <Route path='/stock' element={<Stock />} />
                 <Route path='/dashboard' element={<Dashboard/>}/>
+                <Route path='/logout' element={<Logout/>}/>
             </Routes>
           </Nav>
-          <Routes>
-            <Route path='/login' element={<Login />} />
-          </Routes>
 
         </Router>
       </div>
+  );
+}
+
+// Define a separate component for the header
+function AppHeader({ expanded, setExpanded }) {
+  return (
+    <header>
+      <GiHamburgerMenu onClick={() => setExpanded(!expanded)} />
+    </header>
   );
 }
 
