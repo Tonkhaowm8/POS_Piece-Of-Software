@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import styled from 'styled-components';
 // import {Sidebar, InputItem, DropdownItem, Icon, Item, Logo, LogoText} from 'react-sidebar-ui'
 import './SideNav.css';
-// import SideNav, {Toggle, NavItem, NavIcon, NavText} from '@trendmicro/react-sidenav';
+// import { FaTableColumns, FaDatabase, BiLogOut } from 'react-icons';
 import { useNavigate, Link } from "react-router-dom";
 import SidebarItems from "./SideNavItems";
 
@@ -27,7 +27,7 @@ function Nav({show, children}) {
                 <ul class="fa-ul">
                     {SidebarItems.map((item, index) => (
                         <li key={index}>
-                            <span className="fa-li"><i className={item.icon}></i></span>
+                            <span className="fa-li"><i className="icon">{item.icon}</i></span>
                             <Link to={item.path} className="Link">{item.label}</Link>
                         </li>
                     ))}

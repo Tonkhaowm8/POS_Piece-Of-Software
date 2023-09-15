@@ -1,7 +1,6 @@
 main {
     width: 100%;
     padding: 20px;
-    display: flex;
 }
 
 .sidenav {
@@ -41,11 +40,17 @@ main {
     margin-left: 400px;
 }
 
-.fal-ul {
-    padding: 150px;
+.fal-ul li{
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.fal-ul li i {
+    color: #eaecef;
 }
 
 .Link {
     text-decoration: none;
     color: #eaecef;
+    padding: 0 50px;
 }
