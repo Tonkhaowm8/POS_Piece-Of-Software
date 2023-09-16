@@ -4,19 +4,44 @@ html {
 
 .stock-Background {
     height: fit-content;
-    background-color: #ebebf5;
     color: green;
+    width: 50%;
+}
+
+.button-container {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.buttonn {
+    border: 0.1px solid black;
+    border-radius: 5px;
+}
+
+#bacc {
+    background-color: #ebebf5;
+    padding: 10px 10px
 }
 
 .scrollable-content {
-    width: auto;
     resize: none;
+}
+
+.flex {
+    background-color: aquamarine;
+    display: flex;        /*inline would display content vertically. */
+    flex-wrap: wrap;
+}
+  
+.flex-item {
+    width: calc(33.33% - 10px); /* Adjust the spacing as needed */;
+    align-items: center;
 }
 
 .card-container {
     width: 100%;
     max-height: 100%;
-    padding: 20px;
+    padding: 0 15px;
     box-sizing: border-box;
     overflow-y: auto; /* Enable vertical scrolling when content overflows */
     max-height: calc(100vh - 60px); /* Set a maximum height to fit the available viewport height minus the header height (adjust as needed) */

@@ -28,25 +28,35 @@ function Stock(props) {
 
     return (
         <div className="stock-Background">
-            <div className="scrollable-content">
-                <div className="dropdown">
-                    <h2>Dropdown Title</h2>
+            <div className="scrollable-content" id="bacc">
+                <div className="dropdown" style={{textAlign: 'center'}}>
+                    <h2>All products</h2>
                 </div>
                 <div className="button-container">
-                    <button className="button">Button 1</button>
-                    <button className="button">Button 2</button>
+                    <button type="button" className="buttonn"  onClick={handleButtonClick}>Button 1</button>
+                    <button type="button" className="buttonn"  onClick={handleButtonClick}>Button 2</button>
                 </div>
                 <div className="card-container">
-                    {Array.from({ length: 9 }).map((_, index) => (
-                        <div key={index} className="card">
-                        <h3>Item {index + 1}</h3>
-                        <p>Description of Item {index + 1}</p>
-                        </div>
-                    ))}
+                    <div className="flex">
+                        {Array.from({ length: 36 }).map((_, index) => (
+                            <div className="flex-item" key={index}>
+                                <div key={index} className="card">
+                                <h3>Item {index + 1}</h3>
+                                <p>Description of Item {index + 1}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
     );
+}
+
+function handleButtonClick() {
+    // Perform actions when the button is clicked
+    alert('Button Clicked!');
+    // You can add more logic or state updates here
 }
 
 export default Stock;
