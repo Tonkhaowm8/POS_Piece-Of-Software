@@ -16,9 +16,9 @@ function Nav({show, children}) {
     // };
     
     // const navigate = useNavigate();
-
+    // style={{position: 'fixed'}}
     return (
-        <div className="sidenav" style={{position: 'fixed'}}>
+        <div className="sidenav"> 
             <div className={show ? "mysidenav active" : "mysidenav"}>
                 <img src={require("../../Images/logo_ 2.png")} 
                 alt="logo"

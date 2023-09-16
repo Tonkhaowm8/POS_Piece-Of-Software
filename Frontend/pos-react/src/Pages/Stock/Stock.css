@@ -1,35 +1,24 @@
+html {
+    scroll-behavior: smooth;
+}
+
 .stock-Background {
+    height: fit-content;
     background-color: #ebebf5;
     color: green;
 }
 
 .scrollable-content {
-    overflow: scroll;
-    -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
-    scrollbar-width: none; /* Hide scrollbar in Firefox */
     width: auto;
     resize: none;
 }
-
-/* .col-sm {
-    overflow-x: hidden;
-}
-
-.uni1 .uni2 {
-    overflow: scroll;
-} */
 
 .card-container {
     width: 100%;
     max-height: 100%;
     padding: 20px;
     box-sizing: border-box;
-    overflow: scroll;
-    -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
-    scrollbar-width: none; /* Hide scrollbar in Firefox */
-  }
-  
-.card-container::-webkit-scrollbar {
-    width: 0.4em;
-    display: none;
+    overflow-y: auto; /* Enable vertical scrolling when content overflows */
+    max-height: calc(100vh - 60px); /* Set a maximum height to fit the available viewport height minus the header height (adjust as needed) */
 }
+  
