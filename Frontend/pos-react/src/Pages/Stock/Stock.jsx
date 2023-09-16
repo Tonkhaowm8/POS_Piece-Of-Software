@@ -27,7 +27,7 @@ function Stock(props) {
     }, []); // The empty dependency array ensures this effect runs once on component mount
 
     return (
-        <div className="page" class="stock-Background row">
+        <div className="stock-Background">
             <div className="scrollable-content">
                 <div className="dropdown">
                     <h2>Dropdown Title</h2>

@@ -13,10 +13,17 @@
 
 header {
   overflow: hidden;
-  padding: 25px;
+  width: 250px;
+  padding: 20px;
   color: #eaecef;
   background-color: #011627;
-  height: 15px;
+  height: 20px;
+  transition: all 0.5s;
+}
+
+.app.collapsed header {
+  width: 50px; /* Adjust the width when collapsed */
+
 }
 
 header svg {

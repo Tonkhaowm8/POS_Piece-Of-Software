@@ -1,24 +1,5 @@
 main {
     width: 100%;
-    padding: 20px;
-}
-
-.sidenav {
-    display: flex;
-}
-
-.mysidenav {
-    background-color: #1C0059 !important;
-    position: absolute;
-    width: 250px;
-    height: 95vh;
-    padding: 0 20px;
-    left: -30%;
-    transition: all 0.3s;
-  }
-  
-.mysidenav.active {
-    left: 0;
 }
 
 .logo {
@@ -28,15 +9,43 @@ main {
     cursor: default;
 }
 
+
+.mysidenav {
+    background-color: #1C0059 !important;
+    position: absolute;
+    width: 50px;    /*250px*/
+    height: 95vh;
+    padding: 0 20px;
+    /* left: -30%; */
+    transition: all 0.5s;
+  }
+  
+.mysidenav.active {
+    width: 250px;
+    /* left: 0; */
+}
+.mysidenav .Link {
+    display: none;
+}
+.mysidenav.active .Link {
+    display: inline-block;
+}
+.mysidenav .logo {
+    display: none;
+}
+.mysidenav.active .logo {
+    display: initial;
+}
+
 .contentt {
     flex-grow: 1;
-    padding: 0px 100px; /* Add padding to the content area */
-    margin: -120px 800px;
+    padding: 1px 100px; 
+    transform: translateX(200px); /* Start with no translation */
     transition: all 0.3s;
   }
   
 .contentt.active {
-    margin-left: 400px;
+    transform: translateX(250px); /* Translate the content to the right by the width of the sidebar */
 }
 
 .fal-ul li{

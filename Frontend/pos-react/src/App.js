@@ -20,9 +20,10 @@ function App() {
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
+  const appClass = expanded ? '' : 'collapsed'; // Add or remove the "collapsed" class
 
   return (
-      <div className='app'>
+      <div className={`app ${appClass}`}>
         <Router>
           <Routes>
             {/* Conditionally render the header that header would appear on every page except for login */}

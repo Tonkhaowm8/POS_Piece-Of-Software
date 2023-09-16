@@ -18,7 +18,7 @@ function Nav({show, children}) {
     // const navigate = useNavigate();
 
     return (
-        <div className="sidenav">
+        <div className="sidenav" style={{position: 'fixed'}}>
             <div className={show ? "mysidenav active" : "mysidenav"}>
                 <img src={require("../../Images/logo_ 2.png")} 
                 alt="logo"
@@ -27,14 +27,14 @@ function Nav({show, children}) {
                 <ul class="fa-ul">
                     {SidebarItems.map((item, index) => (
                         <li key={index}>
-                            <span className="fa-li"><i className="icon">{item.icon}</i></span>
+                            <Link to={item.path} style={{color: "#eaecef"}}><span className="fa-li"><i className="icon">{item.icon}</i></span></Link>
                             <Link to={item.path} className="Link">{item.label}</Link>
                         </li>
                     ))}
                 </ul>
-                <main className={show ? "contentt active" : "contentt"}>{children}</main>    
+                {/* <main className={show ? "contentt active" : "contentt"}>{children}</main>     */}
             </div>    
-            {/* <main className="contentt">{children}</main>                */}
+            <main className={show ? "contentt active" : "contentt"}>{children}</main>
         </div>
         
     );

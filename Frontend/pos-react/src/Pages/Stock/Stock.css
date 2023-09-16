@@ -3,20 +3,21 @@
     color: green;
 }
 
-.margin-topnav {
-    background-color: white;
+.scrollable-content {
+    overflow: scroll;
+    -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
     width: auto;
-    margin: auto;
-    padding: -5px 350px;
+    resize: none;
 }
 
-.col-sm {
+/* .col-sm {
     overflow-x: hidden;
 }
 
 .uni1 .uni2 {
     overflow: scroll;
-}
+} */
 
 .card-container {
     width: 100%;
