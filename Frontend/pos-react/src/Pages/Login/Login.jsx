@@ -1,18 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import './Login.css';
 import {useNavigate} from 'react-router-dom';
 
 function Login(props) {
     const navigate = useNavigate();
 
+    // State variables for username and password
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
     const navigateStock = () => {
+        // Get the current values of username and password
+        const currentUsername = username;
+        const currentPassword = password;
+
+        console.log(currentUsername)
+        console.log(currentPassword)
+
         // navigate to stock after logging in imediately 
         navigate('/stock');
     };
 
     return(
         <div class="big">
-                                               
+
         <div class="left">
         </div>
 
@@ -33,14 +44,14 @@ function Login(props) {
                         
                         <div>
                             <label for="fname" ><span >Username or Email</span></label>
-                            <input type="text" id="fname" name="fname" />
+                            <input type="text" id="fname" name="fname" value={username} onChange={(e) => setUsername(e.target.value)} />
                         </div>
                         <div>
                             <div class="forgot-div">
                                 <label for="password" class="l1"><span >Password</span></label>
                                 {/* <div class="a-div"><a href="">forgot?</a></div> */}
                             </div>
-                            <input type="password" id="password" name="password" />
+                            <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
                     </form>
                     <br></br>
@@ -52,8 +63,8 @@ function Login(props) {
             </div>
         </div>
     </div>
-    
-        // โฟรท์,    เปลี่ยน HTML elements ต่างๆในนี้ให้มีปุ่มต่างๆ เเบบที่มึงเห็นในเว็บหน้าล็อกอินตาม figma
+
     );
 }
+
 export default Login;
