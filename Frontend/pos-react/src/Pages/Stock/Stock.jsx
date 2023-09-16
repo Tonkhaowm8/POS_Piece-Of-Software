@@ -4,7 +4,14 @@ import './Stock.css';
 
 function Stock(props) {
     // Define a state variable to store the data
-    const [dataObject, setDataObject] = useState({});
+    // const [dataObject, setDataObject] = useState({});
+
+    const setDataObject = useState({});
+    const dataObject = [
+        {"Profit":300,"Price":1000,"Stock":10,"Product Name":"Baking powders","id":3},
+        {"Profit":400,"Price":2000,"Stock":10,"Product Name":"Naku Weed","id":4},
+        {"Profit":250,"Price":1000,"Stock":8,"Product Name":"Sugars","id":5}
+    ];  // replace with this dataObject for now, until the nodejs server can fetch multiple items from server
 
     useEffect(() => {
         // Fetch the data from the API URL
@@ -33,16 +40,20 @@ function Stock(props) {
                     <h2>All products</h2>
                 </div>
                 <div className="button-container">
-                    <button type="button" className="buttonn"  onClick={handleButtonClick}>Button 1</button>
-                    <button type="button" className="buttonn"  onClick={handleButtonClick}>Button 2</button>
+                    <button type="button" className="buttonn"  onClick={handleButtonClick}>Add Product</button>
+                    <button type="button" className="buttonn"  onClick={handleButtonClick}>Edit Product</button>
                 </div>
                 <div className="card-container">
                     <div className="flex">
-                        {Array.from({ length: 36 }).map((_, index) => (
+                        {/* Map over dataObject and create card elements */}
+                        {dataObject.map((item, index) => (
                             <div className="flex-item" key={index}>
-                                <div key={index} className="card">
-                                <h3>Item {index + 1}</h3>
-                                <p>Description of Item {index + 1}</p>
+                                <div className="card">
+                                    <h3>Item pic {index + 1}</h3>
+                                    <p>"{item["Product Name"]}"</p>
+                                    <p>Stock: {item.Stock}</p>
+                                    <p>Price: {item.Price}</p>
+                                    <p>ID: {item.id}</p>
                                 </div>
                             </div>
                         ))}
