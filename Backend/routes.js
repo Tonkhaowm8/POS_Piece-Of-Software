@@ -12,7 +12,7 @@ router.get('/items', async (req, res) => {
 
     if (success) {
         // If the operation is successful, return JSON response with retrieved data
-        return res.json(data[0]);
+        return res.json(data);
     }
 
     // If there's an error, return a 500 Internal Server Error with an error message
@@ -43,7 +43,7 @@ router.post('/item', async (req, res) => {
     }
 
     // If there's an error, return a 500 Internal Server Error with an error message
-    return res.status(500).json({ success: false, message: error });
+    return res.status(500).json({ success: false, message: error, data: req.body });
 });
 
 // Route to update an item by ID
@@ -74,12 +74,10 @@ router.delete('/item/:id', async (req, res) => {
     }
 
     // If there's an error, return a 500 Internal Server Error with an error message
-    return res.status(500).json({ success: false, message: error });
+    return res.status(500).json({ success: false, message: error, key: id });
 });
 
 // USER API
-
-
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
@@ -88,6 +86,11 @@ router.post('/login', async (req, res) => {
 
     if (success) {
         // If the operation is successful, return JSON response with retrieved data
+        if (password == data.password) {
+            return res.json({login: true, user: data})
+        } else {
+            return res.json({login: false, reason: "wrong password"})
+        }
         return res.json({ success, data });
     }
 
@@ -97,5 +100,3 @@ router.post('/login', async (req, res) => {
 
 // Export the Express router for use in other parts of the application
 module.exports = router;
-
-
