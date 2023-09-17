@@ -59,6 +59,7 @@ main {
 }
 
 .Link {
+    font-size: larger;
     text-decoration: none;
     color: #eaecef;
     padding: 0 50px;

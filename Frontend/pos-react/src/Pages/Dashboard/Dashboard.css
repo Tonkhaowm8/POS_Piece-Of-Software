@@ -1,4 +1,5 @@
 .dashboard-content {
+    width: 50%;
     background-color: aqua;
     overflow-y: auto; /* Enable vertical scrolling when content overflows */
     max-height: calc(100vh - 60px); /* Set a maximum height to fit the available viewport height minus the header height (adjust as needed) */

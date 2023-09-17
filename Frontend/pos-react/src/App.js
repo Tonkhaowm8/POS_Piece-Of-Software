@@ -26,7 +26,7 @@ function App() {
       <div className={`app ${appClass}`}>
         <Router>
           <Routes>
-            {/* Conditionally render the header that header would appear on every page except for login */}
+            {/* Conditionally render the Appheader that header would appear on every page except for login */}
             {['/stock', '/dashboard'].map((path) => (
               <Route
                 key={path}
