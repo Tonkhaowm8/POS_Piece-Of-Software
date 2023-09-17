@@ -9,7 +9,7 @@ import SidebarItems from "./SideNavItems";
 
 
 function Nav({show, children}) {
-    const [isOpen, setIsOpen] = useState(false);
+    // const [isOpen, setIsOpen] = useState(false);
 
     // const toggleSidebar = () => {
     //     setIsOpen(!isOpen);

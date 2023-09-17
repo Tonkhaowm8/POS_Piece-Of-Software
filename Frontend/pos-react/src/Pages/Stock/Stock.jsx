@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import RightSidebar from '../ShoppingCart/ShoppingCart.jsx';
+// import RightSidebar from '../ShoppingCart/ShoppingCart.jsx';
 import ProductModal from "../../ProductModal/ProductModal.jsx";
 import './Stock.css';
 
