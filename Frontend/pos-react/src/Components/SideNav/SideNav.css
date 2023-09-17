@@ -9,13 +9,17 @@ main {
     pointer-events: none;
     cursor: default;
 }
-
+/* Make sidenav go higher ****/
+.sidenav {
+    position: relative;
+    bottom: 40px;
+}
 
 .mysidenav {
     background-color: #1C0059 !important;
     position: absolute;
     width: 50px;    /*250px*/
-    height: 95vh;
+    height: 100vh;   /*95vh*/
     padding: 0 20px;
     /* left: -30%; */
     transition: all 0.5s;

@@ -23,6 +23,7 @@ function Nav({show, children}) {
                 <img src={require("../../Images/logo_ 2.png")} 
                 alt="logo"
                 className="logo"
+                style={{paddingTop:'50px'}}
                 />
                 <ul class="fa-ul">
                     {SidebarItems.map((item, index) => (
