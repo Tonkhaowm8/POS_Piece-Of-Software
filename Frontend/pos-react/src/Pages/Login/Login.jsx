@@ -29,7 +29,7 @@ function Login(props) {
 
         <div class="right">
             <div class="menu">
-                <div class="size-50"><span>Sign in to </span><span class="color">Stock</span><span class="color1">│</span><span>Dashboard</span></div>
+                <div class="size-50"><span> Sign in to </span><span class="color">Stock</span><span class="color1">│</span><span>Dashboard</span></div>
                 <br></br>
                 {/* <div><button class="login-btn">Sign in with Google</button></div>
                 
@@ -41,10 +41,9 @@ function Login(props) {
                 <br></br>
                 <div >
                     <form class="form">
-                        
                         <div>
                             <label for="fname" ><span >Username or Email</span></label>
-                            <input type="text" id="fname" name="fname" value={username} onChange={(e) => setUsername(e.target.value)} />
+                            <input type="text" id="fname" name="fname" value={username} onChange={(e) => setUsername(e.target.value)} /> 
                         </div>
                         <div>
                             <div class="forgot-div">
@@ -59,7 +58,6 @@ function Login(props) {
                     <button class="reg-btn" onClick={navigateStock}>Sign in</button>
                 </div>
                 {/* <div class="div-reg"><span >Don't have an account? </span><a href="" >Sign up</a></div> */}
-                
             </div>
         </div>
     </div>
