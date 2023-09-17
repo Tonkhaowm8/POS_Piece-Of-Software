@@ -4,22 +4,30 @@ html {
 
 .stock-Background {
     height: fit-content;
-    width: 50%;
+    width: 48%;
 }
 
 .button-container {
+    flex: content;
     margin: 30px 0;
     text-align: center;
 }
 
 .buttonn {
+    background-color: #ebebf5;
+    padding: 0 80px;
     border: 0.1px solid black;
     border-radius: 5px;
+    margin: 0 25px;
+}
+.buttonn p {
+    font-size: 12px;
+    font-weight: bold;
 }
 
 #bacc {
     background-color: #ebebf5;
-    padding: 10px 10px
+    padding: 10px 5px
 }
 
 .scrollable-content {
@@ -33,21 +41,26 @@ html {
   
 .flex-item {
     padding: 0 5px;
-    width: calc(33.33% - 10px); /* Adjust the spacing as needed */;
+    width: calc(33.33% - 20px); /* Adjust the spacing as needed */;
     align-items: center;
     background-clip: content-box;
+}
+
+.card {
+    text-align: center;
     box-shadow: 0px 0px 1px 0px black;
 }
 
 .card-container {
     width: 100%;
     max-height: 100%;
-    padding: 0 15px;
+    padding: 0 20px;
     box-sizing: border-box;
     overflow-y: auto; /* Enable vertical scrolling when content overflows */
     max-height: calc(100vh - 60px); /* Set a maximum height to fit the available viewport height minus the header height (adjust as needed) */
 }
   
 .card-container > div {
-    margin: 3px;
+    margin: 0.5px;
+    gap: 8px;
 }
