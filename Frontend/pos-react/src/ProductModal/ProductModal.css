@@ -1,4 +1,4 @@
-.modal-wrapper {
+  .modal-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -8,6 +8,18 @@
     justify-content: center;
     align-items: flex-start;
     padding-top: 20px; /* Add top padding to create space at the top */
+    resize: both;
+    overflow: auto;
+  }
+
+  .resize-handle {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    background-color: #007bff;
+    bottom: 0;
+    right: 0;
+    cursor: se-resize; /* Change cursor style */
   }
   
   .modal-backdrop {
