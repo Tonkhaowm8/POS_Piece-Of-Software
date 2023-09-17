@@ -81,7 +81,7 @@ router.delete('/item/:id', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
-
+    
     const { success, data, error } = await db.getItemById(username, 'username', 'user'); // Call 'getItemById' with the extracted ID
 
     if (success) {
