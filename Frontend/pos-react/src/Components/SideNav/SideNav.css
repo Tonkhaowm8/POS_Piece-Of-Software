@@ -5,7 +5,7 @@ main {
 
 .logo {
     width: fit-content;
-    margin: 15px 0px;
+    margin: 5px 0px;
     pointer-events: none;
     cursor: default;
 }
@@ -44,7 +44,7 @@ main {
 
 .contentt {
     flex-grow: 1;
-    padding: 1px 100px; 
+    padding: 1px 60px; 
     transform: translateX(200px); /* Start with no translation */
     transition: all 0.3s;
   }

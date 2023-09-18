@@ -5,6 +5,24 @@ html {
 .stock-Background {
     height: fit-content;
     width: 48%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.scrollable-content {
+    resize: none;
+}
+
+.selection {
+    text-align: center;
+    margin: 20px;
+    background-color:white;
+    display:flex;
+    border-radius: 12px;
+}
+.selection h3 {
+    padding: 0 25px;
 }
 
 .button-container {
@@ -26,12 +44,7 @@ html {
 }
 
 #bacc {
-    background-color: #ebebf5;
     padding: 10px 5px
-}
-
-.scrollable-content {
-    resize: none;
 }
 
 .flex {

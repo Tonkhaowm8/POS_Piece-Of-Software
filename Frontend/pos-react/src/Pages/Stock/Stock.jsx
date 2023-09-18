@@ -39,8 +39,13 @@ function Stock(props) {
     return (
         <div className="stock-Background">
             <div className="scrollable-content" id="bacc">
-                <div className="dropdown" style={{textAlign: 'center'}}>
-                    <h2>All products</h2>
+                <div className="selection">
+                    <h3>All products</h3>
+                    <h3>Foods</h3>
+                    <h3>Beverages</h3>
+                    <h3>Fashion</h3>
+                    <h3>Cleaners</h3>
+                    <h3>Other</h3>
                 </div>
                 <div className="button-container">
                     <button type="button" className="buttonn"  onClick={() => setIsModalOpen(true)}><p>Add Product</p></button>
@@ -65,6 +70,11 @@ function Stock(props) {
             </div>
             {/* Conditionally render the modal */}
             <ProductModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <div id="bacc">
+                <div style={{textAlign: 'center'}}>
+                    <h2>Carts</h2>
+                </div>
+            </div>
         </div>
     );
 }
