@@ -15,8 +15,9 @@
 
 .scrollable-content {
     /*Comment color out aftet testing*/
-    /* background-color: antiquewhite; */
     /* margin: 0 -50px; */
+    background-color: antiquewhite;
+    height: 35%;
     resize: none;
 }
 
@@ -99,26 +100,34 @@ h3 {
 }
 
 .checkOut {
-    border: groove;
+    border-bottom-style: groove;
+    text-align: center;
     padding:8px 120px;
+    white-space: nowrap;
 }
 
 .stackblock {
     display: flexbox;
+    height: 22em;;      /* Adjust height of products in checkout's container: effect overall height of "Checkout" content */
+    overflow-y: auto;
 }
-.stackblock h3 {
-    background-color: pink;
+.stackblock p {
+    background-color: rgb(207, 204, 204);
 }
 /*FIX PROPERTIES ABOVE AFTER ALL MAIN FEATURES WORKS*/
 .inflex {
-    display: inline-flex;
+    display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     padding:3px 5px;
     background-color: rgba(247, 182, 31, 0.85);
     border-radius: 8px;
 }
+.inflex span {
+    margin-top: 3px;
+}
 .discunt {
-    padding: 0 12px;
+    padding: 5px 12px;
     font-family:Arial, Helvetica, sans-serif;
     font-size: 1.2em;
     text-decoration: none;
@@ -132,7 +141,7 @@ h3 {
 .litem {
     width: calc(50% - 10px); /* Adjust the width as needed */
     margin-bottom: 10px;
-    padding: 3px;
+    padding: 5px;
     box-sizing: border-box;
 }
 .litem:nth-child(even) {
