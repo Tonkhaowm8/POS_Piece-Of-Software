@@ -6,17 +6,10 @@ import './Stock.css';
 function Stock(props) {
     // Define a state variable to store the data
     const [dataObject, setDataObject] = useState([]);
-    const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-    console.log(dataObject)
-    // const setDataObject = useState({});
-    // const dataObject = [
-    //     {"Profit":300,"Price":1000,"Stock":10,"Product Name":"Baking powders","id":3},
-    //     {"Profit":400,"Price":2000,"Stock":10,"Product Name":"Naku Weed","id":4},
-    //     {"Profit":250,"Price":1000,"Stock":8,"Product Name":"Sugars","id":5},
-    //     {"Profit":250,"Price":1000,"Stock":8,"Product Name":"Sugars","id":5},
-    // ];  // replace with this dataObject for now, until the nodejs server can fetch multiple items from server
-
     const [selectedItem, setSelectedItem] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+    const [selectedData, setSelectedData] = useState(new Map()); // State to store selected data and quantity
+    const [totalPrice, setTotalPrice] = useState(0); // State to store the total price
 
     const handleItemClick = (item) => {
         setSelectedItem(item === selectedItem ? null : item);
@@ -42,9 +35,39 @@ function Stock(props) {
             });
     }, []); // The empty dependency array ensures this effect runs once on component mount
 
+    // Function to handle card item click
+    const handleCardClick = (item) => {
+        setSelectedItem(item);
+        setSelectedData((prevMap) => {
+            const updatedMap = new Map(prevMap);
+            const prevQuantity = updatedMap.get(item.id) || 0;
+            updatedMap.set(item.id, prevQuantity + 1);
+            return updatedMap;
+        }); // Update selectedData with the clicked item's data
+    };
+
+    // Function to clear selected data
+    const clearSelectedData = () => {
+        setSelectedData(new Map()); // Reset the array to clear selected data
+        setTotalPrice(0); // Reset the total price
+    };
+
+    // Calculate the total price based on selected data and quantities
+    useEffect(() => {
+        let sum = 0;
+        for (const [itemId, quantity] of selectedData) {
+            const selectedData = dataObject.find((item) => item.id === itemId);
+            if (selectedData) {
+                const itemPrice = selectedData.Price * quantity;
+                sum += itemPrice;
+            }
+        }
+        setTotalPrice(sum);
+    }, [selectedData, dataObject]);
+
     return (
         <div className="stock-Background">
-            <div className="scrollable-content" id="bacc" style={{backgroundColor:'rgb(230, 225, 225)',boxShadow:'0px 5px 8px 0px rgba(0, 0, 0, 0.5)'}}>
+            <div className="scrollable-content" /* id="bacc" */ style={{backgroundColor:'rgb(230, 225, 225)',boxShadow:'0px 5px 8px 0px rgba(0, 0, 0, 0.5)'}}>
                 <div className="selection">
                 <h3
                     className={selectedItem === "All products" ? "selected" : ""}
@@ -98,7 +121,7 @@ function Stock(props) {
                         {/* Map over dataObject and create card elements */}
                         {dataObject.map((item, index) => (
                             <div className="flex-item" key={index}>
-                                <div className="card">
+                                <div className="card" onClick={() => handleCardClick(item)}>
                                     <span style={{fontFamily:'Inter',fontWeight:'bold'}}>Item pic {index + 1}</span>
                                     <p>"{item["Product Name"]}"</p>
                                     <p>Stock: {item.Stock}</p>
@@ -113,7 +136,7 @@ function Stock(props) {
             {/* Conditionally render the modal */}
             <ProductModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
             <div className="scrollable-content">
-                <div style={{padding:'0 15px'}}>
+                <div style={{padding:'0 20px'}}>
 
                 </div>
             </div>
@@ -122,37 +145,59 @@ function Stock(props) {
             <div className="scrollable-content" style={{boxShadow:'0px 5px 8px 0px rgba(0, 0, 0, 0.5)',backgroundColor:'rgb(230, 225, 225)'}}>   
                 <div className="checkOut">
                     <span style={{fontFamily:'Inter',fontWeight:'initial',fontSize:'1.875em'}}>Checkout</span>
+                    {/* Button to clear selected data */}
+                    <button onClick={clearSelectedData}>Clear</button>
                 </div>
-                <div style={{overflow:'auto',overflowX:'hidden',maxHeight:'50%'}}>
-                    {/* TO replace with some datamapping, idk (using actual data from dynamoDB) */}
-                    <div className="stackblock">
-                        {/* <h3>Checkout1</h3>
-                        <h3>CHeckout2</h3>
-                        <h3>Checkout3</h3>
-                        <h3>Checkout3</h3>
-                        <h3>Checkout3</h3>
-                        <h3>Checkout3</h3>
-                        <h3>Checkout3</h3> */}
+                <div style={{backgroundColor:'#f2eded'}} className="stackblock">
+                    {/* Display items from clicked card: default method without replacing any duplicate content */
+                    /* {selectedData.map((selectedData, index) => (
+                    <div key={index}>
+                        <p>Product Name: {selectedData["Product Name"]}</p>
+                        <p>Price: {selectedData.Price}</p>
                     </div>
+                    ))} */}
+
+                    {/* Display items from clicked card: with quantity count method */}
+                    {Array.from(selectedData.keys()).map((itemId, index) => {
+                    const quantity = selectedData.get(itemId);
+
+                        return (
+                            <div key={index}>
+                                {/* Find the item in dataObject using its ID */}
+                                {dataObject.map((item) => {
+                                    if (item.id === itemId) {
+                                        return (
+                                            <div key={item.id}>
+                                                <p>Product Name: {item["Product Name"]}</p>
+                                                <p>Price: {item.Price}</p>
+                                                <p>Quantity: {quantity}</p>
+                                            </div>
+                                        );
+                                    }
+                                    return null;
+                                })}
+                            </div>
+                        );
+                    })}
                 </div>
-                <div style={{margin:'25px 5px',borderRadius:'8px'}}>
+                <div style={{margin:'20px 5px',borderRadius:'8px'}}>
                     <div className="inflex">
                         <span style={{textAlign:'center',fontFamily:'Inter',fontSize:'1.4em',marginRight:'120px'}}>Add</span>
-                        <div style={{padding:'2.8px 22px'}}>
-                            <a href="#" className="discunt">Discount</a>
-                            <a href="#" className="discunt">Note</a>
-                        </div>
+                        <a href="#" className="discunt">Discount</a>
+                        <a href="#" className="discunt">Note</a>
                     </div>
                 </div>
                 <div className="cuntainer" style={{backgroundColor:'white'}}>
                     <div className="litem">Subtotal</div>
-                    <div className="litem">Item 2 (Right)</div>
+                    <div className="litem">{totalPrice}</div>
                     <div className="litem">Tax</div>
-                    <div className="litem">Item 4 (Right)</div>
+                    <div className="litem">Tax price(Right)</div>
                     <div className="litem"><b>Payable Amount</b></div>
-                    <div className="litem">Item 6 (Right)</div>
+                    <div className="litem">Total price (Right)</div>
                 </div>
-                
+                <div style={{padding:'10px auto',border:'none'}} className="checkOut">
+                    <button type="button" style={{padding:'15px',backgroundColor:'#7C00F9',border:'none',fontFamily:'Inter',fontWeight:'bold',borderRadius:'8px',color:'white'}} onClick={handleButtonClick}>Checkout *specifies amount*</button>
+                </div>
             </div>
             
         </div>
