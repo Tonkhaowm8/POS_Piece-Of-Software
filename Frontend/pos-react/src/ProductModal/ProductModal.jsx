@@ -7,6 +7,18 @@ function ProductModal({ isOpen, onClose }) {
   const [stock, setStock] = useState("");
   const [price, setPrice] = useState("");
   const [id, setId] = useState("");
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(""); // State for the selected item
+  const options = ["Foods", "Beverages", "Fashion", "Cleaners", "Other"]; // Your dropdown options
+
+  const handleInputClick = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
+  const handleOptionClick = (option) => {
+    setSelectedItem(option);
+    setDropdownVisible(false);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,6 +66,28 @@ function ProductModal({ isOpen, onClose }) {
                     value={id}
                     onChange={(e) => setId(e.target.value)}
                 />
+                </label>
+                <label>
+                Select an item:
+                <div className="custom-dropdown">
+                  <input
+                      type="text"
+                      value={selectedItem}
+                      onClick={handleInputClick}
+                  />
+                  {dropdownVisible && (
+                      <ul className="dropdown-list">
+                        {options.map((option) => (
+                            <li
+                                key={option}
+                                onClick={() => handleOptionClick(option)}
+                            >
+                                {option}
+                            </li>
+                        ))}
+                      </ul>
+                  )}
+                </div>
                 </label>
                 <button type="submit">Save</button>
             </form>

@@ -12,12 +12,14 @@ body {
 }
 
 header {
+  z-index: 1;
+  position: relative;
   overflow: hidden;
   width: 250px;
   padding: 20px;
   color: #eaecef;
   background-color: #011627;
-  height: 20px;
+  height: 25px;
   transition: all 0.5s;
 }
 
@@ -40,8 +42,8 @@ ul li {
   display: block;
   list-style-type: none;
   color: #eaecef;
-  padding: 10px 15px;
-  margin: 15px 0;
+  padding: 10px 14px;
+  margin: 35px 0;
 }
 
 ul li:nth-child(3) {

@@ -1,21 +1,25 @@
 main {
-    width: 100%;
+    width: 80%;
     overflow: hidden;
 }
 
 .logo {
     width: fit-content;
-    margin: 15px 0px;
+    margin: 5px 0px;
     pointer-events: none;
     cursor: default;
 }
-
+/* Sidenav properties */
+.sidenav {
+    position: relative;
+    bottom: 40px;       /* Make sidenav go higher ****/
+}
 
 .mysidenav {
     background-color: #1C0059 !important;
     position: absolute;
     width: 50px;    /*250px*/
-    height: 95vh;
+    height: 100vh;   /*95vh*/
     padding: 0 20px;
     /* left: -30%; */
     transition: all 0.5s;
@@ -37,10 +41,10 @@ main {
 .mysidenav.active .logo {
     display: initial;
 }
-
+/* Main content properties */
 .contentt {
     flex-grow: 1;
-    padding: 1px 100px; 
+    padding: 1px 80px;     /* Adjust the horizontal (or vertical) position of entire sidenav content */
     transform: translateX(200px); /* Start with no translation */
     transition: all 0.3s;
   }

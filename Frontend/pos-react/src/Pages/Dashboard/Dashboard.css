@@ -1,13 +1,161 @@
-.dashboard-content {
-    width: 50%;
-    background-color: aqua;
-    overflow-y: auto; /* Enable vertical scrolling when content overflows */
-    max-height: calc(100vh - 60px); /* Set a maximum height to fit the available viewport height minus the header height (adjust as needed) */
-    padding: 20px; /* Add padding for spacing */
+.big{
+    display: flex;
+    height: 100vh;
+    font-family:sans-serif;
 }
-.dashboard-content2 {
-    background-color: red;
-    overflow-y: auto; /* Enable vertical scrolling when content overflows */
-    max-height: calc(100vh - 60px); /* Set a maximum height to fit the available viewport height minus the header height (adjust as needed) */
-    padding: 20px; /* Add padding for spacing */
+.left{
+    width: 45%;
+    height: 100%;
+    background-image: url(''); 
+    background-color: aqua;
+}
+.right{
+    width: 55%;
+    height: 100%;
+    text-align: center;
+}
+.menu{
+    margin: 250px auto;
+    width: 80%;
+    text-align: center;
+}
+.login-btn{
+    width: 70%;
+    height: 3em;
+    border-radius: 6px;
+    border: 1px;
+    border-style: solid;
+    background-color: white;
+    font-weight: bold;
+}
+.icon{
+    vertical-align: middle;
+    width: 2em;
+}
+.size-50{
+    font-size: 50px;
+}
+.color{
+    color: brown;
+}
+.color1{
+    color: brown;
+    font-weight: bold;
+}
+.div-text{
+    margin-top: 1em;
+    width: 70%;
+    margin-left:15%;
+}
+.div-text h2{
+    width: 100%; 
+    text-align: center; 
+    border-bottom: 1px solid #d2d2d2; 
+    line-height: 0.1em;
+    margin: 10px 0 20px; 
+}
+.div-text span{
+    background:#fff;
+    padding:0 10px;
+    font-size: 13px;
+    color: #d2d2d2;
+}
+.form{
+    margin-left:15%!important;
+    width: 70%!important;
+    text-align: left!important;
+}
+.form span{
+    font-weight: bold;
+}
+input{
+    background-color: #dedede; 
+    width: 99.4%;
+    height: 2em;
+    border-radius: 5px;
+    border-style:none;
+    margin-top: 0.3em;
+    margin-bottom: 1em;
+}
+.forgot-div{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.a-div{
+    text-align: right;
+    width: 20%;
+}
+.a-div a{
+    color: #d2d2d2;
+}
+.l1{
+    width: 80%;
+}
+.login-btn{
+    width: 70%;
+    height: 3em;
+    border-radius: 6px;
+    border: 1px;
+    border-style: solid;
+    background-color: black!important;
+    font-weight: bold;
+    color: white!important;
+}
+.div-reg{
+    margin-top: 0.5em;
+}
+.div-reg span{
+    color: #d2d2d2;
+}
+.div-reg a{
+    color: #d2d2d2;
+}
+/* ---------------------------------------------------------dashboard */
+nav{
+    background: #ebebeb!important;
+}
+.myNav{
+    width: 2em !important;
+    border-radius: 50%!important;
+    font-size: 1.5em!important;
+    background-color: black!important;
+    color: #eaeaea!important;
+}
+.name{
+    font-size: 1.5em!important;
+    padding-top: 10px!important;
+}
+.raduis{
+    border-radius: 2em;
+}
+.myIcon{
+    width: 2em !important;
+    border-radius: 0.6em;
+}
+.bg{
+    background: #ebebeb!important;
+}
+.bgIcon1{
+    background: #27df39!important;
+}
+.colorIcon1{
+    color: #27df39!important;
+}
+.bg1{
+    background: #e4eaff!important;
+}
+.div-table{
+    border: 2px solid black;
+}
+.my-fs{
+    font-size: 6em;
+}
+.pic{
+    width: 100%;
+}
+.myIcon1{
+    width: 2em !important;
+    border-radius: 0.6em;
+    color: #fd9d2d;
 }

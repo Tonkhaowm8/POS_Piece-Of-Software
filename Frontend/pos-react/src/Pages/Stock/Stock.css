@@ -1,46 +1,79 @@
-html {
+/* html {
     scroll-behavior: smooth;
-}
+} */
 
 .stock-Background {
     height: fit-content;
-    width: 48%;
+    margin-bottom: 180px;          /* Adjust the bottom bg color to extend its length *** */
+    width: 77%;
+    display: inline-flex;
+    flex-direction: row;
+    /* DONT FORGET TO DISABLE THIS */
+    /* outline: solid;                      */
+    /* gap: 12px; */
+}
+
+.scrollable-content {
+    /*Comment color out aftet testing*/
+    /* margin: 0 -50px; */
+    background-color: antiquewhite;
+    height: 35%;
+    resize: none;
+}
+
+#bacc {
+    padding: 0px 35px
+}
+
+.selection {
+    text-align: center;
+    margin: 20px;
+    display:inline-flex;
+    border-radius: 12px;
+    color: black;
+}
+.selection h3 {
+    white-space: nowrap;
+    padding: 0 25px;    /* Increase/decrease horizon properties of padding for length adjustment of sidenav */
+}
+
+h3 {
+    font-family: 'Inter';
+}
+
+.selected {
+    border: 2px solid rgba(247, 182, 31, 1); /* Yellow border for the selected item */
+    background-color: rgba(247, 182, 31, 0.85); /* Yellow background color for the selected item */
+    cursor: pointer; /* Change cursor to pointer when hovering over the item */
+    border-radius: 3px;
+    padding: 0 -5px;
 }
 
 .button-container {
     flex: content;
-    margin: 30px 0;
+    margin: 5px 20px;
     text-align: center;
 }
 
 .buttonn {
-    background-color: #ebebf5;
-    padding: 0 100px;
+    padding: 0 100px;   /* Length of the button content (background color and border) */
     border: 0.1px solid black;
     border-radius: 10px;
-    margin: 0 25px;
+    margin: 0 30px;     /* Seperation length between two buttons */
 }
 .buttonn p {
     font-size: 12px;
     font-weight: bold;
-}
-
-#bacc {
-    background-color: #ebebf5;
-    padding: 10px 5px
-}
-
-.scrollable-content {
-    resize: none;
+    font-family: 'Inter';
 }
 
 .flex {
-    display: flex;        /*inline would display content vertically. */
+    display: flex;   
     flex-wrap: wrap;
 }
   
 .flex-item {
-    padding: 0 5px;
+    padding: 0 7px;
     width: calc(33.33% - 20px); /* Adjust the spacing as needed */;
     align-items: center;
     background-clip: content-box;
@@ -48,14 +81,14 @@ html {
 
 .card {
     text-align: center;
+    background-color: #FFFCFC;
     box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
 }
 
 .card-container {
     width: 100%;
-    max-height: 100%;
-    padding: 0 20px;
+    padding: 30px 15px;
     box-sizing: border-box;
     overflow-y: auto; /* Enable vertical scrolling when content overflows */
     max-height: calc(100vh - 60px); /* Set a maximum height to fit the available viewport height minus the header height (adjust as needed) */
@@ -64,4 +97,60 @@ html {
 .card-container > div {
     margin: 0.5px;
     gap: 8px;
+}
+
+.checkOut {
+    border-bottom-style: groove;
+    text-align: center;
+    padding:8px 120px;
+    white-space: nowrap;
+}
+
+.stackblock {
+    display: flexbox;
+    height: 22em;;      /* Adjust height of products in checkout's container: effect overall height of "Checkout" content */
+    overflow-y: auto;
+}
+.stackflake {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.stackblock p {
+    padding: 0 12px;
+    background-color: rgb(207, 204, 204);
+    box-sizing: border-box;
+}
+/*FIX PROPERTIES ABOVE AFTER ALL MAIN FEATURES WORKS*/
+.inflex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding:3px 5px;
+    background-color: rgba(247, 182, 31, 0.85);
+    border-radius: 8px;
+}
+.inflex span {
+    margin-top: 3px;
+}
+.discunt {
+    padding: 5px 12px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
+.cuntainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.litem {
+    width: calc(50% - 10px); /* Adjust the width as needed */
+    margin-bottom: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.litem:nth-child(even) {
+    text-align: center;
 }
