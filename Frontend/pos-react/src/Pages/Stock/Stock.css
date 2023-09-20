@@ -88,7 +88,7 @@ h3 {
 
 .card-container {
     width: 100%;
-    padding: 35px 15px;
+    padding: 30px 15px;
     box-sizing: border-box;
     overflow-y: auto; /* Enable vertical scrolling when content overflows */
     max-height: calc(100vh - 60px); /* Set a maximum height to fit the available viewport height minus the header height (adjust as needed) */
@@ -111,8 +111,15 @@ h3 {
     height: 22em;;      /* Adjust height of products in checkout's container: effect overall height of "Checkout" content */
     overflow-y: auto;
 }
+.stackflake {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .stackblock p {
+    padding: 0 12px;
     background-color: rgb(207, 204, 204);
+    box-sizing: border-box;
 }
 /*FIX PROPERTIES ABOVE AFTER ALL MAIN FEATURES WORKS*/
 .inflex {

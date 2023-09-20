@@ -10,6 +10,8 @@ function Stock(props) {
     const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
     const [selectedData, setSelectedData] = useState(new Map()); // State to store selected data and quantity
     const [totalPrice, setTotalPrice] = useState(0); // State to store the total price
+    const [taxRate, setTaxRate] = useState(0.1); // Tax rate as 10% (adjust as needed)
+    const [taxAmount, setTaxAmount] = useState(0); // State to store the calculated tax amount
 
     const handleItemClick = (item) => {
         setSelectedItem(item === selectedItem ? null : item);
@@ -46,6 +48,18 @@ function Stock(props) {
         }); // Update selectedData with the clicked item's data
     };
 
+    // Function to decrease the quantity of a selected item
+    const decreaseQuantity = (itemId) => {
+        setSelectedData((prevMap) => {
+            const updatedMap = new Map(prevMap);
+            const prevQuantity = updatedMap.get(itemId) || 0;
+            if (prevQuantity > 0) {
+                updatedMap.set(itemId, prevQuantity - 1);
+            }
+            return updatedMap;
+        });
+    };
+
     // Function to clear selected data
     const clearSelectedData = () => {
         setSelectedData(new Map()); // Reset the array to clear selected data
@@ -64,6 +78,15 @@ function Stock(props) {
         }
         setTotalPrice(sum);
     }, [selectedData, dataObject]);
+
+    // Calculate the tax amount based on the total price and tax rate
+    useEffect(() => {
+        const calculatedTaxAmount = totalPrice * taxRate;
+        setTaxAmount(calculatedTaxAmount);
+    }, [totalPrice, taxRate]);
+
+    // Calculate the total price including tax
+    const totalIncludingTax = totalPrice + taxAmount;
 
     return (
         <div className="stock-Background">
@@ -145,10 +168,10 @@ function Stock(props) {
             <div className="scrollable-content" style={{boxShadow:'0px 5px 8px 0px rgba(0, 0, 0, 0.5)',backgroundColor:'rgb(230, 225, 225)'}}>   
                 <div className="checkOut">
                     <span style={{fontFamily:'Inter',fontWeight:'initial',fontSize:'1.875em'}}>Checkout</span>
-                    {/* Button to clear selected data */}
                     <button onClick={clearSelectedData}>Clear</button>
                 </div>
                 <div style={{backgroundColor:'#f2eded'}} className="stackblock">
+
                     {/* Display items from clicked card: default method without replacing any duplicate content */
                     /* {selectedData.map((selectedData, index) => (
                     <div key={index}>
@@ -162,38 +185,34 @@ function Stock(props) {
                     const quantity = selectedData.get(itemId);
 
                         return (
-                            <div key={index}>
-                                {/* Find the item in dataObject using its ID */}
-                                {dataObject.map((item) => {
-                                    if (item.id === itemId) {
-                                        return (
-                                            <div key={item.id}>
-                                                <p>Product Name: {item["Product Name"]}</p>
-                                                <p>Price: {item.Price}</p>
-                                                <p>Quantity: {quantity}</p>
-                                            </div>
-                                        );
-                                    }
-                                    return null;
-                                })}
-                            </div>
+                            quantity > 0 && (
+                                <div key={index}>
+                                    {/* Find the item in dataObject using its ID */}
+                                    {dataObject.map((item) => {
+                                        if (item.id === itemId) {
+                                            return (
+                                                <div key={item.id} className="stackflake">
+                                                    <p>Quantity: {quantity}</p>
+                                                    <p>{item["Product Name"]}</p>
+                                                    <p>Price: {item.Price}</p>
+                                                    <button onClick={() => decreaseQuantity(item.id)}>Decrease Quantity</button>
+                                                </div>
+                                            );
+                                        }
+                                        return null;
+                                    })}
+                                </div>
+                            )
                         );
                     })}
-                </div>
-                <div style={{margin:'20px 5px',borderRadius:'8px'}}>
-                    <div className="inflex">
-                        <span style={{textAlign:'center',fontFamily:'Inter',fontSize:'1.4em',marginRight:'120px'}}>Add</span>
-                        <a href="#" className="discunt">Discount</a>
-                        <a href="#" className="discunt">Note</a>
-                    </div>
                 </div>
                 <div className="cuntainer" style={{backgroundColor:'white'}}>
                     <div className="litem">Subtotal</div>
                     <div className="litem">{totalPrice}</div>
                     <div className="litem">Tax</div>
-                    <div className="litem">Tax price(Right)</div>
+                    <div className="litem">{(taxRate * 100).toFixed(2)}%</div>
                     <div className="litem"><b>Payable Amount</b></div>
-                    <div className="litem">Total price (Right)</div>
+                    <div className="litem">{totalIncludingTax}</div>
                 </div>
                 <div style={{padding:'10px auto',border:'none'}} className="checkOut">
                     <button type="button" style={{padding:'15px',backgroundColor:'#7C00F9',border:'none',fontFamily:'Inter',fontWeight:'bold',borderRadius:'8px',color:'white'}} onClick={handleButtonClick}>Checkout *specifies amount*</button>
