@@ -35,6 +35,10 @@ function Login(props) {
             if (responseData.login) {
                 // User successfully logged in
                 console.log('Logged in:', responseData.user);
+                // Access user data including username and cart
+                const { username, cart } = responseData.user;
+                console.log('Username:', username);
+                console.log('Cart:', cart);
                 // Redirect to '/stock' or perform other actions
                 navigate('/stock');
             } else {
