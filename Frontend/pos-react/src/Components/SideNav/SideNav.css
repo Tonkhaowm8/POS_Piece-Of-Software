@@ -1,5 +1,5 @@
 main {
-    width: 80%;
+    width: 100%;    /* width: 70% */
     overflow: hidden;
 }
 
@@ -18,7 +18,7 @@ main {
 .mysidenav {
     background-color: #1C0059 !important;
     position: absolute;
-    width: 50px;    /*250px*/
+    width: 80px;    /* width: 50px*/
     height: 100vh;   /*95vh*/
     padding: 0 20px;
     /* left: -30%; */
@@ -26,7 +26,7 @@ main {
   }
   
 .mysidenav.active {
-    width: 250px;
+    width: 280px;       /* Adjust width of sidenav dark blue bar: width 250px */
     /* left: 0; */
 }
 .mysidenav .Link {
@@ -53,12 +53,12 @@ main {
     transform: translateX(250px); /* Translate the content to the right by the width of the sidebar */
 }
 
-.fal-ul li{
+.fal-ull li{
     display: inline-block;
     margin: 0 10px;
 }
 
-.fal-ul li i {
+.fal-ull li i {
     color: #eaecef;
 }
 
@@ -66,5 +66,6 @@ main {
     font-size: larger;
     text-decoration: none;
     color: #eaecef;
+    /* padding: 0 50px; */
     padding: 0 50px;
 }

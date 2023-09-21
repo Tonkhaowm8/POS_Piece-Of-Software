@@ -25,9 +25,9 @@ function Nav({show, children}) {
                 className="logo"
                 style={{paddingTop:'50px'}}
                 />
-                <ul class="fa-ul">
+                <ul class="fa-ull">
                     {SidebarItems.map((item, index) => (
-                        <li key={index}>
+                        <li key={index} style={{display:'flex'} /* no display: flex */} >
                             <Link to={item.path} style={{color: "#eaecef"}}><span className="fa-li"><i className="icon" style={{fontSize:'large'}}>{item.icon}</i></span></Link>
                             <Link to={item.path} className="Link">{item.label}</Link>
                         </li>

@@ -15,22 +15,22 @@ header {
   z-index: 1;
   position: relative;
   overflow: hidden;
-  width: 250px;
+  width: 280px;       /* Adjust width of sidenav top black bar: width 250px */
   padding: 20px;
   color: #eaecef;
   background-color: #011627;
-  height: 25px;
+  height: 60px;       /* height: 25px */
   transition: all 0.5s;
 }
 
 .app.collapsed header {
-  width: 50px; /* Adjust the width when collapsed */
+  width: 80px; /* Adjust the width when collapsed, width: 50px */
 
 }
 
 header svg {
   padding-left: 10px;
-  font-size: 25px;
+  font-size: 30px;  /*25px*/
 }
 
 ul {
@@ -44,10 +44,6 @@ ul li {
   color: #eaecef;
   padding: 10px 14px;
   margin: 35px 0;
-}
-
-ul li:nth-child(3) {
-  bottom: -400px;
 }
 
 ul li:hover,
