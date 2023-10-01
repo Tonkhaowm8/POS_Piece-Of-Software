@@ -1,7 +1,6 @@
 // Import the required modules
 const express = require('express');
 const db = require('./db.js'); // Import the database functions from './db.js'
-const cartQueue = require('./cart'); 
 
 // Create an instance of the Express Router
 const router = express.Router();
@@ -82,34 +81,29 @@ router.delete('/item/:id', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
-
+    
     const { success, data, error } = await db.getItemById(username, 'username', 'user'); // Call 'getItemById' with the extracted ID
 
     if (success) {
-        // If the operation is successful and the password matches, return JSON response with retrieved data
+        // If the operation is successful, return JSON response with retrieved data
         if (password == data.password) {
-            // Assuming cartQueue contains the items and prices
-            const cartItems = cartQueue.map((cartItem) => ({
-                product: cartItem.itemId,
-                price: cartItem.price,
-            }));
-
-            // Combine the username and cart items
-            const userDataWithCart = {
-                username: username,
-                cart: cartItems,
-            };
-
-            return res.json({ login: true, user: userDataWithCart });
+            return res.json({login: true, user: data})
         } else {
-            return res.json({ login: false, reason: "wrong password" });
+            return res.json({login: false, reason: "wrong password"})
         }
+        return res.json({ success, data });
     }
 
     // If there's an error, return a 500 Internal Server Error with an error message
     return res.status(500).json({ success: false, message: error, data: data, body: req.body });
 });
 
+// Route to receive cart data from Stock.jsx
+router.get('/cart', (req, res) => {
+    const cartData = req.body; // This will contain the cart data sent from Stock.jsx
+    console.log('Received cart data:', cartData);
+    return res.json({ success: true, message: "Cart data received"});
+});
 
 // Export the Express router for use in other parts of the application
 module.exports = router;

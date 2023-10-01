@@ -8,6 +8,7 @@ function Login(props) {
     // State variables for username and password
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    
 
     const navigateStock = async () => {
         // Get the current values of username and password
