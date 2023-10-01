@@ -42,11 +42,9 @@ h3 {
 }
 
 .selected {
-    border: 2px solid rgba(247, 182, 31, 1); /* Yellow border for the selected item */
     background-color: rgba(247, 182, 31, 0.85); /* Yellow background color for the selected item */
     cursor: pointer; /* Change cursor to pointer when hovering over the item */
     border-radius: 3px;
-    padding: 0 -5px;
 }
 
 .button-container {
@@ -88,7 +86,7 @@ h3 {
 
 .card-container {
     width: 100%;
-    padding: 30px 15px;
+    padding: 30px 25px;     /* 30px 15px */
     box-sizing: border-box;
     overflow-y: auto; /* Enable vertical scrolling when content overflows */
     max-height: calc(100vh - 60px); /* Set a maximum height to fit the available viewport height minus the header height (adjust as needed) */
