@@ -13,6 +13,7 @@ function Stock(props) {
     const [taxRate, setTaxRate] = useState(0.1); // Tax rate as 10% (adjust as needed)
     const [taxAmount, setTaxAmount] = useState(0); // State to store the calculated tax amount
     const [username, setUsername] = useState(""); // State to store the username
+    const [selectedProducts, setSelectedProducts] = useState([]);   // State to store the selected products
 
     const handleItemClick = (item) => {
         setSelectedItem(item === selectedItem ? null : item);
@@ -47,6 +48,19 @@ function Stock(props) {
             updatedMap.set(item.id, prevQuantity + 1);
             return updatedMap;
         }); // Update selectedData with the clicked item's data
+
+        // Add the selected product to the selectedProducts array
+        setSelectedProducts((prevProducts) => {
+            const updatedProducts = [...prevProducts];
+            updatedProducts.push({
+                id: item.id,
+                name: item["Product Name"],
+                quantity: prevProducts.find((product) => product.id === item.id)?.quantity + 1 || 1,
+                price: item.Price,
+            });
+            return updatedProducts;
+        });
+        console.log("Selected Products:", selectedProducts)
     };
 
     // Function to decrease the quantity of a selected item
@@ -66,6 +80,7 @@ function Stock(props) {
         setSelectedData(new Map()); // Reset the array to clear selected data
         setTotalPrice(0); // Reset the total price
     };
+    
 
     // Calculate the total price based on selected data and quantities
     useEffect(() => {
