@@ -89,54 +89,54 @@ function Stock(props) {
     // Calculate the total price including tax
     const totalIncludingTax = totalPrice + taxAmount;
 
-        // Function to send the cart data to the server
-        const sendCartData = async () => {
-            // Prepare the cart data to send in the request body
-            const cartData = Array.from(selectedData.entries()).map(([itemId, quantity]) => ({
-                itemId,
-                quantity,
-                price: dataObject.find((item) => item.id === itemId)?.Price || 0, // Get the price based on itemId
-            }));
-    
-            // Prepare the data to send in the request body, including username and cartData
-            const dataToSend = {
-                username,
-                cartData,
-            };
-    
-            try {
-                // Make an HTTP POST request to your server's '/login' route
-                const response = await fetch('http://localhost:4000/api/cart', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(dataToSend),
-                });
-    
-                if (response.ok) {
-                    const responseData = await response.json();
-                    if (responseData.login) {
-                        // User successfully logged in
-                        console.log('Logged in:', responseData.user);
-                        // Access user data including username and cart
-                        const { username, cart } = responseData.user;
-                        console.log('Username:', username);
-                        console.log('Cart:', cart);
-                        // Redirect to '/stock' or perform other actions
-                    } else {
-                        // Handle login failure (wrong password)
-                        console.log('Login failed:', responseData.reason);
-                    }
-                } else {
-                    // Handle HTTP request error
-                    console.error('HTTP request failed:', response.status);
-                }
-            } catch (error) {
-                // Handle network or other errors
-                console.error('An error occurred:', error);
-            }
+    // Function to send the cart data to the server
+    const sendCartData = async () => {
+        // Prepare the cart data to send in the request body
+        const cartDataToSend = Array.from(selectedData.entries()).map(([itemId, quantity]) => ({
+            itemId,
+            quantity,
+            price: dataObject.find((item) => item.id === itemId)?.Price || 0, // Get the price based on itemId
+        }));
+
+        // Prepare the data to send in the request body, including username and cartData
+        const dataToSend = {
+            username,
+            cartData: cartDataToSend,
         };
+
+        try {
+            // Make an HTTP POST request to your server's '/cart' route
+            const response = await fetch('http://localhost:4000/api/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataToSend),
+            });
+
+            if (response.ok) {
+                const responseData = await response.json();
+                if (responseData.login) {
+                    // User successfully logged in
+                    console.log('Logged in:', responseData.user);
+                    // Access user data including username and cart
+                    const { username, cart } = responseData.user;
+                    console.log('Username:', username);
+                    console.log('Cart:', cart);
+                    // Redirect to '/stock' or perform other actions
+                } else {
+                    // Handle login failure (wrong password)
+                    console.log('Login failed:', responseData.reason);
+                }
+            } else {
+                // Handle HTTP request error
+                console.error('HTTP request failed:', response.status);
+            }
+        } catch (error) {
+            // Handle network or other errors
+            console.error('An error occurred:', error);
+        }
+    };
 
     return (
         <div className="stock-Background">
@@ -265,7 +265,7 @@ function Stock(props) {
                     <div className="litem">{totalIncludingTax}</div>
                 </div>
                 <div style={{padding:'10px auto',border:'none'}} className="checkOut">
-                    <button type="button" style={{padding:'15px',backgroundColor:'#7C00F9',border:'none',fontFamily:'Inter',fontWeight:'bold',borderRadius:'8px',color:'white'}} onClick={handleButtonClick}>Checkout *specifies amount*</button>
+                    <button type="button" style={{padding:'15px',backgroundColor:'#7C00F9',border:'none',fontFamily:'Inter',fontWeight:'bold',borderRadius:'8px',color:'white'}} onClick={sendCartData}>Checkout *specifies amount*</button>
                 </div>
             </div>
             
@@ -275,8 +275,9 @@ function Stock(props) {
 
 function handleButtonClick() {
     // Perform actions when the button is clicked
-    alert('Button Clicked!');
+    alert('Button Clicked! :)');
     // You can add more logic or state updates here
 }
+
 
 export default Stock;
