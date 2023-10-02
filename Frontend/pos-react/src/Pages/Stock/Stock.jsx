@@ -156,53 +156,53 @@ function Stock(props) {
     return (
         <div className="stock-Background">
             <div className="scrollable-content" /* id="bacc" */ style={{backgroundColor:'rgb(230, 225, 225)',boxShadow:'0px 5px 8px 0px rgba(0, 0, 0, 0.5)'}}>
-                <div className="selection">
-                <h3
-                    className={selectedItem === "All products" ? "selected" : ""}
-                    onClick={() => handleItemClick("All products")}
-                    id="href3"
-                >
-                    All products
-                </h3>
-                <h3
-                    className={selectedItem === "Foods" ? "selected" : ""}
-                    onClick={() => handleItemClick("Foods")}
-                    id="href3"
-                >
-                    Foods
-                </h3>
-                <h3
-                    className={selectedItem === "Beverages" ? "selected" : ""}
-                    onClick={() => handleItemClick("Beverages")}
-                    id="href3"
-                >
-                    Beverages
-                </h3>
-                <h3
-                    className={selectedItem === "Fashion" ? "selected" : ""}
-                    onClick={() => handleItemClick("Fashion")}
-                    id="href3"
-                >
-                    Fashion
-                </h3>
-                <h3
-                    className={selectedItem === "Cleaners" ? "selected" : ""}
-                    onClick={() => handleItemClick("Cleaners")}
-                    id="href3"
-                >
-                    Cleaners
-                </h3>
-                <h3
-                    className={selectedItem === "Other" ? "selected" : ""}
-                    onClick={() => handleItemClick("Other")}
-                    id="href3"
-                >
-                    Other
-                </h3>
-                </div>
+                {/* <div className="selection">
+                    <h3
+                        className={selectedItem === "All products" ? "selected" : ""}
+                        onClick={() => handleItemClick("All products")}
+                        id="href3"
+                    >
+                        All products
+                    </h3>
+                    <h3
+                        className={selectedItem === "Foods" ? "selected" : ""}
+                        onClick={() => handleItemClick("Foods")}
+                        id="href3"
+                    >
+                        Foods
+                    </h3>
+                    <h3
+                        className={selectedItem === "Beverages" ? "selected" : ""}
+                        onClick={() => handleItemClick("Beverages")}
+                        id="href3"
+                    >
+                        Beverages
+                    </h3>
+                    <h3
+                        className={selectedItem === "Fashion" ? "selected" : ""}
+                        onClick={() => handleItemClick("Fashion")}
+                        id="href3"
+                    >
+                        Fashion
+                    </h3>
+                    <h3
+                        className={selectedItem === "Cleaners" ? "selected" : ""}
+                        onClick={() => handleItemClick("Cleaners")}
+                        id="href3"
+                    >
+                        Cleaners
+                    </h3>
+                    <h3
+                        className={selectedItem === "Other" ? "selected" : ""}
+                        onClick={() => handleItemClick("Other")}
+                        id="href3"
+                    >
+                        Other
+                    </h3>
+                </div> */}
                 <div className="button-container">
-                    <button type="button" className="buttonn"  onClick={() => setIsModalOpen(true)}><p>Add Product</p></button>
-                    <button type="button" className="buttonn"  onClick={handleButtonClick}><p>Edit Product</p></button>
+                    <button type="button" className="buttonn"  onClick={() => setIsModalOpen(true)}>Add Product</button>
+                    <button type="button" className="buttonn"  onClick={handleButtonClick}>Edit Product</button>
                 </div>
                 <div className="card-container" >
                     <div className="flex">
