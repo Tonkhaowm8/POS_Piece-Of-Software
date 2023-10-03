@@ -91,9 +91,12 @@ function Stock(props) {
 
     // Function to clear selected data
     const clearSelectedData = () => {
-        setSelectedData(new Map()); // Reset the array to clear selected data
+        setSelectedData(new Map()); // Reset the selectedData state to an empty Map
+        setSelectedProducts([]); // Reset the selectedProducts state to an empty array
         setTotalPrice(0); // Reset the total price
+        setTaxAmount(0); // Reset the tax amount
     };
+    
     
 
     // Calculate the total price based on selected data and quantities
