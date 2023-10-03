@@ -4,6 +4,8 @@ import {AiOutlineReload, AiOutlinePlus} from "react-icons/ai";
 import {TiDeleteOutline} from "react-icons/ti";
 import ProductModal from "../../ProductModal/ProductModal";
 import './Stock.css';
+import { useUsername } from '../Login/UsernameContext.jsx'; // Import the useUsername hook
+
 
 function Stock(props) {
     // Define a state variable to store the data
@@ -13,6 +15,7 @@ function Stock(props) {
     const [totalPrice, setTotalPrice] = useState(0); // State to store the total price
     const [taxRate, setTaxRate] = useState(0.1); // Tax rate as 10% (adjust as needed)
     const [taxAmount, setTaxAmount] = useState(0); // State to store the calculated tax amount
+<<<<<<< HEAD
     const [username, setUsername] = useState(""); // State to store the username
     const [selectedProducts, setSelectedProducts] = useState([]);   // State to store the selected products
     const [showModal, setShowModal] = useState(false);  // State to control modal visibility
@@ -24,6 +27,12 @@ function Stock(props) {
     const handleHideModal = () => {
         setShowModal(false);
     };
+=======
+    const [selectedProducts, setSelectedProducts] = useState([]);  // State to store the selected products
+    const { username } = useUsername();
+
+    
+>>>>>>> 4114884859b598eba52dab1b9a2cc1d89a213918
 
     const handleItemClick = (item) => {
         setSelectedItem(item === selectedItem ? null : item);
@@ -58,7 +67,7 @@ function Stock(props) {
             updatedMap.set(item.id, prevQuantity + 1);
             return updatedMap;
         }); // Update selectedData with the clicked item's data
-
+    
         // Add the selected product to the selectedProducts array
         setSelectedProducts((prevProducts) => {
             const updatedProducts = [...prevProducts];
@@ -70,9 +79,14 @@ function Stock(props) {
             });
             return updatedProducts;
         });
-        console.log("Selected Products:", selectedProducts)
     };
+    
+    // Log the selectedProducts whenever it changes
+    useEffect(() => {
+    console.log("Selected Products:", selectedProducts);
+    }, [selectedProducts]);
 
+<<<<<<< HEAD
     // Function to increase the quantity of a selected item
     const increaseQuantity = (itemId) => {
         setSelectedData((prevMap) => {
@@ -86,12 +100,22 @@ function Stock(props) {
     };
 
     // Function to decrease the quantity of a selected item
+=======
+    // Function to decrease the quantity of a selected item and remove it if quantity becomes 0
+>>>>>>> 4114884859b598eba52dab1b9a2cc1d89a213918
+    
     const decreaseQuantity = (itemId) => {
         setSelectedData((prevMap) => {
             const updatedMap = new Map(prevMap);
             const prevQuantity = updatedMap.get(itemId) || 0;
             if (prevQuantity > 0) {
                 updatedMap.set(itemId, prevQuantity - 1);
+
+                // Remove the item from selectedProducts if its quantity becomes 0
+                setSelectedProducts((prevProducts) => {
+                    const updatedProducts = prevProducts.filter((product) => product.id !== itemId);
+                    return updatedProducts;
+                });
             }
             return updatedMap;
         });
@@ -99,9 +123,12 @@ function Stock(props) {
 
     // Function to clear selected data
     const clearSelectedData = () => {
-        setSelectedData(new Map()); // Reset the array to clear selected data
+        setSelectedData(new Map()); // Reset the selectedData state to an empty Map
+        setSelectedProducts([]); // Reset the selectedProducts state to an empty array
         setTotalPrice(0); // Reset the total price
+        setTaxAmount(0); // Reset the tax amount
     };
+    
     
 
     // Calculate the total price based on selected data and quantities
@@ -128,19 +155,14 @@ function Stock(props) {
 
     // Function to send the cart data to the server
     const sendCartData = async () => {
-        // Prepare the cart data to send in the request body
-        const cartDataToSend = Array.from(selectedData.entries()).map(([itemId, quantity]) => ({
-            itemId,
-            quantity,
-            price: dataObject.find((item) => item.id === itemId)?.Price || 0, // Get the price based on itemId
-        }));
-
-        // Prepare the data to send in the request body, including username and cartData
+        // Prepare the data to send in the request body
+        console.log("Username : ",username)
         const dataToSend = {
-            username,
-            cartData: cartDataToSend,
+            username: username, // Include the username
+            cartData: selectedProducts, // Send the selectedProducts array
         };
-
+    
+    
         try {
             // Make an HTTP POST request to your server's '/cart' route
             const response = await fetch('http://localhost:4000/api/cart', {
@@ -150,21 +172,11 @@ function Stock(props) {
                 },
                 body: JSON.stringify(dataToSend),
             });
-
+    
             if (response.ok) {
                 const responseData = await response.json();
-                if (responseData.login) {
-                    // User successfully logged in
-                    console.log('Logged in:', responseData.user);
-                    // Access user data including username and cart
-                    const { username, cart } = responseData.user;
-                    console.log('Username:', username);
-                    console.log('Cart:', cart);
-                    // Redirect to '/stock' or perform other actions
-                } else {
-                    // Handle login failure (wrong password)
-                    console.log('Login failed:', responseData.reason);
-                }
+                // Handle the response as needed
+                console.log('Response from server:', responseData);
             } else {
                 // Handle HTTP request error
                 console.error('HTTP request failed:', response.status);
@@ -174,6 +186,7 @@ function Stock(props) {
             console.error('An error occurred:', error);
         }
     };
+    
 
     return (
         <div className="stock-Background">

@@ -2,11 +2,11 @@
 const config = require('./config.js');
 
 // Function for creating or updating items in a database table
-const createOrUpdate = async (data = {}) => {
+const createOrUpdate = async (data = {}, table) => {
 
     // Define the parameters for the operation
     const params = {
-        TableName: config.aws_table_name, // Specify the name of the AWS DynamoDB table from the config
+        TableName: table, // Specify the name of the AWS DynamoDB table from the config
         Item: data, // The data to be inserted or updated
     };
 

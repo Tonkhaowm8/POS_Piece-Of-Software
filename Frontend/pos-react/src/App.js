@@ -7,6 +7,8 @@ import Dashboard from './Pages/Dashboard/Dashboard.jsx';
 import Stock from './Pages/Stock/Stock';
 import Login from './Pages/Login/Login';
 import Logout from './Pages/Logout/Logout';
+import { UsernameProvider } from './Pages/Login/UsernameContext.jsx'; // Import the UsernameProvider
+
 
 function App() {
 
@@ -23,11 +25,12 @@ function App() {
   const appClass = expanded ? '' : 'collapsed'; // Add or remove the "collapsed" class
 
   return (
+    <UsernameProvider>
       <div className={`app ${appClass}`}>
         <Router>
           <Routes>
             {/* Conditionally render the Appheader that header would appear on every page except for login */}
-            {['/stock', '/dashboard'].map((path) => (
+            {['/stock', '/dashboard'].map(path => (
               <Route
                 key={path}
                 path={path}
@@ -40,15 +43,15 @@ function App() {
           </Routes>
           <Nav show={expanded}>
             <Routes>
-                <Route path='/' element={<Logout />} />
-                <Route path='/stock' element={<Stock />} />
-                <Route path='/dashboard' element={<Dashboard/>}/>
-                <Route path='/logout' element={<Logout/>}/>
+              <Route path="/" element={<Logout />} />
+              <Route path="/stock" element={<Stock />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/logout" element={<Logout />} />
             </Routes>
           </Nav>
-
         </Router>
       </div>
+    </UsernameProvider>
   );
 }
 

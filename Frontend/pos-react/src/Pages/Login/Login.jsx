@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import './Login.css';
 import {useNavigate} from 'react-router-dom';
+import { useUsername } from './UsernameContext.jsx'; // Import the useUsername hook
 
 function Login(props) {
     const navigate = useNavigate();
-
-    // State variables for username and password
-    const [username, setUsername] = useState("");
+    const { username, setUsername } = useUsername(); // Use the hook to get and set the username
     const [password, setPassword] = useState("");
     
 
@@ -40,6 +39,7 @@ function Login(props) {
                 const { username, cart } = responseData.user;
                 console.log('Username:', username);
                 console.log('Cart:', cart);
+                console.log('From Login Page')
                 // Redirect to '/stock' or perform other actions
                 navigate('/stock');
             } else {
@@ -100,5 +100,7 @@ function Login(props) {
 
     );
 }
+const username = "initialValue";
 
+export {username}; // Export the username variable
 export default Login;
