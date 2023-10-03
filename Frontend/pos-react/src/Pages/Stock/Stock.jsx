@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import RightSidebar from '../ShoppingCart/ShoppingCart.jsx';
+import {AiOutlineReload, AiOutlinePlus} from "react-icons/ai";
+import {TiDeleteOutline} from "react-icons/ti";
 import ProductModal from "../../ProductModal/ProductModal";
 import './Stock.css';
 
@@ -69,6 +71,18 @@ function Stock(props) {
             return updatedProducts;
         });
         console.log("Selected Products:", selectedProducts)
+    };
+
+    // Function to increase the quantity of a selected item
+    const increaseQuantity = (itemId) => {
+        setSelectedData((prevMap) => {
+            const updatedMap = new Map(prevMap);
+            const prevQuantity = updatedMap.get(itemId) || 0;
+            if (prevQuantity > 0) {
+                updatedMap.set(itemId, prevQuantity + 1);
+            }
+            return updatedMap;
+        });
     };
 
     // Function to decrease the quantity of a selected item
@@ -218,11 +232,12 @@ function Stock(props) {
                         {dataObject.map((item, index) => (
                             <div className="flex-item" key={index}>
                                 <div className="card" onClick={() => handleCardClick(item)}>
-                                    <span style={{fontFamily:'Inter',fontWeight:'bold'}}>Item pic {index + 1}</span>
-                                    <p>"{item["Product Name"]}"</p>
-                                    <p>Stock: {item.Stock}</p>
-                                    <p>Price: {item.Price}</p>
-                                    <p>ID: {item.id}</p>
+                                    {/* <span style={{fontFamily:'Lato',fontWeight:'900'}}>Item pic {index + 1}</span> */}
+                                    <span style={{fontFamily:'Lato',fontWeight:'900'}}>ID: {item.id}</span>
+                                    <span style={{fontFamily:'Lato',fontWeight:'400'}}>"{item["Product Name"]}"</span>
+                                    <span id="carde">Stock: {item.Stock}</span>
+                                    <span id="carde">Price: {item.Price}</span>
+                                    <span id="carde">{item.Category}</span>
                                 </div>
                             </div>
                         ))}
@@ -238,20 +253,13 @@ function Stock(props) {
             </div>
             
             {/* padding left-right can only 70px */}
-            <div className="scrollable-content" style={{boxShadow:'0px 5px 8px 0px rgba(0, 0, 0, 0.5)',backgroundColor:'rgb(230, 225, 225)'}}>   
-                <div className="checkOut">
-                    <span style={{fontFamily:'Inter',fontWeight:'initial',fontSize:'1.875em'}}>Checkout</span>
-                    <button onClick={clearSelectedData}>Clear</button>
+            <div className="scrollable-content" style={{boxShadow:'0px 5px 8px 0px rgba(0, 0, 0, 0.5)',backgroundColor:'rgb(230, 225, 225)',maxWidth:'450px',width:'450px'}}>   
+                <div className="checktitle">
+                    <span style={{marginLeft:'2em'}}></span>
+                    <span style={{fontFamily:'Raleway',fontWeight:'bold',fontSize:'1.875em'}}>Checkout</span>
+                    <button onClick={clearSelectedData} style={{flexShrink:0,marginLeft:'10px',border:'none',backgroundColor:'rgb(230, 225, 225)'}}><AiOutlineReload/></button>
                 </div>
                 <div style={{backgroundColor:'#f2eded'}} className="stackblock">
-
-                    {/* Display items from clicked card: default method without replacing any duplicate content */
-                    /* {selectedData.map((selectedData, index) => (
-                    <div key={index}>
-                        <p>Product Name: {selectedData["Product Name"]}</p>
-                        <p>Price: {selectedData.Price}</p>
-                    </div>
-                    ))} */}
 
                     {/* Display items from clicked card: with quantity count method */}
                     {Array.from(selectedData.keys()).map((itemId, index) => {
@@ -265,10 +273,15 @@ function Stock(props) {
                                         if (item.id === itemId) {
                                             return (
                                                 <div key={item.id} className="stackflake">
-                                                    <p>Quantity: {quantity}</p>
-                                                    <p>{item["Product Name"]}</p>
-                                                    <p>Price: {item.Price}</p>
-                                                    <button onClick={() => decreaseQuantity(item.id)}>Decrease Quantity</button>
+                                                    <div className="quantity-align">
+                                                        <button onClick={() => increaseQuantity(item.id)} style={{border:'none',backgroundColor:'rgb(230, 225, 225)'}}><AiOutlinePlus/></button>
+                                                        <span>{quantity}</span>
+                                                    </div>
+                                                    <span>{item["Product Name"]}</span>
+                                                    <div className="quantity-align">
+                                                        <span style={{justifyContent:'flex-start'}}>Price: {item.Price}</span>
+                                                        <button onClick={() => decreaseQuantity(item.id)} style={{border:'none',backgroundColor:'rgb(230, 225, 225)'}}><TiDeleteOutline/></button>
+                                                    </div>
                                                 </div>
                                             );
                                         }
@@ -287,8 +300,8 @@ function Stock(props) {
                     <div className="litem"><b>Payable Amount</b></div>
                     <div className="litem">{totalIncludingTax}</div>
                 </div>
-                <div style={{padding:'10px auto',border:'none'}} className="checkOut">
-                    <button type="button" style={{padding:'15px',backgroundColor:'#7C00F9',border:'none',fontFamily:'Inter',fontWeight:'bold',borderRadius:'8px',color:'white'}} onClick={sendCartData}>Checkout *specifies amount*</button>
+                <div style={{border:'none',textAlign:'center',padding:'20px'}}>
+                    <button type="button" style={{padding:'12px',flexShrink:'0',width:'180px',backgroundColor:'#7C00F9',border:'none',fontFamily:'Inter',fontWeight:'bold',borderRadius:'8px',color:'white'}} onClick={sendCartData}>Checkout {totalIncludingTax}</button>
                 </div>
             </div>
             

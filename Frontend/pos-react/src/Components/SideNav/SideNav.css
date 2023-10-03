@@ -50,7 +50,7 @@ main {
   }
   
 .contentt.active {
-    transform: translateX(230px); /* Translate the content to the right by the width of the sidebar */
+    transform: translateX(240px); /* Translate the content to the right by the width of the sidebar */
 }
 
 .fal-ull li{
