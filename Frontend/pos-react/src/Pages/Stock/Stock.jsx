@@ -15,24 +15,13 @@ function Stock(props) {
     const [totalPrice, setTotalPrice] = useState(0); // State to store the total price
     const [taxRate, setTaxRate] = useState(0.1); // Tax rate as 10% (adjust as needed)
     const [taxAmount, setTaxAmount] = useState(0); // State to store the calculated tax amount
-<<<<<<< HEAD
-    const [username, setUsername] = useState(""); // State to store the username
+    // const [username, setUsername] = useState(""); // State to store the username 
     const [selectedProducts, setSelectedProducts] = useState([]);   // State to store the selected products
     const [showModal, setShowModal] = useState(false);  // State to control modal visibility
 
-    const handleShowModal = () => {
-        setShowModal(true);
-    };
-
-    const handleHideModal = () => {
-        setShowModal(false);
-    };
-=======
-    const [selectedProducts, setSelectedProducts] = useState([]);  // State to store the selected products
     const { username } = useUsername();
 
     
->>>>>>> 4114884859b598eba52dab1b9a2cc1d89a213918
 
     const handleItemClick = (item) => {
         setSelectedItem(item === selectedItem ? null : item);
@@ -86,7 +75,6 @@ function Stock(props) {
     console.log("Selected Products:", selectedProducts);
     }, [selectedProducts]);
 
-<<<<<<< HEAD
     // Function to increase the quantity of a selected item
     const increaseQuantity = (itemId) => {
         setSelectedData((prevMap) => {
@@ -100,9 +88,6 @@ function Stock(props) {
     };
 
     // Function to decrease the quantity of a selected item
-=======
-    // Function to decrease the quantity of a selected item and remove it if quantity becomes 0
->>>>>>> 4114884859b598eba52dab1b9a2cc1d89a213918
     
     const decreaseQuantity = (itemId) => {
         setSelectedData((prevMap) => {
