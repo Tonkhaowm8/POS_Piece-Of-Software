@@ -1,13 +1,15 @@
-/* html {
-    scroll-behavior: smooth;
-} */
+html {
+    width: 1535px; /* Set your desired width */
+    height: 768px; /* Set your desired height */
+}
 
 .stock-Background {
     height: fit-content;
     margin-bottom: 180px;          /* Adjust the bottom bg color to extend its length *** */
-    width: 77%;
+    box-sizing: content-box;
+    width: fit-content;
     display: inline-flex;
-    flex-direction: row;
+    /* flex-direction: row; */
     /* DONT FORGET TO DISABLE THIS */
     /* outline: solid;                      */
     /* gap: 12px; */
@@ -18,52 +20,87 @@
     /* margin: 0 -50px; */
     background-color: antiquewhite;
     height: 35%;
-    resize: none;
 }
 
-#bacc {
+/* #bacc {
     padding: 0px 35px
-}
+} */
 
 .selection {
-    text-align: center;
     margin: 20px;
-    display:inline-flex;
-    border-radius: 12px;
+    display:flex;
+    border-radius: 5px;
     color: black;
+    background-color: rgb(221, 214, 214);
+    justify-content:space-between;
+    align-items: center;
 }
-.selection h3 {
+.selection span {
     white-space: nowrap;
-    padding: 0 25px;    /* Increase/decrease horizon properties of padding for length adjustment of sidenav */
+    padding: 0 25px;    /* Seperation between selection container and the buttons content below it, Increase/decrease horizon properties of padding for length adjustment of sidenav */
+    transition: font-size 0.2s;
+}
+/* Define a pulse animation */
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
+  
+/* Apply the pulse animation to the selected item on hover */
+.selection span.selected:hover {
+    animation: pulse 0.5s ease infinite;
+}
+  
+/* Apply the shake animation to the non-selected items on hover */
+.selection span:not(.selected):hover {
+    animation: pulse 0.5s ease;
 }
 
-h3 {
+/* span {
     font-family: 'Inter';
-}
+} */
 
 .selected {
-    background-color: rgba(247, 182, 31, 0.85); /* Yellow background color for the selected item */
-    cursor: pointer; /* Change cursor to pointer when hovering over the item */
+    color: rgba(35, 29, 218, 0.85); /* Yellow background color for the selected item */
+    font-weight: 700;
+    cursor: grabbing; /* Change cursor to pointer when hovering over the item */
     border-radius: 3px;
+    border-color: rgba(247, 182, 31, 0.85);
 }
 
 .button-container {
     flex: content;
-    margin: 5px 20px;
+    margin: 25px 20px;  /* Seperation between buttons container and the flex card items below it */
     text-align: center;
 }
 
 .buttonn {
-    padding: 0 100px;   /* Length of the button content (background color and border) */
-    border: 0.1px solid black;
+    color:#888888;
+    padding: 10px 100px;   /* Length of the button content (background color and border) */
+    border: 0.1px solid ;
     border-radius: 10px;
     margin: 0 30px;     /* Seperation length between two buttons */
-}
-.buttonn p {
+    line-height: 1.5;
     font-size: 12px;
     font-weight: bold;
-    font-family: 'Inter';
+    font-family: 'Raleway';
 }
+
+/* Add a scale effect on hover */
+.buttonn:hover {
+    transition: 0.5s;
+    transform: scale(1);
+    color: black;
+}
+
+
 
 .flex {
     display: flex;   
@@ -71,10 +108,11 @@ h3 {
 }
   
 .flex-item {
-    padding: 0 7px;
-    width: calc(33.33% - 20px); /* Adjust the spacing as needed */;
-    align-items: center;
+    margin-left: 10px;
+    width: calc(33.33% - 14px); /* Adjust the spacing as needed */;
+    justify-content: center;
     background-clip: content-box;
+    /* height: 100vh; */
 }
 
 .card {
@@ -82,43 +120,89 @@ h3 {
     background-color: #FFFCFC;
     box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
+    margin: 0 auto;
+}
+
+#carde {
+    /*10 letter until it expand div content*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: Lato;
+    font-weight: 400;
+    padding: 10px 0;
 }
 
 .card-container {
     width: 100%;
-    padding: 30px 25px;     /* 30px 15px */
+    /* padding: 30px 25px;     /* 30px 15px */
     box-sizing: border-box;
     overflow-y: auto; /* Enable vertical scrolling when content overflows */
-    max-height: calc(100vh - 60px); /* Set a maximum height to fit the available viewport height minus the header height (adjust as needed) */
+    max-height: calc(100vh - 180px); /* Set a maximum height to fit the available viewport height minus the header height (adjust as needed) */
 }
   
 .card-container > div {
     margin: 0.5px;
-    gap: 8px;
+    gap: 12px 2px;
+    font-size: small;
 }
 
-.checkOut {
+/* Hide scrollbar for webkit-based browsers (Chrome, Safari) */
+.card-container::-webkit-scrollbar {
+    width: 6px; /* Adjust the width as needed */
+}
+
+.card-container::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Hide the thumb */
+}
+
+.card-container::-webkit-scrollbar-track {
+    background-color: transparent; /* Hide the track */
+}
+
+.checktitle {
     border-bottom-style: groove;
-    text-align: center;
-    padding:8px 120px;
-    white-space: nowrap;
-}
-
-.stackblock {
-    display: flexbox;
-    height: 22em;;      /* Adjust height of products in checkout's container: effect overall height of "Checkout" content */
-    overflow-y: auto;
-}
-.stackflake {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.stackblock p {
-    padding: 0 12px;
-    background-color: rgb(207, 204, 204);
-    box-sizing: border-box;
+
+.stackblock {
+    height: 15em;;      /* Adjust height of products in checkout's container: effect overall height of "Checkout" content */
+    overflow-y: auto;
+    padding: 5px 10px;
 }
+.stackblock span {
+    /* background-color: rgb(207, 204, 204); */
+    box-sizing: border-box;
+    font-family: 'Raleway';
+    
+}
+.stackblock::-webkit-scrollbar {
+    width: 6px; /* Adjust the width as needed */
+}
+
+.stackblock::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Hide the thumb */
+}
+
+.stackblock::-webkit-scrollbar-track {
+    background-color: transparent; /* Hide the track */
+}
+
+.stackflake {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    /* align-items:flex-start; */
+}
+
+.quantity-align {
+    display: inline-flex;
+    gap: 0 2em;
+}
+
+
 /*FIX PROPERTIES ABOVE AFTER ALL MAIN FEATURES WORKS*/
 .inflex {
     display: flex;
@@ -144,10 +228,13 @@ h3 {
     justify-content: space-between;
 }
 .litem {
-    width: calc(50% - 10px); /* Adjust the width as needed */
+    width: calc(50% - 20px); /* Adjust the width as needed */
     margin-bottom: 10px;
     padding: 5px;
     box-sizing: border-box;
+}
+.litem:nth-child(odd) {
+    margin-left: 15px;
 }
 .litem:nth-child(even) {
     text-align: center;

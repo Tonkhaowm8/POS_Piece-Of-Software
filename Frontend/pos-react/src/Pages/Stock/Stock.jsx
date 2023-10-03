@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 // import RightSidebar from '../ShoppingCart/ShoppingCart.jsx';
-import ProductModal from "../../ProductModal/ProductModal.jsx";
+import {AiOutlineReload, AiOutlinePlus} from "react-icons/ai";
+import {TiDeleteOutline} from "react-icons/ti";
+import ProductModal from "../../ProductModal/ProductModal";
 import './Stock.css';
 import { useUsername } from '../Login/UsernameContext.jsx'; // Import the useUsername hook
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
@@ -10,19 +12,28 @@ function Stock(props) {
     // Define a state variable to store the data
     const [dataObject, setDataObject] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
     const [selectedData, setSelectedData] = useState(new Map()); // State to store selected data and quantity
     const [totalPrice, setTotalPrice] = useState(0); // State to store the total price
     const [taxRate, setTaxRate] = useState(0.1); // Tax rate as 10% (adjust as needed)
     const [taxAmount, setTaxAmount] = useState(0); // State to store the calculated tax amount
-    const [selectedProducts, setSelectedProducts] = useState([]);  // State to store the selected products
-    const { username } = useUsername();
+    const [username, setUsername] = useState(""); // State to store the username 
+    const [selectedProducts, setSelectedProducts] = useState([]);   // State to store the selected products
+    const [showModal, setShowModal] = useState(false);  // State to control modal visibility
 
+    // const { username } = useUsername();
+
+    const handleShowModal = () => {
+        setShowModal(true);
+      };
     
+      const handleHideModal = () => {
+        setShowModal(false);
+      };
 
     const handleItemClick = (item) => {
         setSelectedItem(item === selectedItem ? null : item);
     };
+    
 
     useEffect(() => {
         // Fetch the data from the API URL
@@ -72,7 +83,20 @@ function Stock(props) {
     console.log("Selected Products:", selectedProducts);
     }, [selectedProducts]);
 
-    // Function to decrease the quantity of a selected item and remove it if quantity becomes 0
+    // Function to increase the quantity of a selected item
+    const increaseQuantity = (itemId) => {
+        setSelectedData((prevMap) => {
+            const updatedMap = new Map(prevMap);
+            const prevQuantity = updatedMap.get(itemId) || 0;
+            if (prevQuantity > 0) {
+                updatedMap.set(itemId, prevQuantity + 1);
+            }
+            return updatedMap;
+        });
+    };
+
+    // Function to decrease the quantity of a selected item
+    
     const decreaseQuantity = (itemId) => {
         setSelectedData((prevMap) => {
             const updatedMap = new Map(prevMap);
@@ -162,52 +186,52 @@ const clearSelectedData = () => {
         <div className="stock-Background">
             <div className="scrollable-content" /* id="bacc" */ style={{backgroundColor:'rgb(230, 225, 225)',boxShadow:'0px 5px 8px 0px rgba(0, 0, 0, 0.5)'}}>
                 <div className="selection">
-                <h3
-                    className={selectedItem === "All products" ? "selected" : ""}
-                    onClick={() => handleItemClick("All products")}
-                    id="href3"
-                >
-                    All products
-                </h3>
-                <h3
-                    className={selectedItem === "Foods" ? "selected" : ""}
-                    onClick={() => handleItemClick("Foods")}
-                    id="href3"
-                >
-                    Foods
-                </h3>
-                <h3
-                    className={selectedItem === "Beverages" ? "selected" : ""}
-                    onClick={() => handleItemClick("Beverages")}
-                    id="href3"
-                >
-                    Beverages
-                </h3>
-                <h3
-                    className={selectedItem === "Fashion" ? "selected" : ""}
-                    onClick={() => handleItemClick("Fashion")}
-                    id="href3"
-                >
-                    Fashion
-                </h3>
-                <h3
-                    className={selectedItem === "Cleaners" ? "selected" : ""}
-                    onClick={() => handleItemClick("Cleaners")}
-                    id="href3"
-                >
-                    Cleaners
-                </h3>
-                <h3
-                    className={selectedItem === "Other" ? "selected" : ""}
-                    onClick={() => handleItemClick("Other")}
-                    id="href3"
-                >
-                    Other
-                </h3>
+                    <span
+                        className={selectedItem === "All products" ? "selected" : ""}
+                        onClick={() => handleItemClick("All products")}
+                        id="href3"
+                    >
+                        All products
+                    </span>
+                    <span
+                        className={selectedItem === "Foods" ? "selected" : ""}
+                        onClick={() => handleItemClick("Foods")}
+                        id="href3"
+                    >
+                        Foods
+                    </span>
+                    <span
+                        className={selectedItem === "Beverages" ? "selected" : ""}
+                        onClick={() => handleItemClick("Beverages")}
+                        id="href3"
+                    >
+                        Beverages
+                    </span>
+                    <span
+                        className={selectedItem === "Fashion" ? "selected" : ""}
+                        onClick={() => handleItemClick("Fashion")}
+                        id="href3"
+                    >
+                        Fashion
+                    </span>
+                    <span
+                        className={selectedItem === "Cleaners" ? "selected" : ""}
+                        onClick={() => handleItemClick("Cleaners")}
+                        id="href3"
+                    >
+                        Cleaners
+                    </span>
+                    <span
+                        className={selectedItem === "Other" ? "selected" : ""}
+                        onClick={() => handleItemClick("Other")}
+                        id="href3"
+                    >
+                        Other
+                    </span>
                 </div>
                 <div className="button-container">
-                    <button type="button" className="buttonn"  onClick={() => setIsModalOpen(true)}><p>Add Product</p></button>
-                    <button type="button" className="buttonn"  onClick={handleButtonClick}><p>Edit Product</p></button>
+                    <button type="button" className="buttonn"   onClick={handleShowModal}>Add Product</button>
+                    <button type="button" className="buttonn"  onClick={handleButtonClick}>Edit Product</button>
                 </div>
                 <div className="card-container" >
                     <div className="flex">
@@ -215,11 +239,12 @@ const clearSelectedData = () => {
                         {dataObject.map((item, index) => (
                             <div className="flex-item" key={index}>
                                 <div className="card" onClick={() => handleCardClick(item)}>
-                                    <span style={{fontFamily:'Inter',fontWeight:'bold'}}>Item pic {index + 1}</span>
-                                    <p>"{item["Product Name"]}"</p>
-                                    <p>Stock: {item.Stock}</p>
-                                    <p>Price: {item.Price}</p>
-                                    <p>ID: {item.id}</p>
+                                    {/* <span style={{fontFamily:'Lato',fontWeight:'900'}}>Item pic {index + 1}</span> */}
+                                    <span style={{fontFamily:'Lato',fontWeight:'900'}}>ID: {item.id}</span>
+                                    <span style={{fontFamily:'Lato',fontWeight:'400'}}>"{item["Product Name"]}"</span>
+                                    <span id="carde">Stock: {item.Stock}</span>
+                                    <span id="carde">Price: {item.Price}</span>
+                                    <span id="carde">{item.Category}</span>
                                 </div>
                             </div>
                         ))}
@@ -227,28 +252,21 @@ const clearSelectedData = () => {
                 </div>
             </div>
             {/* Conditionally render the modal */}
-            <ProductModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <ProductModal show={showModal} onClose={handleHideModal}/>
             <div className="scrollable-content">
-                <div style={{padding:'0 20px'}}>
+                <div style={{padding:'0 8px'}}>
 
                 </div>
             </div>
             
             {/* padding left-right can only 70px */}
-            <div className="scrollable-content" style={{boxShadow:'0px 5px 8px 0px rgba(0, 0, 0, 0.5)',backgroundColor:'rgb(230, 225, 225)'}}>   
-                <div className="checkOut">
-                    <span style={{fontFamily:'Inter',fontWeight:'initial',fontSize:'1.875em'}}>Checkout</span>
-                    <button onClick={clearSelectedData}>Clear</button>
+            <div className="scrollable-content" style={{boxShadow:'0px 5px 8px 0px rgba(0, 0, 0, 0.5)',backgroundColor:'rgb(230, 225, 225)',maxWidth:'450px',width:'450px'}}>   
+                <div className="checktitle">
+                    <span style={{marginLeft:'2em'}}></span>
+                    <span style={{fontFamily:'Raleway',fontWeight:'bold',fontSize:'1.875em'}}>Checkout</span>
+                    <button onClick={clearSelectedData} style={{flexShrink:0,marginLeft:'10px',border:'none',backgroundColor:'rgb(230, 225, 225)'}}><AiOutlineReload/></button>
                 </div>
                 <div style={{backgroundColor:'#f2eded'}} className="stackblock">
-
-                    {/* Display items from clicked card: default method without replacing any duplicate content */
-                    /* {selectedData.map((selectedData, index) => (
-                    <div key={index}>
-                        <p>Product Name: {selectedData["Product Name"]}</p>
-                        <p>Price: {selectedData.Price}</p>
-                    </div>
-                    ))} */}
 
                     {/* Display items from clicked card: with quantity count method */}
                     {Array.from(selectedData.keys()).map((itemId, index) => {
@@ -262,10 +280,15 @@ const clearSelectedData = () => {
                                         if (item.id === itemId) {
                                             return (
                                                 <div key={item.id} className="stackflake">
-                                                    <p>Quantity: {quantity}</p>
-                                                    <p>{item["Product Name"]}</p>
-                                                    <p>Price: {item.Price}</p>
-                                                    <button onClick={() => decreaseQuantity(item.id)}>Decrease Quantity</button>
+                                                    <div className="quantity-align">
+                                                        <button onClick={() => increaseQuantity(item.id)} style={{border:'none',backgroundColor:'rgb(230, 225, 225)'}}><AiOutlinePlus/></button>
+                                                        <span>{quantity}</span>
+                                                    </div>
+                                                    <span>{item["Product Name"]}</span>
+                                                    <div className="quantity-align">
+                                                        <span style={{justifyContent:'flex-start'}}>Price: {item.Price}</span>
+                                                        <button onClick={() => decreaseQuantity(item.id)} style={{border:'none',backgroundColor:'rgb(230, 225, 225)'}}><TiDeleteOutline/></button>
+                                                    </div>
                                                 </div>
                                             );
                                         }
@@ -285,10 +308,7 @@ const clearSelectedData = () => {
                     <div className="litem">{totalIncludingTax}</div>
                 </div>
                 <div style={{padding:'10px auto',border:'none'}} className="checkOut">
-                    {/* Use onClick to handle checkout and navigate to the payment page */}
-                    <button type="button" onClick={sendCartData} style={{ padding: '15px', backgroundColor: '#7C00F9', border: 'none', fontFamily: 'Inter', fontWeight: 'bold', borderRadius: '8px', color: 'white' }}>
-                    Checkout *specifies amount*
-                    </button>
+                    <button type="button" style={{padding:'15px',backgroundColor:'#7C00F9',border:'none',fontFamily:'Inter',fontWeight:'bold',borderRadius:'8px',color:'white'}} onClick={sendCartData}>Checkout *specifies amount*</button>
                 </div>
             </div>
             
