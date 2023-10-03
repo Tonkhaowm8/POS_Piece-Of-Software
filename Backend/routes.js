@@ -35,7 +35,7 @@ router.get('/item/:id', async (req, res) => {
 
 // Route to create an item
 router.post('/item', async (req, res) => {
-    const { success, data, error } = await db.createOrUpdate(req.body); // Call 'createOrUpdate' with the request body
+    const { success, data, error } = await db.createOrUpdate(req.body, 'product'); // Call 'createOrUpdate' with the request body
 
     if (success) {
         // If the operation is successful, return JSON response with the created item data
@@ -52,7 +52,7 @@ router.put('/item/:id', async (req, res) => {
     const { id } = req.params; // Extract the 'id' parameter from the URL
     user.id = parseInt(id); // Convert the 'id' parameter to an integer and add it to the item
 
-    const { success, data, error } = await db.createOrUpdate(user); // Call 'createOrUpdate' with the updated item
+    const { success, data, error } = await db.createOrUpdate(user, 'product'); // Call 'createOrUpdate' with the updated item
 
     if (success) {
         // If the operation is successful, return JSON response with the updated item data
@@ -104,6 +104,18 @@ router.get('/cart', (req, res) => {
     console.log('Received cart data:', cartData);
     return res.json({ success: true, message: "Cart data received"});
 });
+
+// Route to take order
+router.post('/receipt', async (req, res) => {
+    const receiptData = req.body;
+    const { success, data, error } = await db.createOrUpdate(receiptData, 'orders');
+
+    if (success) {
+        return res.json({success: success, data: data})
+    } else {
+        return res.json({success: success, reason: error})
+    }
+})
 
 // Export the Express router for use in other parts of the application
 module.exports = router;
