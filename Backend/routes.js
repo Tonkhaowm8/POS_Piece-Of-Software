@@ -5,6 +5,9 @@ const db = require('./db.js'); // Import the database functions from './db.js'
 // Create an instance of the Express Router
 const router = express.Router();
 
+// Add middleware to parse JSON data
+router.use(express.json());
+
 // Route to READ ALL items
 router.get('/items', async (req, res) => {
     // Call the 'readAllItems' function from the database module
@@ -100,7 +103,10 @@ router.post('/login', async (req, res) => {
 
 router.post('/cart', (req, res) => {
     const { username, cartData } = req.body; // Destructure username and cartData from the request body
+
     console.log('Received cart data from', username, ':', cartData);
+    console.log('cartData type:', typeof cartData);
+
     return res.json({ success: true, received_cart: cartData }); // Respond with the received cart data
 });
 
