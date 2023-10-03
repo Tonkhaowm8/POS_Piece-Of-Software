@@ -1,6 +1,7 @@
-/* html {
-    scroll-behavior: smooth;
-} */
+html {
+    width: 1535px; /* Set your desired width */
+    height: 768px; /* Set your desired height */
+}
 
 .stock-Background {
     height: fit-content;
@@ -27,36 +28,64 @@
 }
 
 .selection {
-    text-align: center;
     margin: 20px;
-    display:inline-flex;
-    border-radius: 12px;
+    display:flex;
+    border-radius: 5px;
     color: black;
+    background-color: rgb(221, 214, 214);
+    justify-content:space-between;
+    align-items: center;
 }
-.selection h3 {
+.selection span {
     white-space: nowrap;
-    padding: 0 20px;    /* Increase/decrease horizon properties of padding for length adjustment of sidenav */
+    padding: 0 25px;    /* Seperation between selection container and the buttons content below it, Increase/decrease horizon properties of padding for length adjustment of sidenav */
+    transition: font-size 0.2s;
 }
+/* Define a pulse animation */
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
+  
+  /* Apply the pulse animation to the selected item on hover */
+  .selection span.selected:hover {
+    animation: pulse 0.5s ease infinite;
+  }
+  
+  /* Apply the shake animation to the non-selected items on hover */
+  .selection span:not(.selected):hover {
+    animation: pulse 0.5s ease infinite;
+  }
 
-h3 {
+/* span {
     font-family: 'Inter';
-}
+} */
 
 .selected {
-    background-color: rgba(247, 182, 31, 0.85); /* Yellow background color for the selected item */
-    cursor: pointer; /* Change cursor to pointer when hovering over the item */
+    color: rgba(35, 29, 218, 0.85); /* Yellow background color for the selected item */
+    font-weight: 700;
+    cursor: grabbing; /* Change cursor to pointer when hovering over the item */
     border-radius: 3px;
+    border-color: rgba(247, 182, 31, 0.85);
 }
 
 .button-container {
     flex: content;
-    margin: 5px 20px;
+    margin: 25px 20px;  /* Seperation between buttons container and the flex card items below it */
     text-align: center;
 }
 
 .buttonn {
+    color:#888888;
     padding: 10px 100px;   /* Length of the button content (background color and border) */
-    border: 0.1px solid black;
+    border: 0.1px solid ;
     border-radius: 10px;
     margin: 0 30px;     /* Seperation length between two buttons */
     line-height: 1.5;
@@ -72,9 +101,10 @@ h3 {
   
 .flex-item {
     margin-left: 10px;
-    width: calc(33.33% - 20px); /* Adjust the spacing as needed */;
-    align-items: center;
+    width: calc(33.33% - 14px); /* Adjust the spacing as needed */;
+    justify-content: center;
     background-clip: content-box;
+    /* height: 100vh; */
 }
 
 .card {
@@ -89,12 +119,26 @@ h3 {
     /* padding: 30px 25px;     /* 30px 15px */
     box-sizing: border-box;
     overflow-y: auto; /* Enable vertical scrolling when content overflows */
-    max-height: calc(100vh - 60px); /* Set a maximum height to fit the available viewport height minus the header height (adjust as needed) */
+    max-height: calc(100vh - 180px); /* Set a maximum height to fit the available viewport height minus the header height (adjust as needed) */
 }
   
 .card-container > div {
     margin: 0.5px;
-    gap: 8px;
+    gap: 12px 2px;
+    font-size: small;
+}
+
+/* Hide scrollbar for webkit-based browsers (Chrome, Safari) */
+.card-container::-webkit-scrollbar {
+    width: 6px; /* Adjust the width as needed */
+}
+
+.card-container::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Hide the thumb */
+}
+
+.card-container::-webkit-scrollbar-track {
+    background-color: transparent; /* Hide the track */
 }
 
 .checkOut {
@@ -106,19 +150,32 @@ h3 {
 
 .stackblock {
     display: flexbox;
-    height: 22em;;      /* Adjust height of products in checkout's container: effect overall height of "Checkout" content */
+    height: 15em;;      /* Adjust height of products in checkout's container: effect overall height of "Checkout" content */
     overflow-y: auto;
 }
+.stackblock::-webkit-scrollbar {
+    width: 6px; /* Adjust the width as needed */
+}
+
+.stackblock::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Hide the thumb */
+}
+
+.stackblock::-webkit-scrollbar-track {
+    background-color: transparent; /* Hide the track */
+}
+
 .stackflake {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items:flex-start;
 }
 .stackblock p {
     padding: 0 12px;
     background-color: rgb(207, 204, 204);
     box-sizing: border-box;
 }
+
 /*FIX PROPERTIES ABOVE AFTER ALL MAIN FEATURES WORKS*/
 .inflex {
     display: flex;

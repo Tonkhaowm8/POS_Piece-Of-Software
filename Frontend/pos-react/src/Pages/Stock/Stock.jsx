@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from "react";
 // import RightSidebar from '../ShoppingCart/ShoppingCart.jsx';
-import ProductModal from "../../ProductModal/ProductModal.jsx";
+import ProductModal from "../../ProductModal/ProductModal";
 import './Stock.css';
 
 function Stock(props) {
     // Define a state variable to store the data
     const [dataObject, setDataObject] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
     const [selectedData, setSelectedData] = useState(new Map()); // State to store selected data and quantity
     const [totalPrice, setTotalPrice] = useState(0); // State to store the total price
     const [taxRate, setTaxRate] = useState(0.1); // Tax rate as 10% (adjust as needed)
     const [taxAmount, setTaxAmount] = useState(0); // State to store the calculated tax amount
     const [username, setUsername] = useState(""); // State to store the username
     const [selectedProducts, setSelectedProducts] = useState([]);   // State to store the selected products
+    const [showModal, setShowModal] = useState(false);  // State to control modal visibility
+
+    const handleShowModal = () => {
+        setShowModal(true);
+    };
+
+    const handleHideModal = () => {
+        setShowModal(false);
+    };
 
     const handleItemClick = (item) => {
         setSelectedItem(item === selectedItem ? null : item);
@@ -156,52 +164,52 @@ function Stock(props) {
     return (
         <div className="stock-Background">
             <div className="scrollable-content" /* id="bacc" */ style={{backgroundColor:'rgb(230, 225, 225)',boxShadow:'0px 5px 8px 0px rgba(0, 0, 0, 0.5)'}}>
-                {/* <div className="selection">
-                    <h3
+                <div className="selection">
+                    <span
                         className={selectedItem === "All products" ? "selected" : ""}
                         onClick={() => handleItemClick("All products")}
                         id="href3"
                     >
                         All products
-                    </h3>
-                    <h3
+                    </span>
+                    <span
                         className={selectedItem === "Foods" ? "selected" : ""}
                         onClick={() => handleItemClick("Foods")}
                         id="href3"
                     >
                         Foods
-                    </h3>
-                    <h3
+                    </span>
+                    <span
                         className={selectedItem === "Beverages" ? "selected" : ""}
                         onClick={() => handleItemClick("Beverages")}
                         id="href3"
                     >
                         Beverages
-                    </h3>
-                    <h3
+                    </span>
+                    <span
                         className={selectedItem === "Fashion" ? "selected" : ""}
                         onClick={() => handleItemClick("Fashion")}
                         id="href3"
                     >
                         Fashion
-                    </h3>
-                    <h3
+                    </span>
+                    <span
                         className={selectedItem === "Cleaners" ? "selected" : ""}
                         onClick={() => handleItemClick("Cleaners")}
                         id="href3"
                     >
                         Cleaners
-                    </h3>
-                    <h3
+                    </span>
+                    <span
                         className={selectedItem === "Other" ? "selected" : ""}
                         onClick={() => handleItemClick("Other")}
                         id="href3"
                     >
                         Other
-                    </h3>
-                </div> */}
+                    </span>
+                </div>
                 <div className="button-container">
-                    <button type="button" className="buttonn"  onClick={() => setIsModalOpen(true)}>Add Product</button>
+                    <button type="button" className="buttonn"   onClick={handleShowModal}>Add Product</button>
                     <button type="button" className="buttonn"  onClick={handleButtonClick}>Edit Product</button>
                 </div>
                 <div className="card-container" >
@@ -222,9 +230,9 @@ function Stock(props) {
                 </div>
             </div>
             {/* Conditionally render the modal */}
-            <ProductModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <ProductModal show={showModal} onClose={handleHideModal} />
             <div className="scrollable-content">
-                <div style={{padding:'0 20px'}}>
+                <div style={{padding:'0 8px'}}>
 
                 </div>
             </div>

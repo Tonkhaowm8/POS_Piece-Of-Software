@@ -44,13 +44,13 @@ main {
 /* Main content properties */
 .contentt {
     flex-grow: 1;
-    padding: 1px 80px;     /* Adjust the horizontal (or vertical) position of entire sidenav content */
+    padding: 1px 60px;     /* ADJUST the horizontal (or vertical) position of entire sidenav content */
     transform: translateX(200px); /* Start with no translation */
     transition: all 0.3s;
   }
   
 .contentt.active {
-    transform: translateX(250px); /* Translate the content to the right by the width of the sidebar */
+    transform: translateX(230px); /* Translate the content to the right by the width of the sidebar */
 }
 
 .fal-ull li{
