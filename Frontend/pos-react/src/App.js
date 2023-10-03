@@ -7,6 +7,7 @@ import Dashboard from './Pages/Dashboard/Dashboard.jsx';
 import Stock from './Pages/Stock/Stock';
 import Login from './Pages/Login/Login';
 import Logout from './Pages/Logout/Logout';
+import Payment from './Pages/Payment/Payment';
 import { UsernameProvider } from './Pages/Login/UsernameContext.jsx'; // Import the UsernameProvider
 
 
@@ -40,6 +41,7 @@ function App() {
             <Route path="/stock" element={<Stock />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/payment" element={<Payment />} />
           </Routes>
           <Nav show={expanded}>
             <Routes>
@@ -47,6 +49,7 @@ function App() {
               <Route path="/stock" element={<Stock />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/logout" element={<Logout />} />
+              <Route path="/payment" element={<Payment />} />
             </Routes>
           </Nav>
         </Router>

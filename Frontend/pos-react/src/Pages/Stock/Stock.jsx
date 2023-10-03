@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import ProductModal from "../../ProductModal/ProductModal.jsx";
 import './Stock.css';
 import { useUsername } from '../Login/UsernameContext.jsx'; // Import the useUsername hook
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 
 function Stock(props) {
@@ -90,13 +91,13 @@ function Stock(props) {
     };
 
     // Function to clear selected data
-    const clearSelectedData = () => {
-        setSelectedData(new Map()); // Reset the selectedData state to an empty Map
-        setSelectedProducts([]); // Reset the selectedProducts state to an empty array
-        setTotalPrice(0); // Reset the total price
-        setTaxAmount(0); // Reset the tax amount
-    };
-    
+const clearSelectedData = () => {
+    setSelectedData(new Map()); // Reset the selectedData state to an empty Map
+    setSelectedProducts([]); // Reset the selectedProducts state to an empty array
+    setTotalPrice(0); // Reset the total price
+    setTaxAmount(0); // Reset the tax amount
+};
+
     
 
     // Calculate the total price based on selected data and quantities
@@ -145,6 +146,7 @@ function Stock(props) {
                 const responseData = await response.json();
                 // Handle the response as needed
                 console.log('Response from server:', responseData);
+                window.location.href = '/payment'; // Redirect to the payment page
             } else {
                 // Handle HTTP request error
                 console.error('HTTP request failed:', response.status);
@@ -283,7 +285,10 @@ function Stock(props) {
                     <div className="litem">{totalIncludingTax}</div>
                 </div>
                 <div style={{padding:'10px auto',border:'none'}} className="checkOut">
-                    <button type="button" style={{padding:'15px',backgroundColor:'#7C00F9',border:'none',fontFamily:'Inter',fontWeight:'bold',borderRadius:'8px',color:'white'}} onClick={sendCartData}>Checkout *specifies amount*</button>
+                    {/* Use onClick to handle checkout and navigate to the payment page */}
+                    <button type="button" onClick={sendCartData} style={{ padding: '15px', backgroundColor: '#7C00F9', border: 'none', fontFamily: 'Inter', fontWeight: 'bold', borderRadius: '8px', color: 'white' }}>
+                    Checkout *specifies amount*
+                    </button>
                 </div>
             </div>
             
