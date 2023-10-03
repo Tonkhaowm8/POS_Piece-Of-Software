@@ -15,17 +15,24 @@ function Stock(props) {
     const [totalPrice, setTotalPrice] = useState(0); // State to store the total price
     const [taxRate, setTaxRate] = useState(0.1); // Tax rate as 10% (adjust as needed)
     const [taxAmount, setTaxAmount] = useState(0); // State to store the calculated tax amount
-    // const [username, setUsername] = useState(""); // State to store the username 
+    const [username, setUsername] = useState(""); // State to store the username 
     const [selectedProducts, setSelectedProducts] = useState([]);   // State to store the selected products
     const [showModal, setShowModal] = useState(false);  // State to control modal visibility
 
-    const { username } = useUsername();
+    // const { username } = useUsername();
 
+    const handleShowModal = () => {
+        setShowModal(true);
+      };
     
+      const handleHideModal = () => {
+        setShowModal(false);
+      };
 
     const handleItemClick = (item) => {
         setSelectedItem(item === selectedItem ? null : item);
     };
+    
 
     useEffect(() => {
         // Fetch the data from the API URL
@@ -243,7 +250,7 @@ function Stock(props) {
                 </div>
             </div>
             {/* Conditionally render the modal */}
-            <ProductModal show={showModal} onClose={handleHideModal} />
+            <ProductModal show={showModal} onClose={handleHideModal}/>
             <div className="scrollable-content">
                 <div style={{padding:'0 8px'}}>
 
