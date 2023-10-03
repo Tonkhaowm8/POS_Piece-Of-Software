@@ -98,12 +98,13 @@ router.post('/login', async (req, res) => {
     return res.status(500).json({ success: false, message: error, data: data, body: req.body });
 });
 
-// Route to receive cart data from Stock.jsx
-router.get('/cart', (req, res) => {
-    const cartData = req.body; // This will contain the cart data sent from Stock.jsx
-    console.log('Received cart data:', cartData);
-    return res.json({ success: true, message: "Cart data received"});
+router.post('/cart', (req, res) => {
+    const { username, cartData } = req.body; // Destructure username and cartData from the request body
+    console.log('Received cart data from', username, ':', cartData);
+    return res.json({ success: true, received_cart: cartData }); // Respond with the received cart data
 });
+
+
 
 // Export the Express router for use in other parts of the application
 module.exports = router;
