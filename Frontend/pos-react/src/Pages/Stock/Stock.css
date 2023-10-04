@@ -18,8 +18,9 @@ html {
 .scrollable-content {
     /*Comment color out aftet testing*/
     /* margin: 0 -50px; */
-    background-color: antiquewhite;
+    background-color: rgb(230, 225, 225);
     height: 35%;
+    box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.5);
 }
 
 /* #bacc {
@@ -77,16 +78,17 @@ html {
 
 .button-container {
     flex: content;
-    margin: 25px 20px;  /* Seperation between buttons container and the flex card items below it */
+    margin: 25px 0px;  /* Seperation between buttons container and the flex card items below it */
     text-align: center;
 }
 
 .buttonn {
-    color:#888888;
-    padding: 10px 100px;   /* Length of the button content (background color and border) */
+    background-color: rgba(233, 172, 30, 0.88);
+    color:rgb(240, 230, 230);
+    padding: 10px 80px;   /* Length of the button content (background color and border) */
     border: 0.1px solid ;
     border-radius: 10px;
-    margin: 0 30px;     /* Seperation length between two buttons */
+    margin: 0 55px;     /* Seperation length between two buttons */
     line-height: 1.5;
     font-size: 12px;
     font-weight: bold;
@@ -95,9 +97,11 @@ html {
 
 /* Add a scale effect on hover */
 .buttonn:hover {
+    background-color: rgba(247, 182, 31, 0.99);
     transition: 0.5s;
     transform: scale(1);
     color: black;
+    border-color: rgb(221, 157, 6);
 }
 
 
@@ -193,8 +197,8 @@ html {
 .stackflake {
     display: flex;
     justify-content: space-between;
-    padding: 5px 0;
-    /* align-items:flex-start; */
+    padding: 15px 0;
+    
 }
 
 .quantity-align {
@@ -221,11 +225,16 @@ html {
     font-size: 1.2em;
     text-decoration: none;
 }
+.checkOut {
+    text-align: center;
+    padding: 10px;
+}
 
 .cuntainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    border-bottom-style:ridge;
 }
 .litem {
     width: calc(50% - 20px); /* Adjust the width as needed */
@@ -237,5 +246,6 @@ html {
     margin-left: 15px;
 }
 .litem:nth-child(even) {
+    margin-right: -15px;
     text-align: center;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import RightSidebar from '../ShoppingCart/ShoppingCart.jsx';
 import {AiOutlineReload, AiOutlinePlus} from "react-icons/ai";
-import {TiDeleteOutline} from "react-icons/ti";
+import {TiDelete} from "react-icons/ti";
 import ProductModal from "../../ProductModal/ProductModal";
 import './Stock.css';
 import { useUsername } from '../Login/UsernameContext.jsx'; // Import the useUsername hook
@@ -184,7 +184,7 @@ const clearSelectedData = () => {
 
     return (
         <div className="stock-Background">
-            <div className="scrollable-content" /* id="bacc" */ style={{backgroundColor:'rgb(230, 225, 225)',boxShadow:'0px 5px 8px 0px rgba(0, 0, 0, 0.5)'}}>
+            <div className="scrollable-content" /* id="bacc" */>
                 <div className="selection">
                     <span
                         className={selectedItem === "All products" ? "selected" : ""}
@@ -240,10 +240,10 @@ const clearSelectedData = () => {
                             <div className="flex-item" key={index}>
                                 <div className="card" onClick={() => handleCardClick(item)}>
                                     {/* <span style={{fontFamily:'Lato',fontWeight:'900'}}>Item pic {index + 1}</span> */}
-                                    <span style={{fontFamily:'Lato',fontWeight:'900'}}>ID: {item.id}</span>
-                                    <span style={{fontFamily:'Lato',fontWeight:'400'}}>"{item["Product Name"]}"</span>
+                                    {/* <span style={{fontFamily:'Lato',fontWeight:'900'}}>ID: {item.id}</span> */}
+                                    <span style={{fontFamily:'Lato',fontWeight:'700',color:'rgba(35, 29, 218, 0.85)'}}>"{item["Product Name"]}"</span>
                                     <span id="carde">Stock: {item.Stock}</span>
-                                    <span id="carde">Price: {item.Price}</span>
+                                    <span id="carde">{item.Price} ฿</span>
                                     <span id="carde">{item.Category}</span>
                                 </div>
                             </div>
@@ -260,7 +260,7 @@ const clearSelectedData = () => {
             </div>
             
             {/* padding left-right can only 70px */}
-            <div className="scrollable-content" style={{boxShadow:'0px 5px 8px 0px rgba(0, 0, 0, 0.5)',backgroundColor:'rgb(230, 225, 225)',maxWidth:'450px',width:'450px'}}>   
+            <div className="scrollable-content" style={{maxWidth:'400px',width:'450px'}}>   
                 <div className="checktitle">
                     <span style={{marginLeft:'2em'}}></span>
                     <span style={{fontFamily:'Raleway',fontWeight:'bold',fontSize:'1.875em'}}>Checkout</span>
@@ -275,19 +275,20 @@ const clearSelectedData = () => {
                         return (
                             quantity > 0 && (
                                 <div key={index}>
-                                    {/* Find the item in dataObject using its ID */}
+                                    {/* Find the item in dataObject using its ID  border-style: ridge;*/}
                                     {dataObject.map((item) => {
                                         if (item.id === itemId) {
                                             return (
                                                 <div key={item.id} className="stackflake">
                                                     <div className="quantity-align">
-                                                        <button onClick={() => increaseQuantity(item.id)} style={{border:'none',backgroundColor:'rgb(230, 225, 225)'}}><AiOutlinePlus/></button>
+                                                        <button onClick={() => increaseQuantity(item.id)} style={{border:'none',backgroundColor:'#f2eded',borderRadius:'5%'}}><AiOutlinePlus/></button>
                                                         <span>{quantity}</span>
                                                     </div>
-                                                    <span>{item["Product Name"]}</span>
+                                                    
                                                     <div className="quantity-align">
-                                                        <span style={{justifyContent:'flex-start'}}>Price: {item.Price}</span>
-                                                        <button onClick={() => decreaseQuantity(item.id)} style={{border:'none',backgroundColor:'rgb(230, 225, 225)'}}><TiDeleteOutline/></button>
+                                                        <span>{item["Product Name"]}</span>
+                                                        <span>{item.Price}฿</span>
+                                                        <button onClick={() => decreaseQuantity(item.id)} style={{border:'none',backgroundColor:'#f2eded',color:'red'}}><TiDelete/></button>
                                                     </div>
                                                 </div>
                                             );
@@ -301,14 +302,14 @@ const clearSelectedData = () => {
                 </div>
                 <div className="cuntainer" style={{backgroundColor:'white'}}>
                     <div className="litem">Subtotal</div>
-                    <div className="litem">{totalPrice}</div>
+                    <div className="litem">{totalPrice}฿</div>
                     <div className="litem">Tax</div>
                     <div className="litem">{(taxRate * 100).toFixed(2)}%</div>
                     <div className="litem"><b>Payable Amount</b></div>
-                    <div className="litem">{totalIncludingTax}</div>
+                    <div className="litem">{totalIncludingTax}฿</div>
                 </div>
-                <div style={{padding:'10px auto',border:'none'}} className="checkOut">
-                    <button type="button" style={{padding:'15px',backgroundColor:'#7C00F9',border:'none',fontFamily:'Inter',fontWeight:'bold',borderRadius:'8px',color:'white'}} onClick={sendCartData}>Checkout *specifies amount*</button>
+                <div style={{padding:'10px auto',border:'none',backgroundColor:'white'}} className="checkOut">
+                    <button type="button" style={{padding:'15px',backgroundColor:'#7C00F9',border:'none',fontFamily:'Inter',fontWeight:'bold',borderRadius:'12px',color:'white'}} onClick={sendCartData}>Checkout *specifies amount*</button>
                 </div>
             </div>
             
