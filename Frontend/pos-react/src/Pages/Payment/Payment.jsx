@@ -4,20 +4,6 @@ import './payment.css'; // Import your CSS file here
 function Payment(props) {
     return (
         <div className="container">
-            <div className="sidebar">
-                <div className="con1">
-                    <span className="style1">Stock|</span>Dashboard
-                </div>
-                <div className="con2">
-                    <button type="button" className="btn btn-default bi bi-layout-text-window-reverse" style={{ color: 'white' }}> &nbsp; Dashboard </button>
-                </div>
-                <div className="con2">
-                    <button type="button" className="btn btn-default bi bi-cart3" style={{ color: 'white' }}> &nbsp; Stock </button>
-                </div>
-                <div className="con3">
-                    <button type="button" className="btn btn-default bi bi-arrow-bar-right " style={{ color: 'white' }}> &nbsp; Log out </button>
-                </div>
-            </div>
             <div className="display">
                 <div className="proprietary">
                     <div className="billing-payment">
