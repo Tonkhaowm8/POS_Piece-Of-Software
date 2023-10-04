@@ -110,12 +110,35 @@ router.post('/cart', (req, res) => {
 });
 
 // Route to take order
+
 router.post('/receipt', async (req, res) => {
     const receiptData = req.body;
-    const { success, data, error } = await db.createOrUpdate(receiptData, 'orders');
+    const { success: success, data: data, error: error } = await db.createOrUpdate(receiptData, 'orders');
+    //console.log(data)
 
     if (success) {
-        return res.json({success: success, data: data})
+        for (let i of data['item']) {
+            console.log(i['itemID']);
+            const {success: success1, data: data1, error: error1} = await db.getItemById(i['itemID'], 'id', 'product');
+            console.log(data1)
+            if (success1){
+                console.log(data1['Stock']);
+                data1['Stock'] = data1['Stock'] - data['quantity'];
+                const newData = data1;    
+                let {success: success2, data: data2, error: error2} = await db.createOrUpdate(newData, 'product');
+
+                if (success2) {
+                    return res.json({success: success2, data: data2})
+                } else {
+                    return res.json({success: success2, reason: error2})
+                }
+
+            } else {
+                console.log("Hello")
+                return res.json({success: success1, reason: error1})
+            }
+        }
+
     } else {
         return res.json({success: success, reason: error})
     }
