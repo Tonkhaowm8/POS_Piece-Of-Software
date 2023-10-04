@@ -123,7 +123,7 @@ router.post('/receipt', async (req, res) => {
             console.log(data1)
             if (success1){
                 console.log(data1['Stock']);
-                data1['Stock'] = data1['Stock'] - data['quantity'];
+                data1['Stock'] = parseInt(data1['Stock']) - parseInt(i['quantity']);
                 const newData = data1;    
                 let {success: success2, data: data2, error: error2} = await db.createOrUpdate(newData, 'product');
 
