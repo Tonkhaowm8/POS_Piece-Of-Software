@@ -160,5 +160,32 @@ router.post('/receipt', async (req, res) => {
     }
 })
 
+// API for dashboard
+router.get('/dashboard', async (req, res) => {
+    const totalSold = 0;
+    const amountSold = 0;
+    const totalPeople = 0;
+    const highestSale = 0;
+
+    // calculate total sold and amount sold
+    const {success, data, error} = await db.readAllItems("orders");
+
+    if (success) {
+        //return res.json(data);
+        for (let i of data['item']) {
+            amountSold += i['quantity'];
+            let currentsold = (i['quantity'] * i['price']);
+            totalSold += currentsold;
+            if (currentsold > highestSale){
+                highestSale = currentsold;
+            }
+        }
+        return res.json({})
+    } else {
+        return res.status(500).json({ success: false, messsage: error });
+    }
+
+})
+
 // Export the Express router for use in other parts of the application
 module.exports = router;
