@@ -16,11 +16,9 @@ function Stock(props) {
     const [totalPrice, setTotalPrice] = useState(0); // State to store the total price
     const [taxRate, setTaxRate] = useState(0.1); // Tax rate as 10% (adjust as needed)
     const [taxAmount, setTaxAmount] = useState(0); // State to store the calculated tax amount
-    const [username, setUsername] = useState(""); // State to store the username 
     const [selectedProducts, setSelectedProducts] = useState([]);   // State to store the selected products
     const [showModal, setShowModal] = useState(false);  // State to control modal visibility
-
-    // const { username } = useUsername();
+    const { username } = useUsername();
 
     const handleShowModal = () => {
         setShowModal(true);
@@ -115,12 +113,12 @@ function Stock(props) {
     };
 
     // Function to clear selected data
-const clearSelectedData = () => {
-    setSelectedData(new Map()); // Reset the selectedData state to an empty Map
-    setSelectedProducts([]); // Reset the selectedProducts state to an empty array
-    setTotalPrice(0); // Reset the total price
-    setTaxAmount(0); // Reset the tax amount
-};
+    const clearSelectedData = () => {
+        setSelectedData(new Map()); // Reset the selectedData state to an empty Map
+        setSelectedProducts([]); // Reset the selectedProducts state to an empty array
+        setTotalPrice(0); // Reset the total price
+        setTaxAmount(0); // Reset the tax amount
+    };
 
     
 
@@ -154,8 +152,8 @@ const clearSelectedData = () => {
             username: username, // Include the username
             cartData: selectedProducts, // Send the selectedProducts array
         };
-    
-    
+
+
         try {
             // Make an HTTP POST request to your server's '/cart' route
             const response = await fetch('http://localhost:4000/api/cart', {
@@ -165,7 +163,7 @@ const clearSelectedData = () => {
                 },
                 body: JSON.stringify(dataToSend),
             });
-    
+
             if (response.ok) {
                 const responseData = await response.json();
                 // Handle the response as needed
@@ -180,7 +178,36 @@ const clearSelectedData = () => {
             console.error('An error occurred:', error);
         }
     };
-    
+
+    const handleSaveProduct = async (productData) => {
+        console.log('Product data added:', productData);
+
+        try {
+            console.log(JSON.stringify(productData))
+          // Make an HTTP POST request to your server's '/item' route
+          const response = await fetch('http://localhost:4000/api/item', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(productData), // Send the product data in the request body
+            
+          });
+          
+          if (response.ok) {
+            // Product data was successfully added on the server
+            console.log('Product data added:', productData);
+      
+          } else {
+            // Handle the case where the request failed
+            console.error('Failed to add product data:', response.status);
+          }
+        } catch (error) {
+          // Handle network or other errors
+          console.error('An error occurred while adding product data:', error);
+        }
+      };
+      
 
     return (
         <div className="stock-Background">
@@ -252,7 +279,10 @@ const clearSelectedData = () => {
                 </div>
             </div>
             {/* Conditionally render the modal */}
-            <ProductModal show={showModal} onClose={handleHideModal}/>
+
+            {/* Get the functions in the productmodal */}
+            <ProductModal show={showModal} onClose={handleHideModal} onSave={handleSaveProduct} />
+
             <div className="scrollable-content">
                 <div style={{padding:'0 8px'}}>
 

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import Draggable from "react-draggable"; // Import the Draggable component
 import "./ProductModal.css"; // Create a CSS file for any custom styling
 
-const ProductModal = ({ show, onClose }) => {
-  const [productName, setProductName] = useState("");
-  const [stockValue, setStockValue] = useState(0);
-  const [priceValue, setPriceValue] = useState(0);
-  const [idNumber, setIdNumber] = useState(0);
-  const [category, setCategory] = useState("Foods");
+const ProductModal = ({ show, onClose, onSave }) => {
+  const [ProductName, setProductName] = useState("");
+  const [Stock, setStockValue] = useState(0);
+  const [Price, setPriceValue] = useState(0);
+  const [id, setIdNumber] = useState(0);
+  const [Category, setCategory] = useState("Foods");
 
   // Add an event listener to the document to handle clicks outside the modal
   useEffect(() => {
@@ -24,18 +24,21 @@ const ProductModal = ({ show, onClose }) => {
     };
   }, [show, onClose]);
 
+  // Collects input product data
+
   const handleSave = () => {
-    // You can handle the save action here, e.g., send data to the server
-    console.log({
-      productName,
-      stockValue,
-      priceValue,
-      idNumber,
-      category,
-    });
+    const productData = {
+      ProductName,
+      Stock,
+      Price,
+      id: parseInt(id), // Parse 'id' as an integer
+      Category,
+    };
+
+    onSave(productData); // Call the onSave callback with the product data
     onClose();
   };
-
+  
   return (
     <Draggable handle=".modal-header" bounds={{left: 0, top: 0, right: 270, bottom: 30}}>
         <div className={`modal ${show ? "show" : ""}`}>
@@ -50,55 +53,55 @@ const ProductModal = ({ show, onClose }) => {
           <div className="modal-body">
             <form>
               <div className="form-group">
-                <label htmlFor="productName">Product Name</label>
+                <label htmlFor="ProductName">Product Name</label>
                 <input
                   type="text"
                   className="form-control"
-                  id="productName"
+                  id="ProductName"
                   placeholder="Enter product name"
-                  value={productName}
+                  value={ProductName}
                   onChange={(e) => setProductName(e.target.value)}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="stockValue">Stock Value</label>
+                <label htmlFor="StockValue">Stock Value</label>
                 <input
                   type="number"
                   className="form-control"
-                  id="stockValue"
+                  id="Stock"
                   placeholder="Enter stock value"
-                  value={stockValue}
+                  value={Stock}
                   onChange={(e) => setStockValue(e.target.value)}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="priceValue">Price Value</label>
+                <label htmlFor="Price">Price Value</label>
                 <input
                   type="number"
                   className="form-control"
-                  id="priceValue"
+                  id="Price"
                   placeholder="Enter price value"
-                  value={priceValue}
+                  value={Price}
                   onChange={(e) => setPriceValue(e.target.value)}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="idNumber">ID Number</label>
+                <label htmlFor="id">ID Number</label>
                 <input
                   type="number"
                   className="form-control"
-                  id="idNumber"
+                  id="id"
                   placeholder="Enter ID number"
-                  value={idNumber}
+                  value={id}
                   onChange={(e) => setIdNumber(e.target.value)}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="category">Category</label>
+                <label htmlFor="Category">Category</label>
                 <select
                   className="form-control"
-                  id="category"
-                  value={category}
+                  id="Category"
+                  value={Category}
                   onChange={(e) => setCategory(e.target.value)}
                 >
                   <option value="Foods">Foods</option>

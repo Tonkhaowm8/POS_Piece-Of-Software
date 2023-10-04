@@ -8,6 +8,8 @@ const router = express.Router();
 // Add middleware to parse JSON data
 router.use(express.json());
 
+//-------------------------------------------------------------------------------------------------------------------------------
+
 // Route to READ ALL items
 router.get('/items', async (req, res) => {
     // Call the 'readAllItems' function from the database module
@@ -21,6 +23,8 @@ router.get('/items', async (req, res) => {
     // If there's an error, return a 500 Internal Server Error with an error message
     return res.status(500).json({ success: false, messsage: error });
 });
+
+//-------------------------------------------------------------------------------------------------------------------------------
 
 // Route to get an item by ID
 router.get('/item/:id', async (req, res) => {
@@ -36,6 +40,8 @@ router.get('/item/:id', async (req, res) => {
     return res.status(500).json({ success: false, message: error });
 });
 
+//-------------------------------------------------------------------------------------------------------------------------------
+
 // Route to create an item
 router.post('/item', async (req, res) => {
     const { success, data, error } = await db.createOrUpdate(req.body, 'product'); // Call 'createOrUpdate' with the request body
@@ -48,6 +54,8 @@ router.post('/item', async (req, res) => {
     // If there's an error, return a 500 Internal Server Error with an error message
     return res.status(500).json({ success: false, message: error, data: req.body });
 });
+
+//-------------------------------------------------------------------------------------------------------------------------------
 
 // Route to update an item by ID
 router.put('/item/:id', async (req, res) => {
@@ -66,6 +74,8 @@ router.put('/item/:id', async (req, res) => {
     return res.status(500).json({ success: false, message: error });
 });
 
+//-------------------------------------------------------------------------------------------------------------------------------
+
 // Route to delete an item by ID
 router.delete('/item/:id', async (req, res) => {
     const { id } = req.params; // Extract the 'id' parameter from the URL
@@ -81,6 +91,8 @@ router.delete('/item/:id', async (req, res) => {
 });
 
 // USER API
+
+//-------------------------------------------------------------------------------------------------------------------------------
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
@@ -101,13 +113,17 @@ router.post('/login', async (req, res) => {
     return res.status(500).json({ success: false, message: error, data: data, body: req.body });
 });
 
+//-------------------------------------------------------------------------------------------------------------------------------
+
 router.post('/cart', (req, res) => {
     const { username, cartData } = req.body; // Destructure username and cartData from the request body
 
-    console.log('Received cart data from : ', username, ':', cartData);
+    console.log('Received cart data from', username, ':', cartData);
 
     return res.json({ success: true, received_cart: cartData }); // Respond with the received cart data
 });
+
+//-------------------------------------------------------------------------------------------------------------------------------
 
 // Route to take order
 router.post('/receipt', async (req, res) => {
