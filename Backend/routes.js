@@ -104,7 +104,7 @@ router.post('/login', async (req, res) => {
 router.post('/cart', (req, res) => {
     const { username, cartData } = req.body; // Destructure username and cartData from the request body
 
-    console.log('Received cart data from', username, ':', cartData);
+    console.log('Received cart data from : ', username, ':', cartData);
 
     return res.json({ success: true, received_cart: cartData }); // Respond with the received cart data
 });
