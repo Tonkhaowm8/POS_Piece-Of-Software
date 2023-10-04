@@ -13,7 +13,7 @@ const createOrUpdate = async (data = {}, table) => {
     try {
         // Perform a put operation (insert or update) on the DynamoDB table
         await config.db.put(params).promise();
-        return { success: true }; // Return success status
+        return { success: true, data: data }; // Return success status
     } catch (error) {
         return { success: false, error: error.message, data: data }; // Return error if operation fails
     }
