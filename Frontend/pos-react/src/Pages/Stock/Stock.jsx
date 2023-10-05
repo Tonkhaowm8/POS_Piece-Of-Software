@@ -18,6 +18,7 @@ function Stock(props) {
     const [selectedProducts, setSelectedProducts] = useState([]);   // State to store the selected products
     const [showModal, setShowModal] = useState(false);  // State to control modal visibility
     const [isEditMode, setIsEditMode] = useState(false); // State to control edit mode
+    const [category, setCategory] = useState("All products"); // State to store the selected category
     const { username } = useUsername();
 
     const handleShowModal = () => {
@@ -30,6 +31,7 @@ function Stock(props) {
 
     const handleItemClick = (item) => {
         setSelectedItem(item === selectedItem ? null : item);
+        setCategory(item); // Update the selected category
     };
 
     const toggleEditMode = () => {
@@ -146,6 +148,14 @@ function Stock(props) {
             return updatedMap;
         });
     };
+
+    // Filter the dataObject based on the selected category
+    const filteredData = dataObject.filter((item) => {
+        if (category === "All products") {
+            return true;
+        }
+        return item.Category === category;
+    });
 
     // Function to clear selected data
     const clearSelectedData = () => {
@@ -340,7 +350,7 @@ function Stock(props) {
                 <div className="card-container" >
                     <div className="flex">
                         {/* Map over dataObject and create card elements */}
-                        {dataObject.map((item, index) => (
+                        {filteredData.map((item, index) => (
                             <div className="flex-item" key={index}>
                                 <div className={`card ${isEditMode ? "edit-mode" : ""}`} onClick={() => handleCardClick(item)}>
                                     {isEditMode && (
