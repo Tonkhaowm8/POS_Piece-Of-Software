@@ -203,3 +203,15 @@
     overflow-x: hidden;
     text-align:justify;
 }
+
+.quantity{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    font-style: normal;
+    text-align: left;
+    width: 20%;
+    right: 10%;
+    margin-top: -12vh;
+    position: absolute;
+}
