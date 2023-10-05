@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import './App.css';
-import { BrowserRouter as Router, Route, Routes, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Outlet, Link, useLocation, } from "react-router-dom";
 import Nav from './Components/SideNav/SideNav.jsx';
 import Dashboard from './Pages/Dashboard/Dashboard.jsx';
 import Stock from './Pages/Stock/Stock';
@@ -49,7 +49,6 @@ function App() {
               <Route path="/stock" element={<Stock />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/logout" element={<Logout />} />
-              <Route path="/payment" element={<Payment />} />
             </Routes>
           </Nav>
         </Router>
