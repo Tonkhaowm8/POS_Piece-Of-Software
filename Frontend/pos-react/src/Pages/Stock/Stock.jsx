@@ -346,6 +346,7 @@ function Stock(props) {
                                     {isEditMode && (
                                         <button
                                             className="remove-button"
+                                            style={{border:'none',borderRadius:'8px 0px 0px 0px',backgroundColor:'white',color:'red',width:'0px',fontSize:'18px'}}
                                             onClick={(e) => {
                                                 e.stopPropagation(); // Prevent card click event
                                                 handleRemoveItem(item.id);
