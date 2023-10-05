@@ -162,17 +162,18 @@ router.post('/receipt', async (req, res) => {
 
 // API for dashboard
 router.get('/dashboard', async (req, res) => {
-    const totalSold = 0;
-    const amountSold = 0;
-    const totalPeople = 0;
-    const highestSale = 0;
+    var totalSold = 0;
+    var amountSold = 0;
+    var totalPeople = 0;
+    var highestSale = 0;
 
     // calculate total sold and amount sold
     const {success, data, error} = await db.readAllItems("orders");
 
     if (success) {
         //return res.json(data);
-        for (let i of data['item']) {
+        console.log(data[0]['item'])
+        for (let i of data[0]['item']) {
             amountSold += i['quantity'];
             let currentsold = (i['quantity'] * i['price']);
             totalSold += currentsold;
