@@ -71,7 +71,7 @@ function Stock(props) {
             const updatedProducts = [...prevProducts];
             updatedProducts.push({
                 id: item.id,
-                name: item["Product Name"],
+                name: item["ProductName"],
                 quantity: prevProducts.find((product) => product.id === item.id)?.quantity + 1 || 1,
                 price: item.Price,
             });
@@ -316,7 +316,7 @@ function Stock(props) {
                                             <TiDelete />
                                         </button>
                                     )}
-                                    <span style={{ fontFamily: 'Lato', fontWeight: '700', color: 'rgba(35, 29, 218, 0.85)' }}>"{item["Product Name"]}"</span>
+                                    <span style={{ fontFamily: 'Lato', fontWeight: '700', color: 'rgba(35, 29, 218, 0.85)' }}>"{item["ProductName"]}"</span>
                                     <span id="carde">Stock: {item.Stock}</span>
                                     <span id="carde">{item.Price} ฿</span>
                                     <span id="carde">{item.Category}</span>
@@ -364,7 +364,7 @@ function Stock(props) {
                                                     </div>
                                                     
                                                     <div className="quantity-align">
-                                                        <span>{item["Product Name"]}</span>
+                                                        <span>{item["ProductName"]}</span>
                                                         <span>{item.Price}฿</span>
                                                         <button onClick={() => decreaseQuantity(item.id)} style={{border:'none',backgroundColor:'#f2eded',color:'red'}}><TiDelete/></button>
                                                     </div>
