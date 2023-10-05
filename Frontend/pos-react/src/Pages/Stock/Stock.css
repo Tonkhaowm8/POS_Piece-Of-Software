@@ -172,7 +172,7 @@ html {
 }
 
 .stackblock {
-    height: 15em;;      /* Adjust height of products in checkout's container: effect overall height of "Checkout" content */
+    height: 20em;;      /* Adjust height of products in checkout's container: effect overall height of "Checkout" content */
     overflow-y: auto;
     padding: 5px 10px;
 }

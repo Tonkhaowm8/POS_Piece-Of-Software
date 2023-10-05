@@ -5,7 +5,7 @@ import {TiDelete} from "react-icons/ti";
 import ProductModal from "../../ProductModal/ProductModal";
 import './Stock.css';
 import { useUsername } from '../Login/UsernameContext.jsx'; // Import the useUsername hook
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+// import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 
 function Stock(props) {
@@ -14,22 +14,25 @@ function Stock(props) {
     const [selectedItem, setSelectedItem] = useState(null);
     const [selectedData, setSelectedData] = useState(new Map()); // State to store selected data and quantity
     const [totalPrice, setTotalPrice] = useState(0); // State to store the total price
-    const [taxRate, setTaxRate] = useState(0.1); // Tax rate as 10% (adjust as needed)
-    const [taxAmount, setTaxAmount] = useState(0); // State to store the calculated tax amount
     const [selectedProducts, setSelectedProducts] = useState([]);   // State to store the selected products
     const [showModal, setShowModal] = useState(false);  // State to control modal visibility
+    const [isEditMode, setIsEditMode] = useState(false); // State to control edit mode
     const { username } = useUsername();
 
     const handleShowModal = () => {
         setShowModal(true);
-      };
+    };
     
-      const handleHideModal = () => {
+    const handleHideModal = () => {
         setShowModal(false);
-      };
+    };
 
     const handleItemClick = (item) => {
         setSelectedItem(item === selectedItem ? null : item);
+    };
+
+    const toggleEditMode = () => {
+        setIsEditMode(!isEditMode);
     };
     
 
@@ -78,8 +81,21 @@ function Stock(props) {
     
     // Log the selectedProducts whenever it changes
     useEffect(() => {
-    console.log("Selected Products:", selectedProducts);
+        console.log("Selected Products:", selectedProducts);
     }, [selectedProducts]);
+
+    // Calculate the total price based on selected data and quantities
+    useEffect(() => {
+        let sum = 0;
+        for (const [itemId, quantity] of selectedData) {
+            const selectedData = dataObject.find((item) => item.id === itemId);
+            if (selectedData) {
+                const itemPrice = selectedData.Price * quantity;
+                sum += itemPrice;
+            }
+        }
+        setTotalPrice(sum);
+    }, [selectedData, dataObject]);
 
     // Function to increase the quantity of a selected item
     const increaseQuantity = (itemId) => {
@@ -94,7 +110,6 @@ function Stock(props) {
     };
 
     // Function to decrease the quantity of a selected item
-    
     const decreaseQuantity = (itemId) => {
         setSelectedData((prevMap) => {
             const updatedMap = new Map(prevMap);
@@ -117,32 +132,7 @@ function Stock(props) {
         setSelectedData(new Map()); // Reset the selectedData state to an empty Map
         setSelectedProducts([]); // Reset the selectedProducts state to an empty array
         setTotalPrice(0); // Reset the total price
-        setTaxAmount(0); // Reset the tax amount
     };
-
-    
-
-    // Calculate the total price based on selected data and quantities
-    useEffect(() => {
-        let sum = 0;
-        for (const [itemId, quantity] of selectedData) {
-            const selectedData = dataObject.find((item) => item.id === itemId);
-            if (selectedData) {
-                const itemPrice = selectedData.Price * quantity;
-                sum += itemPrice;
-            }
-        }
-        setTotalPrice(sum);
-    }, [selectedData, dataObject]);
-
-    // Calculate the tax amount based on the total price and tax rate
-    useEffect(() => {
-        const calculatedTaxAmount = totalPrice * taxRate;
-        setTaxAmount(calculatedTaxAmount);
-    }, [totalPrice, taxRate]);
-
-    // Calculate the total price including tax
-    const totalIncludingTax = totalPrice + taxAmount;
 
     // Function to send the cart data to the server
     const sendCartData = async () => {
@@ -179,6 +169,7 @@ function Stock(props) {
         }
     };
 
+    // Function to handle save product after adding.?
     const handleSaveProduct = async (productData) => {
         console.log('Product data added:', productData);
 
@@ -207,6 +198,52 @@ function Stock(props) {
           console.error('An error occurred while adding product data:', error);
         }
       };
+
+    // Function to handle deletion of data using delete method from route.js
+    const handleRemoveItem = async (itemId) => {
+        try {
+            // Make an HTTP DELETE request to your server's '/item/:id' route
+            const response = await fetch(`http://localhost:4000/api/item/${itemId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                // Item was successfully deleted
+                console.log(`Item with ID ${itemId} was deleted.`);
+                // Refetch data to update the item list
+                fetchData();
+            } else {
+                // Handle the case where the request failed
+                console.error(`Failed to delete item with ID ${itemId}:`, response.status);
+            }
+        } catch (error) {
+            // Handle network or other errors
+            console.error(`An error occurred while deleting item with ID ${itemId}:`, error);
+        }
+    };
+
+    const fetchData = () => {
+        // Fetch the data from the API URL
+        fetch('http://localhost:4000/api/items')
+            .then((response) => {
+                // Check if the response status is OK (status code 200)
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // Parse the response body as JSON
+                return response.json();
+            })
+            .then((data) => {
+                // Update the dataObject state with the fetched data
+                setDataObject(data);
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    };
       
 
     return (
@@ -258,17 +295,28 @@ function Stock(props) {
                 </div>
                 <div className="button-container">
                     <button type="button" className="buttonn"   onClick={handleShowModal}>Add Product</button>
-                    <button type="button" className="buttonn"  onClick={handleButtonClick}>Edit Product</button>
+                    <button type="button" className="buttonn" onClick={toggleEditMode}>
+                        {isEditMode ? "Done Editing" : "Edit Product"}
+                    </button>
                 </div>
                 <div className="card-container" >
                     <div className="flex">
                         {/* Map over dataObject and create card elements */}
                         {dataObject.map((item, index) => (
                             <div className="flex-item" key={index}>
-                                <div className="card" onClick={() => handleCardClick(item)}>
-                                    {/* <span style={{fontFamily:'Lato',fontWeight:'900'}}>Item pic {index + 1}</span> */}
-                                    {/* <span style={{fontFamily:'Lato',fontWeight:'900'}}>ID: {item.id}</span> */}
-                                    <span style={{fontFamily:'Lato',fontWeight:'700',color:'rgba(35, 29, 218, 0.85)'}}>"{item["Product Name"]}"</span>
+                                <div className={`card ${isEditMode ? "edit-mode" : ""}`} onClick={() => handleCardClick(item)}>
+                                    {isEditMode && (
+                                        <button
+                                            className="remove-button"
+                                            onClick={(e) => {
+                                                e.stopPropagation(); // Prevent card click event
+                                                handleRemoveItem(item.id);
+                                            }}
+                                        >
+                                            <TiDelete />
+                                        </button>
+                                    )}
+                                    <span style={{ fontFamily: 'Lato', fontWeight: '700', color: 'rgba(35, 29, 218, 0.85)' }}>"{item["Product Name"]}"</span>
                                     <span id="carde">Stock: {item.Stock}</span>
                                     <span id="carde">{item.Price} ฿</span>
                                     <span id="carde">{item.Category}</span>
@@ -333,10 +381,8 @@ function Stock(props) {
                 <div className="cuntainer" style={{backgroundColor:'white'}}>
                     <div className="litem">Subtotal</div>
                     <div className="litem">{totalPrice}฿</div>
-                    <div className="litem">Tax</div>
-                    <div className="litem">{(taxRate * 100).toFixed(2)}%</div>
                     <div className="litem"><b>Payable Amount</b></div>
-                    <div className="litem">{totalIncludingTax}฿</div>
+                    <div className="litem">{totalPrice}฿</div>
                 </div>
                 <div style={{padding:'10px auto',border:'none',backgroundColor:'white'}} className="checkOut">
                     <button type="button" style={{padding:'15px',backgroundColor:'#7C00F9',border:'none',fontFamily:'Inter',fontWeight:'bold',borderRadius:'12px',color:'white'}} onClick={sendCartData}>Checkout *specifies amount*</button>
