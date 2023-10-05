@@ -309,7 +309,7 @@ function Stock(props) {
 
     return (
         <div className="stock-Background">
-            <div className="scrollable-content" /* id="bacc" */>
+            <div className="scrollable-content" /* id="bacc" */ >
                 <div className="selection">
                     <span
                         className={selectedItem === "All products" ? "selected" : ""}
