@@ -93,6 +93,9 @@ function Payment(props) {
         .catch(error => {
             console.error('Error:', error);
         });
+        
+        // Navigate back to the stock page
+        window.location.href = "/stock"; // Replace "/stock" with the actual path of your stock page
     };
 
     return (
