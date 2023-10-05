@@ -19,7 +19,13 @@ function Stock(props) {
     const [showModal, setShowModal] = useState(false);  // State to control modal visibility
     const [isEditMode, setIsEditMode] = useState(false); // State to control edit mode
     const [category, setCategory] = useState("All products"); // State to store the selected category
+    const [existingIds, setExistingIds] = useState([]); // Create an array to store existing IDs as an example
     const { username } = useUsername();
+    
+    // Function to check if an ID already exists
+    const isIdAlreadyExist = (id) => {
+        return existingIds.includes(id);
+    };
 
     const handleShowModal = () => {
         setShowModal(true);
@@ -32,6 +38,13 @@ function Stock(props) {
     const handleItemClick = (item) => {
         setSelectedItem(item === selectedItem ? null : item);
         setCategory(item); // Update the selected category
+    };
+
+    const handleSaveModal = (productData) => {
+        // Implement the logic to save the product data
+        // Here, we'll just add the ID to the existingIds array as an example
+        setExistingIds([...existingIds, productData.id]);
+        console.log("Saving product data:", productData);
     };
 
     const toggleEditMode = () => {
@@ -378,7 +391,7 @@ function Stock(props) {
             {/* Conditionally render the modal */}
 
             {/* Get the functions in the productmodal */}
-            <ProductModal show={showModal} onClose={handleHideModal} onSave={handleSaveProduct} />
+            <ProductModal show={showModal} onClose={handleHideModal} onSave={handleSaveProduct} isIdAlreadyExist={isIdAlreadyExist}/>
 
             <div className="scrollable-content">
                 <div style={{padding:'0 8px'}}>

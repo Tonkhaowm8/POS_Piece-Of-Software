@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import Draggable from "react-draggable"; // Import the Draggable component
 import "./ProductModal.css"; // Create a CSS file for any custom styling
 
-const ProductModal = ({ show, onClose, onSave }) => {
+const ProductModal = ({ show, onClose, onSave, isIdAlreadyExist }) => {
   const [ProductName, setProductName] = useState("");
   const [Stock, setStockValue] = useState(0);
   const [Price, setPriceValue] = useState(0);
   const [id, setIdNumber] = useState(0);
   const [Category, setCategory] = useState("Foods");
+  const [isIdExist, setIsIdExist] = useState(false); // State to track if the ID already exists
 
   // Add an event listener to the document to handle clicks outside the modal
   useEffect(() => {
@@ -26,17 +27,63 @@ const ProductModal = ({ show, onClose, onSave }) => {
 
   // Collects input product data
 
-  const handleSave = () => {
-    const productData = {
-      ProductName,
-      Stock,
-      Price,
-      id: parseInt(id), // Parse 'id' as an integer
-      Category,
-    };
+  const handleStockChange = (e) => {
+    const newValue = parseInt(e.target.value);
+    if (!isNaN(newValue) && newValue >= 0) {
+      setStockValue(newValue);
+    }
+  };
 
-    onSave(productData); // Call the onSave callback with the product data
-    onClose();
+  const handlePriceChange = (e) => {
+    const newValue = parseFloat(e.target.value);
+    if (!isNaN(newValue) && newValue >= 0) {
+      setPriceValue(newValue);
+    }
+  };
+
+  const handleIdChange = (e) => {
+    const newValue = parseInt(e.target.value);
+    if (!isNaN(newValue)) {
+      setIdNumber(newValue);
+    }
+  };
+
+  const checkIdExistence = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:4000/api/item/${id}`);
+      const data = await response.json();
+
+      if (data.success) {
+        setIsIdExist(true);
+      } else {
+        setIsIdExist(false);
+      }
+    } catch (error) {
+      console.error("Error checking ID existence:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (id !== 0) {
+      checkIdExistence(id);
+    }
+  }, [id]);
+
+  const handleSave = () => {
+    if (isIdAlreadyExist(id)) {
+      alert("ID already exists in the database.");
+    } else {
+      const productData = {
+        ProductName,
+        Stock,
+        Price,
+        id,
+        Category,
+      };
+
+      onSave(productData);
+      onClose();
+    }
   };
   
   return (
@@ -71,7 +118,7 @@ const ProductModal = ({ show, onClose, onSave }) => {
                   id="Stock"
                   placeholder="Enter stock value"
                   value={Stock}
-                  onChange={(e) => setStockValue(e.target.value)}
+                  onChange={handleStockChange}
                 />
               </div>
               <div className="form-group">
@@ -82,7 +129,7 @@ const ProductModal = ({ show, onClose, onSave }) => {
                   id="Price"
                   placeholder="Enter price value"
                   value={Price}
-                  onChange={(e) => setPriceValue(e.target.value)}
+                  onChange={handlePriceChange}
                 />
               </div>
               <div className="form-group">
@@ -93,7 +140,7 @@ const ProductModal = ({ show, onClose, onSave }) => {
                   id="id"
                   placeholder="Enter ID number"
                   value={id}
-                  onChange={(e) => setIdNumber(e.target.value)}
+                  onChange={handleIdChange}
                 />
               </div>
               <div className="form-group">
