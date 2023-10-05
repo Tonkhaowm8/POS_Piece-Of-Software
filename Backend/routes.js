@@ -116,11 +116,11 @@ router.post('/login', async (req, res) => {
 //-------------------------------------------------------------------------------------------------------------------------------
 
 router.post('/cart', (req, res) => {
-    const { username, cartData } = req.body; // Destructure username and cartData from the request body
+    const { username, products, totalPrice } = req.body; // Destructure username and cartData from the request body
 
-    console.log('Received cart data from', username, ':', cartData);
+    console.log('Received cart data from', username, ':', products, 'Total Price: ', totalPrice);
 
-    return res.json({ success: true, received_cart: cartData }); // Respond with the received cart data
+    return res.json({ success: true, received_cart: products }); // Respond with the received cart data
 });
 
 //-------------------------------------------------------------------------------------------------------------------------------

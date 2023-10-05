@@ -6,6 +6,7 @@ import ProductModal from "../../ProductModal/ProductModal";
 import './Stock.css';
 import { useUsername } from '../Login/UsernameContext.jsx'; // Import the useUsername hook
 // import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 
 
 function Stock(props) {
@@ -59,26 +60,44 @@ function Stock(props) {
     // Function to handle card item click
     const handleCardClick = (item) => {
         setSelectedItem(item);
+
         setSelectedData((prevMap) => {
             const updatedMap = new Map(prevMap);
             const prevQuantity = updatedMap.get(item.id) || 0;
             updatedMap.set(item.id, prevQuantity + 1);
             return updatedMap;
-        }); // Update selectedData with the clicked item's data
-    
-        // Add the selected product to the selectedProducts array
+        });
+
         setSelectedProducts((prevProducts) => {
-            const updatedProducts = [...prevProducts];
-            updatedProducts.push({
-                id: item.id,
-                name: item["ProductName"],
-                quantity: prevProducts.find((product) => product.id === item.id)?.quantity + 1 || 1,
-                price: item.Price,
-            });
-            return updatedProducts;
+            const existingProduct = prevProducts.find((product) => product.id === item.id);
+
+            if (existingProduct) {
+                // If the product already exists in selectedProducts, update its quantity
+                const updatedProducts = prevProducts.map((product) => {
+                    if (product.id === item.id) {
+                        return {
+                            ...product,
+                            quantity: product.quantity + 1,
+                        };
+                    }
+                    return product;
+                });
+                return updatedProducts;
+            } else {
+                // If the product is not in selectedProducts, add it with quantity 1
+                return [
+                    ...prevProducts,
+                    {
+                        id: item.id,
+                        name: item["ProductName"],
+                        quantity: 1,
+                        price: item.Price,
+                    },
+                ];
+            }
         });
     };
-    
+
     // Log the selectedProducts whenever it changes
     useEffect(() => {
         console.log("Selected Products:", selectedProducts);
@@ -96,6 +115,7 @@ function Stock(props) {
         }
         setTotalPrice(sum);
     }, [selectedData, dataObject]);
+
 
     // Function to increase the quantity of a selected item
     const increaseQuantity = (itemId) => {
@@ -134,40 +154,58 @@ function Stock(props) {
         setTotalPrice(0); // Reset the total price
     };
 
-    // Function to send the cart data to the server
-    const sendCartData = async () => {
-        // Prepare the data to send in the request body
-        console.log("Username : ",username)
-        const dataToSend = {
-            username: username, // Include the username
-            cartData: selectedProducts, // Send the selectedProducts array
-        };
+    // Function to send the cart data to payment without an HTTP request
+    const sendCartData = () => {
+    // Construct the URL with query parameters
+    const queryParams = new URLSearchParams();
+    queryParams.append("username", username);
+    for (const product of selectedProducts) {
+      queryParams.append("product", product.name);
+      queryParams.append("price", product.price);
+      queryParams.append("quantity", product.quantity);
+      queryParams.append("id", product.id)
+    }
+    // Append the subtotal to the query parameters
+    queryParams.append("totalPrice", totalPrice);
+
+    // Navigate to the Payment component with the query parameters
+    window.location.href = `/payment?${queryParams.toString()}`;
+  };
+
+    // // Function to send the cart data to the server
+    // const sendCartData = async () => {
+    //     // Prepare the data to send in the request body
+    //     console.log("Username : ",username)
+    //     const dataToSend = {
+    //         username: username, // Include the username
+    //         cartData: selectedProducts, // Send the selectedProducts array
+    //     };
 
 
-        try {
-            // Make an HTTP POST request to your server's '/cart' route
-            const response = await fetch('http://localhost:4000/api/cart', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(dataToSend),
-            });
+    //     try {
+    //         // Make an HTTP POST request to your server's '/cart' route
+    //         const response = await fetch('http://localhost:4000/api/cart', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify(dataToSend),
+    //         });
 
-            if (response.ok) {
-                const responseData = await response.json();
-                // Handle the response as needed
-                console.log('Response from server:', responseData);
-                window.location.href = '/payment'; // Redirect to the payment page
-            } else {
-                // Handle HTTP request error
-                console.error('HTTP request failed:', response.status);
-            }
-        } catch (error) {
-            // Handle network or other errors
-            console.error('An error occurred:', error);
-        }
-    };
+    //         if (response.ok) {
+    //             const responseData = await response.json();
+    //             // Handle the response as needed
+    //             console.log('Response from server:', responseData);
+    //             window.location.href = '/payment'; // Redirect to the payment page
+    //         } else {
+    //             // Handle HTTP request error
+    //             console.error('HTTP request failed:', response.status);
+    //         }
+    //     } catch (error) {
+    //         // Handle network or other errors
+    //         console.error('An error occurred:', error);
+    //     }
+    // };
 
     // Function to handle save product after adding.?
     const handleSaveProduct = async (productData) => {
@@ -385,7 +423,23 @@ function Stock(props) {
                     <div className="litem">{totalPrice}฿</div>
                 </div>
                 <div style={{padding:'10px auto',border:'none',backgroundColor:'white'}} className="checkOut">
-                    <button type="button" style={{padding:'15px',backgroundColor:'#7C00F9',border:'none',fontFamily:'Inter',fontWeight:'bold',borderRadius:'12px',color:'white'}} onClick={sendCartData}>Checkout *specifies amount*</button>
+                <Link to="/payment">
+                    <button
+                    type="button"
+                    style={{
+                        padding: "15px",
+                        backgroundColor: "#7C00F9",
+                        border: "none",
+                        fontFamily: "Inter",
+                        fontWeight: "bold",
+                        borderRadius: "12px",
+                        color: "white",
+                    }}
+                    onClick={sendCartData}
+                    >
+                    Checkout
+                    </button>
+                </Link>
                 </div>
             </div>
             
