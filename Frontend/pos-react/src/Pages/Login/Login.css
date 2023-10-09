@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Abril Fatface');
+#username{
+    font-family: 'Abril Fatface','sans-sarif';
+}
 .big{
     display: flex;
     height: 100vh;
-    font-family:sans-serif;
 }
 .left{
     width: 45%;
@@ -98,7 +101,7 @@ input{
     border-radius: 6px;
     border: 1px;
     border-style: solid;
-    background-color: #011627!important;
+    background-color: black!important;
     font-weight: bold;
     color: white!important;
 }
