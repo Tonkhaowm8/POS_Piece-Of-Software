@@ -41,9 +41,9 @@ function Dashboard(props) {
 
       {dashboardData && (
         <div>
-          <div className="container text-center">
+          <div className="container text-center ">
             <div className="row">
-              <div className="col-md-3 bg text-start p-4 radius">
+              <div className="radius col-md-3 bg text-start p-4 ">
                 <div className="fs-3 p-2 text-center myIcon bgIcon1 text-white">
                   <i className="bi bi-currency-dollar"></i>
                 </div>
@@ -55,7 +55,7 @@ function Dashboard(props) {
 
               <div className="col-md-1"></div>
 
-              <div className="col-md-3 bg1 text-start p-4 radius">
+              <div className="radius col-md-3 bg1 text-start p-4 ">
                 <div className="fs-3 bg-danger p-2 text-center myIcon text-white">
                   <i className="bi bi-chevron-double-down"></i>
                 </div>
@@ -67,7 +67,7 @@ function Dashboard(props) {
 
               <div className="col-md-1"></div>
 
-              <div className="col-md-3 bg1 text-start p-4 radius">
+              <div className="radius col-md-3 bg1 text-start p-4 ">
                 <div className="fs-3 bg-black text-white p-2 text-center myIcon">
                   <i className="bi bi-person-fill"></i>
                 </div>
@@ -81,45 +81,69 @@ function Dashboard(props) {
           <br />
           <br />
 
-          <div className="container text-center">
+          <div className="container text-center raduis">
             <div className="row">
               <div className="col-md-7 bg-white text-start p-4 radius div-table">
                 <div>
                   <h3>Staff's performance</h3>
                 </div>
-
-                <table className="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">Ranking</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Profit</th>
-                    </tr>
-                  </thead>
-                  <tbody className="table-group-divider">
-                  <tr>
-                    <td>&emsp;1</td>
-                    <td>
-                      <i className="bi bi-person-fill"></i> Otto
-                    </td>
-                    <td>$45665</td>
-                  </tr>
-                  <tr>
-                    <td>&emsp;2</td>
-                    <td>
-                      <i className="bi bi-person-fill"></i> Thornton
-                    </td>
-                    <td>$6543</td>
-                  </tr>
-                  <tr>
-                    <td>&emsp;3</td>
-                    <td>
-                      <i className="bi bi-person-fill"></i> Larry
-                    </td>
-                    <td>$123457</td>
-                  </tr>
-                </tbody>
-                </table>
+                <div id="table-wrapper">
+                  <div id="table-scroll">
+                    <table className="table ">
+                      <thead>
+                        <tr>
+                          <th scope="col"><span class="text1">Ranking</span></th>
+                          <th scope="col"><span class="text1">Name</span></th>
+                          <th scope="col"><span class="text1">Profit</span></th>
+                        </tr>
+                      </thead>
+                      <tbody className="table-group-divider">
+                      <tr>
+                        <td class="no1">&emsp;1</td>
+                        <td class="no1">
+                          <i className="bi bi-person-fill"></i> Otto
+                        </td>
+                        <td class="no1">$45665</td>
+                      </tr>
+                      <tr>
+                        <td class="no2">&emsp;2</td>
+                        <td class="no2">
+                          <i className="bi bi-person-fill"></i> Thornton
+                        </td>
+                        <td class="no2">$6543</td>
+                      </tr>
+                      <tr>
+                        <td class="no3">&emsp;3</td>
+                        <td class="no3">
+                          <i className="bi bi-person-fill"></i> Larry
+                        </td>
+                        <td class="no3">$123457</td>
+                      </tr>
+                      <tr>
+                        <td>&emsp;4</td>
+                        <td>
+                          <i className="bi bi-person-fill"></i> Larry
+                        </td>
+                        <td>$123457</td>
+                      </tr>
+                      <tr>
+                        <td>&emsp;5</td>
+                        <td>
+                          <i className="bi bi-person-fill"></i> Larry
+                        </td>
+                        <td>$123457</td>
+                      </tr>
+                      <tr>
+                        <td>&emsp;3</td>
+                        <td>
+                          <i className="bi bi-person-fill"></i> Larry
+                        </td>
+                        <td>$123457</td>
+                      </tr>
+                    </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
 
               <div className="col-md-1"></div>
