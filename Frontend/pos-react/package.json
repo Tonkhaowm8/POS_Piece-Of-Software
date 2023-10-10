@@ -6,7 +6,7 @@
       "localhost",
       ".localhost"
     ],
-    "proxy": "http://localhost:4000"
+    "proxy": "http://3.210.84.212/4000"
   },
   "private": true,
   "dependencies": {
