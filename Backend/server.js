@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 4000;
 
 const items = require('./routes.js');
 
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: 'http://siraphop.com' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
