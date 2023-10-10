@@ -1,7 +1,7 @@
-html {
-    width: 1535px; /* Set your desired width */
-    height: 768px; /* Set your desired height */
-}
+/* html {
+    width: 1535px; 
+    height: 768px; 
+} */
 
 .stock-Background {
     height: fit-content;
@@ -32,13 +32,15 @@ html {
     display:flex;
     border-radius: 5px;
     color: black;
-    background-color: rgb(221, 214, 214);
     justify-content:space-between;
     align-items: center;
 }
 .selection span {
     white-space: nowrap;
-    padding: 0 25px;    /* Seperation between selection container and the buttons content below it, Increase/decrease horizon properties of padding for length adjustment of sidenav */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 18%;
+    padding: 5px 25px;    /* Seperation between selection container and the buttons content below it, Increase/decrease horizon properties of padding for length adjustment of sidenav */
     transition: font-size 0.2s;
 }
 /* Define a pulse animation */
@@ -47,10 +49,10 @@ html {
       transform: scale(1);
     }
     50% {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
     100% {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
   }
   
@@ -69,11 +71,16 @@ html {
 } */
 
 .selected {
-    color: rgba(35, 29, 218, 0.85); /* Yellow background color for the selected item */
-    font-weight: 700;
+    background-color: #7C00F9;
+    color: white; /* Yellow background color for the selected item */
+    /* font-weight: 700; */
     cursor: grabbing; /* Change cursor to pointer when hovering over the item */
     border-radius: 3px;
     border-color: rgba(247, 182, 31, 0.85);
+}
+.unselected {
+    background-color: #FFFCFC;
+    border-radius: 5%;
 }
 
 .button-container {
@@ -165,10 +172,16 @@ html {
 }
 
 .checktitle {
-    border-bottom-style: groove;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* border-bottom-style: groove; */
+}
+
+.fitem {
+    /* font-size: medium; */
+    padding: 5px;
+    box-sizing: border-box;
 }
 
 .stackblock {
@@ -198,12 +211,19 @@ html {
     display: flex;
     justify-content: space-between;
     padding: 15px 0;
-    
+    border-bottom-style: ridge;
 }
 
 .quantity-align {
     display: inline-flex;
+    justify-content: space-between;
     gap: 0 2em;
+}
+.quantity-align > span:nth-child(2) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 10%;
 }
 
 
