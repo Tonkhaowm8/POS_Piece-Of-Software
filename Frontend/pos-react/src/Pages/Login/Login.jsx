@@ -22,7 +22,7 @@ function Login(props) {
 
     try {
         // Make an HTTP POST request to your server's '/login' route
-        const response = await fetch('http://localhost:4000/api/login', {
+        const response = await fetch('/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

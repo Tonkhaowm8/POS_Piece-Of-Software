@@ -50,7 +50,7 @@ const ProductModal = ({ show, onClose, onSave, isIdAlreadyExist }) => {
 
   const checkIdExistence = async (id) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/item/${id}`);
+      const response = await fetch(`/api/item/${id}`);
       const data = await response.json();
 
       if (data.success) {

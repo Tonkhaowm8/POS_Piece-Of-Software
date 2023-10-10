@@ -54,7 +54,7 @@ function Stock(props) {
 
     useEffect(() => {
         // Fetch the data from the API URL
-        fetch('http://localhost:4000/api/items')
+        fetch('/api/items')
             .then((response) => {
                 // Check if the response status is OK (status code 200)
                 if (!response.ok) {
@@ -237,7 +237,7 @@ function Stock(props) {
         try {
             console.log(JSON.stringify(productData))
           // Make an HTTP POST request to your server's '/item' route
-          const response = await fetch('http://localhost:4000/api/item', {
+          const response = await fetch('/api/item', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -264,7 +264,7 @@ function Stock(props) {
     const handleRemoveItem = async (itemId) => {
         try {
             // Make an HTTP DELETE request to your server's '/item/:id' route
-            const response = await fetch(`http://localhost:4000/api/item/${itemId}`, {
+            const response = await fetch(`/api/item/${itemId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -288,7 +288,7 @@ function Stock(props) {
 
     const fetchData = () => {
         // Fetch the data from the API URL
-        fetch('http://localhost:4000/api/items')
+        fetch('/api/items')
             .then((response) => {
                 // Check if the response status is OK (status code 200)
                 if (!response.ok) {
