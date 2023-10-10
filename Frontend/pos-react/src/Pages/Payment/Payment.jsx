@@ -76,7 +76,7 @@ function Payment(props) {
         };
 
         // Send the data to the server
-        fetch('http://localhost:4000/api/cart', {
+        fetch('/api/cart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -54,7 +54,7 @@ function Stock(props) {
 
     useEffect(() => {
         // Fetch the data from the API URL
-        fetch('http://localhost:4000/api/items')
+        fetch('/api/items')
             .then((response) => {
                 // Check if the response status is OK (status code 200)
                 if (!response.ok) {
@@ -237,7 +237,7 @@ function Stock(props) {
         try {
             console.log(JSON.stringify(productData))
           // Make an HTTP POST request to your server's '/item' route
-          const response = await fetch('http://localhost:4000/api/item', {
+          const response = await fetch('/api/item', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -264,7 +264,7 @@ function Stock(props) {
     const handleRemoveItem = async (itemId) => {
         try {
             // Make an HTTP DELETE request to your server's '/item/:id' route
-            const response = await fetch(`http://localhost:4000/api/item/${itemId}`, {
+            const response = await fetch(`/api/item/${itemId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -288,7 +288,7 @@ function Stock(props) {
 
     const fetchData = () => {
         // Fetch the data from the API URL
-        fetch('http://localhost:4000/api/items')
+        fetch('/api/items')
             .then((response) => {
                 // Check if the response status is OK (status code 200)
                 if (!response.ok) {
@@ -312,42 +312,42 @@ function Stock(props) {
             <div className="scrollable-content" /* id="bacc" */ >
                 <div className="selection">
                     <span
-                        className={selectedItem === "All products" ? "selected" : ""}
+                        className={selectedItem === "All products" ? "selected" : "unselected"}
                         onClick={() => handleItemClick("All products")}
                         id="href3"
                     >
                         All products
                     </span>
                     <span
-                        className={selectedItem === "Foods" ? "selected" : ""}
+                        className={selectedItem === "Foods" ? "selected" : "unselected"}
                         onClick={() => handleItemClick("Foods")}
                         id="href3"
                     >
                         Foods
                     </span>
                     <span
-                        className={selectedItem === "Beverages" ? "selected" : ""}
+                        className={selectedItem === "Beverages" ? "selected" : "unselected"}
                         onClick={() => handleItemClick("Beverages")}
                         id="href3"
                     >
                         Beverages
                     </span>
                     <span
-                        className={selectedItem === "Fashion" ? "selected" : ""}
+                        className={selectedItem === "Fashion" ? "selected" : "unselected"}
                         onClick={() => handleItemClick("Fashion")}
                         id="href3"
                     >
                         Fashion
                     </span>
                     <span
-                        className={selectedItem === "Cleaners" ? "selected" : ""}
+                        className={selectedItem === "Cleaners" ? "selected" : "unselected"}
                         onClick={() => handleItemClick("Cleaners")}
                         id="href3"
                     >
                         Cleaners
                     </span>
                     <span
-                        className={selectedItem === "Other" ? "selected" : ""}
+                        className={selectedItem === "Other" ? "selected" : "unselected"}
                         onClick={() => handleItemClick("Other")}
                         id="href3"
                     >
@@ -394,7 +394,7 @@ function Stock(props) {
             <ProductModal show={showModal} onClose={handleHideModal} onSave={handleSaveProduct} isIdAlreadyExist={isIdAlreadyExist}/>
 
             <div className="scrollable-content">
-                <div style={{padding:'0 8px'}}>
+                <div style={{padding:'0 12px'}}>
 
                 </div>
             </div>
@@ -403,9 +403,16 @@ function Stock(props) {
             <div className="scrollable-content" style={{maxWidth:'400px',width:'450px'}}>   
                 <div className="checktitle">
                     <span style={{marginLeft:'2em'}}></span>
-                    <span style={{fontFamily:'Raleway',fontWeight:'bold',fontSize:'1.875em'}}>Checkout</span>
+                    <span style={{fontFamily:'Raleway',fontWeight:'bold',fontSize:'1.65em',padding:'8px'}}>Checkout</span>
                     <button onClick={clearSelectedData} style={{flexShrink:0,marginLeft:'10px',border:'none',backgroundColor:'rgb(230, 225, 225)'}}><AiOutlineReload/></button>
                 </div>
+
+                <div className="checktitle" style={{backgroundColor:'rgb(210, 210, 210)',flexWrap:'wrap',justifyContent:'space-between'}}>
+                    <div className="fitem" style={{marginLeft:'10px'}}>Quantity</div>
+                    <div className="fitem" style={{marginLeft:'20px'}}>Name</div>
+                    <div className="fitem" style={{marginRight:'60px'}}>Price</div>
+                </div>
+
                 <div style={{backgroundColor:'#f2eded'}} className="stackblock">
 
                     {/* Display items from clicked card: with quantity count method */}
@@ -423,10 +430,11 @@ function Stock(props) {
                                                     <div className="quantity-align">
                                                         <button onClick={() => increaseQuantity(item.id)} style={{border:'none',backgroundColor:'#f2eded',borderRadius:'5%'}}><AiOutlinePlus/></button>
                                                         <span>{quantity}</span>
+                                                        <span>{item["ProductName"]}</span>
                                                     </div>
                                                     
                                                     <div className="quantity-align">
-                                                        <span>{item["ProductName"]}</span>
+                                                        {/* <span>{item["ProductName"]}</span> */}
                                                         <span>{item.Price}฿</span>
                                                         <button onClick={() => decreaseQuantity(item.id)} style={{border:'none',backgroundColor:'#f2eded',color:'red'}}><TiDelete/></button>
                                                     </div>
