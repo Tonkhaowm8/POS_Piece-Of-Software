@@ -1,9 +1,10 @@
 .App {
-  text-align: justify;
+  /* text-align: justify; */
 }
 
 body {
   overflow: hidden;
+  background-color: #EBEBF5;
 }
 
 .page {

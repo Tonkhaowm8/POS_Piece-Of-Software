@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 // import RightSidebar from '../ShoppingCart/ShoppingCart.jsx';
-import {AiOutlineReload, AiOutlinePlus} from "react-icons/ai";
+import {AiOutlineReload, AiOutlinePlus, AiOutlineShopping, AiFillHome} from "react-icons/ai";
+import { IoShirtOutline } from "react-icons/io5";
+import { MdEmojiFoodBeverage, MdFastfood, MdFoodBank } from "react-icons/md";
+import { TbWashTemperature4 } from "react-icons/tb";
 import {TiDelete} from "react-icons/ti";
 import ProductModal from "../../ProductModal/ProductModal";
 import './Stock.css';
 import { useUsername } from '../Login/UsernameContext.jsx'; // Import the useUsername hook
-// import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import { Link } from "react-router-dom";
 
 
@@ -20,6 +22,7 @@ function Stock(props) {
     const [isEditMode, setIsEditMode] = useState(false); // State to control edit mode
     const [category, setCategory] = useState("All products"); // State to store the selected category
     const [existingIds, setExistingIds] = useState([]); // Create an array to store existing IDs as an example
+    const [searchTerm, setSearchTerm] = useState("");
     const { username } = useUsername();
     
     // Function to check if an ID already exists
@@ -164,10 +167,15 @@ function Stock(props) {
 
     // Filter the dataObject based on the selected category
     const filteredData = dataObject.filter((item) => {
-        if (category === "All products") {
-            return true;
+        if (category === "All products" || item.Category === category) {
+            if (searchTerm === "") {
+                return true; // No search term, show all items in the selected category
+            } else {
+                // Search term is not empty, check if the item name contains the search term
+                return item["ProductName"].toLowerCase().includes(searchTerm.toLowerCase());
+            }
         }
-        return item.Category === category;
+        return false; // Item doesn't match category, don't show it
     });
 
     // Function to clear selected data
@@ -310,6 +318,19 @@ function Stock(props) {
     return (
         <div className="stock-Background">
             <div className="scrollable-content" /* id="bacc" */ >
+                <div className="button-container">
+                    <input
+                        type="text"
+                        placeholder="Search by name"
+                        className="search-input"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    <button type="button" className="buttonn" onClick={handleShowModal}>Add Product</button>
+                    <button type="button" className="buttonn" onClick={toggleEditMode}>
+                        {isEditMode ? "Done Editing" : "Edit Product"}
+                    </button>
+                </div>
                 <div className="selection">
                     <span
                         className={selectedItem === "All products" ? "selected" : "unselected"}
@@ -317,6 +338,7 @@ function Stock(props) {
                         id="href3"
                     >
                         All products
+                        <AiFillHome className="iconsiam"/>
                     </span>
                     <span
                         className={selectedItem === "Foods" ? "selected" : "unselected"}
@@ -324,6 +346,7 @@ function Stock(props) {
                         id="href3"
                     >
                         Foods
+                        <MdFoodBank className="iconsiam"/>
                     </span>
                     <span
                         className={selectedItem === "Beverages" ? "selected" : "unselected"}
@@ -331,6 +354,7 @@ function Stock(props) {
                         id="href3"
                     >
                         Beverages
+                        <MdEmojiFoodBeverage className="iconsiam"/>
                     </span>
                     <span
                         className={selectedItem === "Fashion" ? "selected" : "unselected"}
@@ -338,6 +362,7 @@ function Stock(props) {
                         id="href3"
                     >
                         Fashion
+                        <IoShirtOutline className="iconsiam"/>
                     </span>
                     <span
                         className={selectedItem === "Cleaners" ? "selected" : "unselected"}
@@ -345,6 +370,7 @@ function Stock(props) {
                         id="href3"
                     >
                         Cleaners
+                        <TbWashTemperature4 className="iconsiam"/>
                     </span>
                     <span
                         className={selectedItem === "Other" ? "selected" : "unselected"}
@@ -352,14 +378,10 @@ function Stock(props) {
                         id="href3"
                     >
                         Other
+                        <AiOutlineShopping className="iconsiam"/>
                     </span>
                 </div>
-                <div className="button-container">
-                    <button type="button" className="buttonn"   onClick={handleShowModal}>Add Product</button>
-                    <button type="button" className="buttonn" onClick={toggleEditMode}>
-                        {isEditMode ? "Done Editing" : "Edit Product"}
-                    </button>
-                </div>
+
                 <div className="card-container" >
                     <div className="flex">
                         {/* Map over dataObject and create card elements */}

@@ -28,10 +28,11 @@
 } */
 
 .selection {
-    margin: 10px;
+    margin: 10px 10px;
     display:flex;
     border-radius: 5px;
     color: black;
+    background-color: #FFFCFC;
     justify-content:space-between;
     align-items: center;
 }
@@ -39,8 +40,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 18%;
-    padding: 5px 25px;    /* Seperation between selection container and the buttons content below it, Increase/decrease horizon properties of padding for length adjustment of sidenav */
+    max-width: 20%;       /* Set max-width length of text-letters displaying in span item (within selection content) */
+    padding: 5px 25px;    /* Increase/decrease horizon properties of padding for length adjustment of sidenav */
     transition: font-size 0.2s;
 }
 /* Define a pulse animation */
@@ -63,39 +64,45 @@
   
 /* Apply the shake animation to the non-selected items on hover */
 .selection span:not(.selected):hover {
-    animation: pulse 0.5s ease;
+    color: #7c00f9e0;
+    /* animation: pulse 0.5s ease; */
 }
 
-/* span {
-    font-family: 'Inter';
-} */
 
 .selected {
-    background-color: #7C00F9;
+    background-color: #7c00f9e0;
     color: white; /* Yellow background color for the selected item */
-    /* font-weight: 700; */
+    border: 2px solid purple;
     cursor: grabbing; /* Change cursor to pointer when hovering over the item */
     border-radius: 3px;
-    border-color: rgba(247, 182, 31, 0.85);
 }
 .unselected {
     background-color: #FFFCFC;
     border-radius: 5%;
 }
 
+.iconsiam {
+    margin: 0 2px;
+}
+
 .button-container {
     flex: content;
-    margin: 25px 0px;  /* Seperation between buttons container and the flex card items below it */
-    text-align: center;
+    justify-content:space-evenly;
+    margin: 15px 0px;  /* Seperation between buttons container and the flex card items below it */
+    text-align: right;
+}
+.button-container > input {
+    margin-right: 8%;
+    width: 60%;
 }
 
 .buttonn {
     background-color: rgba(233, 172, 30, 0.88);
     color:rgb(240, 230, 230);
-    padding: 10px 80px;   /* Length of the button content (background color and border) */
+    padding: 10px 20px;   /* Length of the button content (background color and border) */
     border: 0.1px solid ;
     border-radius: 10px;
-    margin: 0 55px;     /* Seperation length between two buttons */
+    margin: 0 5px;     /* Seperation length between two buttons */
     line-height: 1.5;
     font-size: 12px;
     font-weight: bold;
@@ -110,7 +117,6 @@
     color: black;
     border-color: rgb(221, 157, 6);
 }
-
 
 
 .flex {
