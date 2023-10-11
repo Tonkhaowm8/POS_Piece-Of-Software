@@ -6,19 +6,27 @@ function Dashboard(props) {
   const [dashboardData, setDashboardData] = useState(null);
 
   useEffect(() => {
-    // Fetch data from the API when the component mounts
-    fetch('http://localhost:4000/api/dashboard')
-      .then(response => response.json())
-      .then(data => {
-        setDashboardData(data);
-      })
-      .catch(error => {
+    // Function to fetch data from the API
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/dashboard');
+        if (response.ok) {
+          const data = await response.json();
+          setDashboardData(data);
+        } else {
+          console.error('Failed to fetch data');
+        }
+      } catch (error) {
         console.error('Error fetching data:', error);
-      });
+      }
+    };
+
+    // Call the fetchData function when the component mounts
+    fetchData();
   }, []);
 
   return (
-    <div>
+    <div style={{backgroundColor:'aquamarine'}}>
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
           <button
@@ -86,6 +94,7 @@ function Dashboard(props) {
               <div className="col-md-7 bg-white text-start p-4 radius div-table">
                 <div>
                   <h3>Staff's performance</h3>
+                  <br></br>
                 </div>
                 <div id="table-wrapper">
                   <div id="table-scroll">
@@ -98,49 +107,19 @@ function Dashboard(props) {
                         </tr>
                       </thead>
                       <tbody className="table-group-divider">
-                      <tr>
-                        <td class="no1">&emsp;1</td>
-                        <td class="no1">
-                          <i className="bi bi-person-fill"></i> Otto
-                        </td>
-                        <td class="no1">$45665</td>
-                      </tr>
-                      <tr>
-                        <td class="no2">&emsp;2</td>
-                        <td class="no2">
-                          <i className="bi bi-person-fill"></i> Thornton
-                        </td>
-                        <td class="no2">$6543</td>
-                      </tr>
-                      <tr>
-                        <td class="no3">&emsp;3</td>
-                        <td class="no3">
-                          <i className="bi bi-person-fill"></i> Larry
-                        </td>
-                        <td class="no3">$123457</td>
-                      </tr>
-                      <tr>
-                        <td>&emsp;4</td>
-                        <td>
-                          <i className="bi bi-person-fill"></i> Larry
-                        </td>
-                        <td>$123457</td>
-                      </tr>
-                      <tr>
-                        <td>&emsp;5</td>
-                        <td>
-                          <i className="bi bi-person-fill"></i> Larry
-                        </td>
-                        <td>$123457</td>
-                      </tr>
-                      <tr>
-                        <td>&emsp;3</td>
-                        <td>
-                          <i className="bi bi-person-fill"></i> Larry
-                        </td>
-                        <td>$123457</td>
-                      </tr>
-                    </tbody>
+                        {/* Staff Performance */}
+                        <tr>
+                            <td >
+                              &emsp;
+                            </td>
+                            <td >
+                              <i className="bi bi-person-fill"></i> Olio
+                            </td>
+                            <td>
+                              ${dashboardData.amountSold}
+                            </td>
+                        </tr>
+                      </tbody>
                     </table>
                   </div>
                 </div>
@@ -166,7 +145,7 @@ function Dashboard(props) {
                 <div>
                   <h3>Individual profit target</h3>
                 </div>
-                <img src="chart.png" className="pic" alt="" />
+                <img src={require("../../Images/chart.png")}  />
               </div>
             </div>
           </div>
