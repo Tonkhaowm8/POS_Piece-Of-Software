@@ -45,7 +45,7 @@ main {
 .contentt {
     flex-grow: 1;
     padding: 1px 60px;     /* ADJUST the horizontal (or vertical) position of entire sidenav content */
-    transform: translateX(200px); /* Start with no translation */
+    transform: translateX(150px); /* Start with no translation */
     transition: all 0.3s;
   }
   

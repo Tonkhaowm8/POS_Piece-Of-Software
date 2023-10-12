@@ -49,14 +49,14 @@ function Dashboard(props) {
 
       {dashboardData && (
         <div>
-          <div className="container text-center ">
+          <div className="container text-center">
             <div className="row">
               <div className="radius col-md-3 bg text-start p-4 ">
                 <div className="fs-3 p-2 text-center myIcon bgIcon1 text-white">
                   <i className="bi bi-currency-dollar"></i>
                 </div>
                 <div className="d-flex mt-3">
-                  <h3>${dashboardData.totalSold}</h3>
+                  <h4>${dashboardData.totalSold}</h4>
                 </div>
                 <h6 className="nav-link">Total Sold</h6>
               </div>
@@ -68,19 +68,19 @@ function Dashboard(props) {
                   <i className="bi bi-chevron-double-down"></i>
                 </div>
                 <div className="d-flex mt-3">
-                  <h3>${dashboardData.amountSold}</h3>
+                  <h4>${dashboardData.amountSold}</h4>
                 </div>
                 <h6 className="nav-link">Receipt Amount</h6>
               </div>
 
-              <div className="col-md-1"></div>
+              {/* <div className="col-md-1"></div> */}
 
               <div className="radius col-md-3 bg1 text-start p-4 ">
                 <div className="fs-3 bg-black text-white p-2 text-center myIcon">
                   <i className="bi bi-person-fill"></i>
                 </div>
                 <div className="d-flex mt-3">
-                  <h3>{dashboardData.totalPeople} people</h3>
+                  <h4>{dashboardData.totalPeople} people</h4>
                 </div>
               </div>
             </div>
@@ -125,7 +125,7 @@ function Dashboard(props) {
                 </div>
               </div>
 
-              <div className="col-md-1"></div>
+              {/* <div className="col-sm-1"></div> */}
 
               <div className="col-md-3  bg1 text-start px-4 radius">
                 <div className="my-fs myIcon1 p-0">

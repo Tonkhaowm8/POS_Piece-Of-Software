@@ -10,6 +10,13 @@ import './Stock.css';
 import { useUsername } from '../Login/UsernameContext.jsx'; // Import the useUsername hook
 import { Link } from "react-router-dom";
 
+/* Import images for card items */
+// import Foods from "../../Images/foods.png";
+// import Beverages from "../../Images/beverages.jpg";
+// import Fashion from "../../Images/cloths.jpg";
+// import Cleaners from "../../Images/cleaners.jpg";
+// import Other from "../../Images/others.jpg";
+
 
 function Stock(props) {
     // Define a state variable to store the data
@@ -54,6 +61,14 @@ function Stock(props) {
         setIsEditMode(!isEditMode);
     };
     
+    // Images Path
+    const categoryImageMap = {
+        Foods: require("../../Images/foods.jpg"), // Set the image path for the "Foods" category
+        Beverages: require("../../Images/beverages.jpg"), // Set the image path for the "Beverages" category
+        Fashion: require("../../Images/cloths.jpg"), // Set the image path for the "Fashion" category
+        Cleaners: require("../../Images/cleaners.jpg"), // Set the image path for the "Cleaners" category
+        Other: require("../../Images/others.jpg"), // Set the image path for the "Other" category
+    };
 
     useEffect(() => {
         // Fetch the data from the API URL
@@ -317,19 +332,25 @@ function Stock(props) {
 
     return (
         <div className="stock-Background">
-            <div className="scrollable-content" /* id="bacc" */ >
-                <div className="button-container">
-                    <input
+                <div className="scrollable-content" /* id="bacc" */ >
+                <div className="button-container d-flex align-items-center justify-content-between">
+                    <div className="input-group">
+                        <input
                         type="text"
-                        placeholder="Search by name"
-                        className="search-input"
+                        placeholder="Search by name..."
+                        className="form-control ml-3"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    <button type="button" className="buttonn" onClick={handleShowModal}>Add Product</button>
-                    <button type="button" className="buttonn" onClick={toggleEditMode}>
-                        {isEditMode ? "Done Editing" : "Edit Product"}
-                    </button>
+                        />
+                        <div className="input-group-append">
+                        <button type="button" className="btn btn-primary buttonn" onClick={handleShowModal}>
+                            Add Product
+                        </button>
+                        <button type="button" className="btn btn-secondary buttonn" onClick={toggleEditMode}>
+                            {isEditMode ? "Done Editing" : "Edit Product"}
+                        </button>
+                        </div>
+                    </div>
                 </div>
                 <div className="selection">
                     <span
@@ -386,7 +407,7 @@ function Stock(props) {
                     <div className="flex">
                         {/* Map over dataObject and create card elements */}
                         {filteredData.map((item, index) => (
-                            <div className="flex-item" key={index}>
+                            <div className="flex-item" key={index} style={{ flex: "0 0 33%" }}>
                                 <div className={`card ${isEditMode ? "edit-mode" : ""}`} onClick={() => handleCardClick(item)}>
                                     {isEditMode && (
                                         <button
@@ -400,7 +421,8 @@ function Stock(props) {
                                             <TiDelete />
                                         </button>
                                     )}
-                                    <span style={{ fontFamily: 'Lato', fontWeight: '700', color: 'rgba(35, 29, 218, 0.85)' }}>"{item["ProductName"]}"</span>
+                                    <img id="carde" src={categoryImageMap[item.Category]} alt={item.Category} style={{margin:'0 auto',width:'80%',height:'auto'}}/>
+                                    <span style={{ fontFamily: 'Lato', fontWeight: '700', color: 'rgba(35, 29, 218, 0.85)' }}>{item["ProductName"]}</span>
                                     <span id="carde">Stock: {item.Stock}</span>
                                     <span id="carde">{item.Price} ฿</span>
                                     <span id="carde">{item.Category}</span>

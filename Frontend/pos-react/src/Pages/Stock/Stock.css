@@ -20,7 +20,7 @@
     /* margin: 0 -50px; */
     background-color: rgb(230, 225, 225);
     height: 35%;
-    box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.5);
 }
 
 /* #bacc {
@@ -28,11 +28,11 @@
 } */
 
 .selection {
-    margin: 10px 10px;
+    margin: 15px 12px;
     display:flex;
     border-radius: 5px;
     color: black;
-    background-color: #FFFCFC;
+    background-color: rgb(210, 210, 210);
     justify-content:space-between;
     align-items: center;
 }
@@ -41,7 +41,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 20%;       /* Set max-width length of text-letters displaying in span item (within selection content) */
-    padding: 5px 25px;    /* Increase/decrease horizon properties of padding for length adjustment of sidenav */
+    padding: 10px 25px;    /* Increase/decrease horizon properties of padding for length adjustment of sidenav */
     transition: font-size 0.2s;
 }
 /* Define a pulse animation */
@@ -77,7 +77,7 @@
     border-radius: 3px;
 }
 .unselected {
-    background-color: #FFFCFC;
+    background-color: rgb(210, 210, 210);
     border-radius: 5%;
 }
 
@@ -86,23 +86,23 @@
 }
 
 .button-container {
-    flex: content;
-    justify-content:space-evenly;
-    margin: 15px 0px;  /* Seperation between buttons container and the flex card items below it */
+    /* display: flexbox;
+    justify-content:space-evenly; */
+    margin: 10px 10px;  /* Seperation between buttons container and the flex card items below it */
     text-align: right;
 }
-.button-container > input {
-    margin-right: 8%;
-    width: 60%;
+.input-group > input {
+    margin-right: 5%;
+    /* width: 60%; */
 }
 
 .buttonn {
-    background-color: rgba(233, 172, 30, 0.88);
-    color:rgb(240, 230, 230);
+    background-color: rgba(247, 182, 31, 0.99);
+    color:black;
     padding: 10px 20px;   /* Length of the button content (background color and border) */
-    border: 0.1px solid ;
+    border: 0.1px solid rgb(221, 157, 6);
     border-radius: 10px;
-    margin: 0 5px;     /* Seperation length between two buttons */
+    margin: 0 3px;     /* Seperation length between two buttons */
     line-height: 1.5;
     font-size: 12px;
     font-weight: bold;
@@ -114,30 +114,32 @@
     background-color: rgba(247, 182, 31, 0.99);
     transition: 0.5s;
     transform: scale(1);
-    color: black;
-    border-color: rgb(221, 157, 6);
+    color: white;
+    border-color: black;
 }
 
 
 .flex {
     display: flex;   
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
   
 .flex-item {
-    margin-left: 10px;
+    /* margin-left: 10px; */
     width: calc(33.33% - 14px); /* Adjust the spacing as needed */;
-    justify-content: center;
-    background-clip: content-box;
+    /* justify-content: center; */
+    background-clip: padding-box;
     /* height: 100vh; */
 }
 
 .card {
     text-align: center;
     background-color: #FFFCFC;
-    box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-    margin: 5px 0px;
+    margin: 5px 20px;       /* Adjust horizon value higher to decrease card width's length */
 }
 
 #carde {
@@ -229,7 +231,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 10%;
+    max-width: 15%;
 }
 
 
