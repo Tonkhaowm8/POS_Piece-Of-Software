@@ -35,10 +35,10 @@ function Nav({show, children}) {
         <div className="sidenav"> 
             {renderSidebar && (
                 <div className={show || expandOnLogout ? "mysidenav active" : "mysidenav"}>
-                    <img src={require("../../Images/logo_ 2.png")} 
+                    <img src={require("../../Images/new_logo.png")} 
                     alt="logo"
                     className="logo"
-                    style={{paddingTop:'50px'}}
+                    style={{paddingTop:'50px',height:'120px',width:'230px'}}
                     />
                     <ul class="fa-ull">
                         {SidebarItems.map((item, index) => (
