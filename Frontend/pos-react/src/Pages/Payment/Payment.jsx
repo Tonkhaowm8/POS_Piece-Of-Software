@@ -109,7 +109,7 @@ function Payment(props) {
                     <div className="product-cont">
                         {productElements}
                     </div>
-                    <button className="payment-done-btn" onClick={sendDataToServer}>Transaction Complete</button>
+                    <button className="payment-done-btn" onClick={sendDataToServer}>Transaction</button>
                 </div>
                 <div className="payment">
                     <div className="total">

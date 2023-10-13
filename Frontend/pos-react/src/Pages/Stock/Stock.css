@@ -3,11 +3,56 @@
     height: 768px; 
 } */
 
+@media only screen and (min-width: 1080px) and (max-width: 1200px) {
+    .scrollable-content {
+        width: 40%;
+    }
+    .stackblock {
+        height: 6em;
+    }
+}
+
+@media only screen and (min-width: 1201px) and (max-width: 1298px) {
+    .scrollable-content {
+        width: 45%;
+    }
+    .stackblock {
+        height: 9em;
+    }
+}
+
+@media only screen and (max-width: 1299px) {
+    .scrollable-content {
+        width: 50%;
+    }
+    .stackblock {
+        height: 12em;
+    }
+}
+  
+@media only screen and (min-width: 1300px) and (max-width: 1400px) {
+    .scrollable-content {
+        width: 54%;
+    }
+    .stackblock {
+        height: 15em;
+    }
+}
+
+@media only screen and (min-width: 1401px) {
+    .scrollable-content {
+        width: 58%;
+    }
+    .stackblock {
+        height: 20em;
+    }
+}
+
 .stock-Background {
     height: fit-content;
     margin-bottom: 180px;          /* Adjust the bottom bg color to extend its length *** */
     box-sizing: content-box;
-    width: fit-content;
+    width: 100%;
     display: inline-flex;
     /* flex-direction: row; */
     /* DONT FORGET TO DISABLE THIS */
@@ -17,7 +62,8 @@
 
 .scrollable-content {
     /*Comment color out aftet testing*/
-    /* margin: 0 -50px; */
+    /* margin: 0 50px; */
+    max-width: fit-content;
     background-color: rgb(230, 225, 225);
     height: 35%;
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.5);
@@ -153,7 +199,7 @@
 }
 
 .card-container {
-    width: 50rem;
+    max-width: 50rem;
     /* padding: 30px 25px;     /* 30px 15px */
     box-sizing: border-box;
     overflow-y: auto; /* Enable vertical scrolling when content overflows */
@@ -188,12 +234,13 @@
 
 .fitem {
     /* font-size: medium; */
-    padding: 5px;
+    padding: 10px 10px;
     box-sizing: border-box;
 }
 
 .stackblock {
-    height: 20em;;      /* Adjust height of products in checkout's container: effect overall height of "Checkout" content */
+    /* height: 20em; */
+    max-height: 20em;      /* Adjust height of products in checkout's container: effect overall height of "Checkout" content */
     overflow-y: auto;
     padding: 5px 10px;
 }
@@ -253,16 +300,13 @@
     font-size: 1.2em;
     text-decoration: none;
 }
-.checkOut {
-    text-align: center;
-    padding: 10px;
-}
 
 .cuntainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     border-bottom-style:ridge;
+    max-height: 100px;
 }
 .litem {
     width: calc(50% - 20px); /* Adjust the width as needed */
@@ -276,4 +320,9 @@
 .litem:nth-child(even) {
     margin-right: -15px;
     text-align: center;
+}
+
+.checkOut {
+    text-align: center;
+    padding: 10px;
 }

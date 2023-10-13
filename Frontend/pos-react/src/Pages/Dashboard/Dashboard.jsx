@@ -3,7 +3,13 @@ import Nav from "../../Components/SideNav/SideNav.jsx";
 import './Dashboard.css';
 
 function Dashboard(props) {
-  const [dashboardData, setDashboardData] = useState(null);
+  const [dashboardData, setDashboardData] = useState({
+    totalSold: 0,
+    amountSold: 0,
+    totalPeople: 0,
+    highestSale: 0,
+    eachMember: [],
+  });
 
   useEffect(() => {
     // Function to fetch data from the API
@@ -26,7 +32,7 @@ function Dashboard(props) {
   }, []);
 
   return (
-    <div style={{backgroundColor:'aquamarine'}}>
+    <div>
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
           <button
@@ -44,113 +50,107 @@ function Dashboard(props) {
         </div>
       </nav>
 
-      <br />
-      <br />
 
-      {dashboardData && (
-        <div>
-          <div className="container text-center">
-            <div className="row">
-              <div className="radius col-md-3 bg text-start p-4 ">
-                <div className="fs-3 p-2 text-center myIcon bgIcon1 text-white">
-                  <i className="bi bi-currency-dollar"></i>
-                </div>
-                <div className="d-flex mt-3">
-                  <h4>${dashboardData.totalSold}</h4>
-                </div>
-                <h6 className="nav-link">Total Sold</h6>
+      <div style={{ marginRight: '60px' }}>
+        <div className="container text-center">
+          <div className="row">
+            <h2 className='overwiev'>Tun Sales</h2>
+            <div className="radius col-md-3 text-start p-4">
+              <div className="fs-3 p-2 text-center myIcon bgIcon1 text-white">
+                <i className="bi bi-currency-dollar"></i>
               </div>
-
-              <div className="col-md-1"></div>
-
-              <div className="radius col-md-3 bg1 text-start p-4 ">
-                <div className="fs-3 bg-danger p-2 text-center myIcon text-white">
-                  <i className="bi bi-chevron-double-down"></i>
-                </div>
-                <div className="d-flex mt-3">
-                  <h4>${dashboardData.amountSold}</h4>
-                </div>
-                <h6 className="nav-link">Receipt Amount</h6>
+              <div className="d-flex mt-3">
+                <h4>${dashboardData.totalSold}</h4>
               </div>
-
-              {/* <div className="col-md-1"></div> */}
-
-              <div className="radius col-md-3 bg1 text-start p-4 ">
-                <div className="fs-3 bg-black text-white p-2 text-center myIcon">
-                  <i className="bi bi-person-fill"></i>
-                </div>
-                <div className="d-flex mt-3">
-                  <h4>{dashboardData.totalPeople} people</h4>
-                </div>
-              </div>
+              <h6 className="nav-link">Total Sales</h6>
             </div>
-          </div>
 
-          <br />
-          <br />
+            <div className="col-md-1"></div>
 
-          <div className="container text-center raduis">
-            <div className="row">
-              <div className="col-md-7 bg-white text-start p-4 radius div-table">
-                <div>
-                  <h3>Staff's performance</h3>
-                  <br></br>
-                </div>
-                <div id="table-wrapper">
-                  <div id="table-scroll">
-                    <table className="table ">
-                      <thead>
-                        <tr>
-                          <th scope="col"><span class="text1">Ranking</span></th>
-                          <th scope="col"><span class="text1">Name</span></th>
-                          <th scope="col"><span class="text1">Profit</span></th>
-                        </tr>
-                      </thead>
-                      <tbody className="table-group-divider">
-                        {/* Staff Performance */}
-                        <tr>
-                            <td >
-                              &emsp;
-                            </td>
-                            <td >
-                              <i className="bi bi-person-fill"></i> Olio
-                            </td>
-                            <td>
-                              ${dashboardData.amountSold}
-                            </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+            <div className="radius col-md-3 text-start p-4">
+              <div className="fs-3 bg-danger p-2 text-center myIcon text-white">
+                <i className="bi bi-chevron-double-down"></i>
               </div>
-
-              {/* <div className="col-sm-1"></div> */}
-
-              <div className="col-md-3  bg1 text-start px-4 radius">
-                <div className="my-fs myIcon1 p-0">
-                  <i className="bi bi-bar-chart-fill"></i>
-                </div>
-                <div className="d-flex mt-0">
-                  <h2>${dashboardData.highestSale}</h2>
-                </div>
-                <h6 className="nav-link">Highest sales</h6>
+              <div className="d-flex mt-3">
+                <h4>{dashboardData.amountSold}</h4>
               </div>
+              <h6 className="nav-link">Item Amount</h6>
             </div>
-          </div>
 
-          <div className="container text-center my-5">
-            <div className="row">
-              <div className="col-md-11 bg1 text-start p-4 radius">
-                <div>
-                  <h3>Individual profit target</h3>
-                </div>
-                <img src={require("../../Images/chart.png")}  />
+            <div className="col-md-1"></div>
+
+            <div className="radius col-md-3 text-start p-4">
+              <div className="fs-3 bg-black text-white p-2 text-center myIcon">
+                <i className="bi bi-person-fill"></i>
+              </div>
+              <div className="d-flex mt-3">
+                <h4>{dashboardData.totalPeople} people</h4>
               </div>
             </div>
           </div>
         </div>
-      )}
+
+        <br />
+        <br />
+
+        <div className="container text-center raduis">
+          <div className="row">
+            <div className="col-md-7 bg-white text-start p-4 radius">
+              <div>
+                <h3>Staff Performance</h3>
+                <br></br>
+              </div>
+              <div id="table-wrapper">
+                <div id="table-scroll">
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th scope="col"><span class="text1">Ranking</span></th>
+                        <th scope="col"><span class="text1">Name</span></th>
+                        <th scope="col"><span class="text1">Profit</span></th>
+                      </tr>
+                    </thead>
+                    <tbody className="table-group-divider">
+                      {Object.keys(dashboardData).map((key, index) => (
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>
+                            <i className="bi bi-person-fill"></i> {dashboardData.Ppl}
+                          </td>
+                          <td>${dashboardData.totalSold}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-sm-1"></div>
+
+            <div className="col-md-3  text-start px-4 radius" /* "col-md-3 bg1 text-start px-4 radius" */> 
+              <div className="fs-2 myIcon1 p-0">
+                <i className="bi bi-bar-chart-fill"></i>
+              </div>
+              <div className="d-flex mt-0">
+                <h2>${dashboardData.highestSale}</h2>
+              </div>
+              <h6 className="nav-link">Highest sales</h6>
+            </div>
+          </div>
+        </div>
+
+                        
+        <div className="container text-center my-4">
+          <div className="row">
+            <div className="col-md-11 bg1 text-start p-4 radius">
+              <div>
+                <h3>Sales Overview</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

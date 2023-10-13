@@ -166,24 +166,35 @@ router.get('/dashboard', async (req, res) => {
     var amountSold = 0;
     var totalPeople = 0;
     var highestSale = 0;
+    // var itemsWithUsers = [];
 
     // calculate total sold and amount sold
     const {success, data, error} = await db.readAllItems("orders");
     const {success: succPpl, data: dataPpl, error: errorPpl} = await db.readAllItems("user")
 
     if (success && succPpl) {
-        //return res.json(data);
         for (let i of data[0]['item']) {
-            amountSold += i['quantity'];
-            let currentsold = (i['quantity'] * i['price']);
-            totalSold += currentsold;
-            if (currentsold > highestSale){
-                highestSale = currentsold;
+            for (let j of dataPpl) {
+                // Assuming there is a common identifier to match items and users, replace "commonIdentifier" with the actual field that connects items with users
+                if (i['user'] === j['username (String)']) {
+                    amountSold += i['quantity'];
+                    let currentsold = (i['quantity'] * i['price']);
+                    totalSold += currentsold;
+                    if (currentsold > highestSale) {
+                        highestSale = currentsold;
+                    }
+
+                    // itemsWithUsers.push(j);
+                }
             }
         }
-        return res.json({totalSold: totalSold, amountSold: amountSold, totalPeople: dataPpl.length, highestSale: highestSale})
+
+        // Extract the "name" from each user in "Ppl"
+        const namesFromPpl = data.map(orders => orders.user);
+
+        return res.json({ totalSold: totalSold, amountSold: amountSold, totalPeople: dataPpl.length, highestSale: highestSale, Ppl: namesFromPpl });
     } else {
-        return res.status(500).json({ success: false, messsage: error });
+        return res.status(500).json({ success: false, message: error });
     }
 
 })

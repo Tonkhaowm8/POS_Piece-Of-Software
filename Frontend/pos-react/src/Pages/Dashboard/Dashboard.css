@@ -1,6 +1,12 @@
 
 /* ---------------------------------------------------------dashboard */
-
+.overwiev{
+    text-align: left;
+    margin-bottom: 30px;
+}
+.col-md-3 {
+    background-color: #d3ddff;
+}
 .name{
     font-size: 1.5em!important;
     padding-top: 10px!important;
@@ -42,7 +48,7 @@
     position:relative!important;
   }
 #table-scroll {
-height: 220px !important;
+height: 150px !important;
 overflow:auto!important;
 margin-top:20px!important;
 }

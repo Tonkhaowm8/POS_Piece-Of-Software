@@ -149,6 +149,21 @@ function Stock(props) {
         setTotalPrice(sum);
     }, [selectedData, dataObject]);
 
+    useEffect(() => {
+        // Add an event listener for the "Escape" key when the component mounts
+        const handleKeyDown = (e) => {
+          if (e.key === 'Escape') {
+            handleHideModal();
+          }
+        };
+    
+        window.addEventListener('keydown', handleKeyDown);
+    
+        // Remove the event listener when the component unmounts
+        return () => {
+          window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []); // The empty dependency array ensures the event listener is set up only once
 
     // Function to increase the quantity of a selected item
     const increaseQuantity = (itemId) => {
@@ -358,7 +373,7 @@ function Stock(props) {
                         onClick={() => handleItemClick("All products")}
                         id="href3"
                     >
-                        All products
+                        All Products
                         <AiFillHome className="iconsiam"/>
                     </span>
                     <span
@@ -438,20 +453,20 @@ function Stock(props) {
             <ProductModal show={showModal} onClose={handleHideModal} onSave={handleSaveProduct} isIdAlreadyExist={isIdAlreadyExist}/>
 
             <div className="scrollable-content">
-                <div style={{padding:'0 12px'}}>
+                <div style={{padding:'0 15px'}}>
 
                 </div>
             </div>
             
             {/* padding left-right can only 70px */}
-            <div className="scrollable-content" style={{maxWidth:'400px',width:'450px'}}>   
+            <div className="scrollable-content" style={{maxWidth:'400px'}}>   
                 <div className="checktitle">
                     <span style={{marginLeft:'2em'}}></span>
-                    <span style={{fontFamily:'Raleway',fontWeight:'bold',fontSize:'1.65em',padding:'8px'}}>Checkout</span>
+                    <span style={{fontFamily:'Raleway',fontWeight:'bold',fontSize:'1.85em',padding:'8px'}}>Checkout</span>
                     <button onClick={clearSelectedData} style={{flexShrink:0,marginLeft:'10px',border:'none',backgroundColor:'rgb(230, 225, 225)'}}><AiOutlineReload/></button>
                 </div>
 
-                <div className="checktitle" style={{backgroundColor:'rgb(210, 210, 210)',flexWrap:'wrap',justifyContent:'space-between'}}>
+                <div className="checktitle" style={{backgroundColor:'rgb(210, 210, 210)',flexWrap:'wrap',justifyContent:'space-between',marginTop:'18px'}}>
                     <div className="fitem" style={{marginLeft:'10px'}}>Quantity</div>
                     <div className="fitem" style={{marginLeft:'20px'}}>Name</div>
                     <div className="fitem" style={{marginRight:'60px'}}>Price</div>
@@ -499,26 +514,26 @@ function Stock(props) {
                     <div className="litem">{totalPrice}฿</div>
                 </div>
                 <div style={{padding:'10px auto',border:'none',backgroundColor:'white'}} className="checkOut">
-                <Link to="/payment">
-                    <button
-                    type="button"
-                    style={{
-                        padding: "15px",
-                        backgroundColor: "#7C00F9",
-                        border: "none",
-                        fontFamily: "Inter",
-                        fontWeight: "bold",
-                        borderRadius: "12px",
-                        color: "white",
-                    }}
-                    onClick={sendCartData}
-                    >
-                    Checkout
-                    </button>
-                </Link>
+                    <Link to="/payment">
+                        <button
+                        type="button"
+                        style={{
+                            padding: "15px",
+                            backgroundColor: "#7C00F9",
+                            border: "none",
+                            fontFamily: "Inter",
+                            fontWeight: "bold",
+                            borderRadius: "12px",
+                            color: "white",
+                        }}
+                        onClick={sendCartData}
+                        >
+                        Checkout
+                        </button>
+                    </Link>
                 </div>
             </div>
-            
+
         </div>
     );
 }
