@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Bar } from 'react-chartjs-2';
 import Nav from "../../Components/SideNav/SideNav.jsx";
 import './Dashboard.css';
 
@@ -30,6 +31,33 @@ function Dashboard(props) {
     // Call the fetchData function when the component mounts
     fetchData();
   }, []);
+
+  // Define data for the chart
+  const chartData = {
+    labels: ['Total Sold'],
+    datasets: [
+      {
+        label: 'Highest Sale',
+        data: [dashboardData ? dashboardData.highestSale : 0], // Use dashboardData to access the value
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const chartOptions = {
+    scales: {
+      x: {
+        type: 'category', // Use 'category' scale for labels
+        labels: ['Total Sold'],
+      },
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+  
 
   return (
     <div>
@@ -147,6 +175,7 @@ function Dashboard(props) {
               <div>
                 <h3>Sales Overview</h3>
               </div>
+              {/* <Bar data={chartData} options={chartOptions} /> */}
             </div>
           </div>
         </div>
