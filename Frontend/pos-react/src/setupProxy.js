@@ -6,6 +6,7 @@ module.exports = function (app) {
     '/api',
     createProxyMiddleware({
       target: 'http://localhost:4000/', // Ensure this matches your backend address
+      // target: 'http://localhost:4000/', // Ensure this matches your backend address
       changeOrigin: true,
     })
   );
