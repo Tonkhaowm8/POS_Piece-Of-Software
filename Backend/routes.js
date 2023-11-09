@@ -102,6 +102,7 @@ router.post('/login', async (req, res) => {
     if (success) {
         // If the operation is successful, return JSON response with retrieved data
         if (password == data.password) {
+            cookie = username;
             return res.json({login: true, user: data})
         } else {
             return res.json({login: false, reason: "wrong password"})
@@ -128,17 +129,24 @@ router.post('/cart', (req, res) => {
 // Route to take order
 
 router.post('/receipt', async (req, res) => {
+
+    // change the req data so that it fits the db format
     const receiptData = req.body;
+    receiptData.user = receiptData.username;
+    delete receiptData.username;
+    //console.log(receiptData);
+    const { success: success0, data: data0, error: error0 } = await db.readAllItems("orders");
+    //console.log(data0.length);
+    receiptData.id = data0.length + 1;
     const { success: success, data: data, error: error } = await db.createOrUpdate(receiptData, 'orders');
     //console.log(data)
 
     if (success) {
-        for (let i of data['item']) {
-            console.log(i['itemID']);
-            const {success: success1, data: data1, error: error1} = await db.getItemById(i['itemID'], 'id', 'product');
-            console.log(data1)
+        for (let i of data['products']) {
+            const {success: success1, data: data1, error: error1} = await db.getItemById(i['id'], 'id', 'product');
+            //console.log(data1)
             if (success1){
-                console.log(data1['Stock']);
+                //console.log(data1['Stock']); // get itemid of each item in receipt
                 data1['Stock'] = parseInt(data1['Stock']) - parseInt(i['quantity']);
                 const newData = data1;    
                 let {success: success2, data: data2, error: error2} = await db.createOrUpdate(newData, 'product');
@@ -150,7 +158,6 @@ router.post('/receipt', async (req, res) => {
                 }
 
             } else {
-                console.log("Hello")
                 return res.json({success: success1, reason: error1})
             }
         }
