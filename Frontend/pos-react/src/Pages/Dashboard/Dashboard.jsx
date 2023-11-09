@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Bar } from 'react-chartjs-2';
 import Nav from "../../Components/SideNav/SideNav.jsx";
 import './Dashboard.css';
 
@@ -139,15 +138,21 @@ function Dashboard(props) {
                       </tr>
                     </thead>
                     <tbody className="table-group-divider">
-                      {Object.keys(dashboardData).map((key, index) => (
-                        <tr key={index}>
-                          <td>{index + 1}</td>
-                          <td>
-                            <i className="bi bi-person-fill"></i> {dashboardData.Ppl}
-                          </td>
-                          <td>${dashboardData.totalSold}</td>
+                      {Array.isArray(dashboardData.Ppl) ? (
+                        dashboardData.Ppl.map((userName, index) => (
+                          <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>
+                              <i className="bi bi-person-fill"></i> {userName}
+                            </td>
+                            <td>${dashboardData.totalSold}</td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="3">No data available</td>
                         </tr>
-                      ))}
+                      )}
                     </tbody>
                   </table>
                 </div>

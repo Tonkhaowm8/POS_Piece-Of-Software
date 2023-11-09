@@ -171,6 +171,8 @@ router.get('/dashboard', async (req, res) => {
     // calculate total sold and amount sold
     const {success, data, error} = await db.readAllItems("orders");
     const {success: succPpl, data: dataPpl, error: errorPpl} = await db.readAllItems("user")
+    console.log(data)
+    console.log(dataPpl)
 
     if (success && succPpl) {
         for (let i of data[0]['item']) {
@@ -184,7 +186,7 @@ router.get('/dashboard', async (req, res) => {
                         highestSale = currentsold;
                     }
 
-                    // itemsWithUsers.push(j);
+                    itemsWithUsers.push(j);
                 }
             }
         }
