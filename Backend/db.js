@@ -1,6 +1,6 @@
 // Import the configuration module from './config.js'
 const { response } = require('express');
-const config = require('./config.js');
+const config = require('./server.js');
 
 // Function for creating or updating items in a database table
 const createOrUpdate = async (data = {}, table) => {
