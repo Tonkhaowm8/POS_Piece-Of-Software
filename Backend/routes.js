@@ -221,5 +221,33 @@ router.get('/dashboard', async (req, res) => {
     }
 });
 
+//-------------------------------------------------------------------------------------------------------------------------------
+
+// Route to handle new user registration
+router.post('/register', async (req, res) => {
+    const { username, password, name } = req.body;
+  
+    // Check if the username already exists
+    const userExists = db.user.find((user) => user.username === username);
+  
+    if (userExists) {
+      return res.status(400).json({ success: false, message: 'Username already exists' });
+    }
+  
+    // If the username is unique, create a new user
+    const newUser = {
+      username,
+      name,
+      noOfSales: 0,
+      password, // In a real application, you would hash and salt the password
+      status: 'Employee', // Defaulting status to 'Employee'
+    };
+  
+    // Save the new user to the database
+    db.users.push(newUser);
+  
+    return res.json({ success: true, message: 'User registered successfully', user: newUser });
+  });
+
 // Export the Express router for use in other parts of the application
 module.exports = router;
