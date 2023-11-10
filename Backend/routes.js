@@ -109,6 +109,7 @@ router.post('/login', async (req, res) => {
         }
         return res.json({ success, data });
     }
+
     // If there's an error, return a 500 Internal Server Error with an error message
     return res.status(500).json({ success: false, message: error, data: data, body: req.body });
 });
@@ -137,7 +138,7 @@ router.post('/receipt', async (req, res) => {
     const { success: success0, data: data0, error: error0 } = await db.readAllItems("orders");
     //console.log(data0.length);
     receiptData.id = data0.length + 1;
-    const { success: success, data: data, error: error } = await db.createOrUpdate(receiptData, 'orders'); //updates the receipt
+    const { success: success, data: data, error: error } = await db.createOrUpdate(receiptData, 'orders'); //updates the receipt 
     //console.log(data)
 
     //updates noOfSales
@@ -171,55 +172,46 @@ router.post('/receipt', async (req, res) => {
     }
 })
 
-
-
-//-------------------------------------------------------------------------------------------------------------------------------
-
 // API for dashboard
 router.get('/dashboard', async (req, res) => {
-    try {
-        var totalSold = 0;
-        var amountSold = 0;
-        var totalPeople = 0;
-        var highestSale = 0;
+    var totalSold = 0;
+    var amountSold = 0;
+    var totalPeople = 0;
+    var highestSale = 0;
+    // var itemsWithUsers = [];
 
-        // calculate total sold and amount sold
-        const { success, dataOrder, error } = await db.readAllItems("orders");
-        const { success: succPpl, data: dataPpl, error: errorPpl } = await db.readAllItems("user");
+    // calculate total sold and amount sold
+    const {success: succ, data: dat, error: err} = await db.readAllItems("orders");
+    const {success: succPpl, data: dataPpl, error: errorPpl} = await db.readAllItems("user")
+    console.log(dat)
+    console.log(dataPpl)
 
-        console.log("dataOrder:", dataOrder);
-
-        if (success && succPpl) {
-            if (Array.isArray(dataOrder)) { // Check if dataOrder is an array
-                for (let order of dataOrder) {
-                    if (order.item && Array.isArray(order.item)) {
-                        // Check if the employee has made any sales
-                        if (order.item.length > 0) {
-                            for (let item of order.item) {
-                                amountSold += item.quantity;
-                                let currentSold = item.quantity * item.price;
-                                totalSold += currentSold;
-                                if (currentSold > highestSale) {
-                                    highestSale = currentSold;
-                                }
-                            }
-                        }
+    if (succ && succPpl) {
+        for (let i of dat[0]['products']) {
+            for (let j of dataPpl) {
+                // Assuming there is a common identifier to match items and users, replace "commonIdentifier" with the actual field that connects items with users
+                if (i['user'] === j['username (String)']) {
+                    amountSold += i['quantity'];
+                    let currentsold = (i['quantity'] * i['price']);
+                    totalSold += currentsold;
+                    if (currentsold > highestSale) {
+                        highestSale = currentsold;
                     }
+
+                    //itemsWithUsers.push(j);
                 }
             }
-
-            totalPeople = dataPpl.length;
-
-            return res.json({ totalSold, amountSold, totalPeople, highestSale, Ppl: dataPpl });
-        } else {
-            return res.status(500).json({ success: false, message: error || errorPpl });
         }
-    } catch (error) {
-        console.error('Unexpected error:', error);
-        // Handle unexpected errors
-        return res.status(500).json({ success: false, message: 'Unexpected error' });
+
+        // Extract the "name" from each user in "Ppl"
+        const namesFromPpl = dat.map(orders => orders.user);
+
+        return res.json({ totalSold: totalSold, amountSold: amountSold, totalPeople: dataPpl.length, highestSale: highestSale, Ppl: namesFromPpl });
+    } else {
+        return res.status(500).json({ success: false, message: error });
     }
-});
+
+})
 
 //-------------------------------------------------------------------------------------------------------------------------------
 
