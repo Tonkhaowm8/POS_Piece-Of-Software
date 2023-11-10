@@ -182,17 +182,6 @@ function Dashboard(props) {
             </div>
           </div>
         </div>  
-
-        <div className="container text-center my-4">
-          <div className="row">
-            <div className="col-md-11 bg1 text-start p-4 radius">
-              <div>
-                <h3>Sales Overview</h3>
-              </div>
-              {/* <Bar data={chartData} options={chartOptions} /> */}
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

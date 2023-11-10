@@ -187,20 +187,17 @@ router.get('/dashboard', async (req, res) => {
     if (succ && succPpl) {
         // Initialize an array to store individual sales amounts
         const individualSales = [];
-    
         for (let order of dat) {
             let orderTotal = 0; // Initialize the total for each order
     
             for (let item of order.products) {
                 orderTotal += item.price * item.quantity;
             }
-    
             individualSales.push({ user: order.user, total: orderTotal });
             
             // Update totalSold
             totalSold += orderTotal;
         }
-    
         // Find the highestSale
         const highestSaleObj = individualSales.reduce((max, sale) => (sale.total > max.total ? sale : max), { total: 0 });
         highestSale = highestSaleObj.total;
@@ -212,7 +209,6 @@ router.get('/dashboard', async (req, res) => {
     } else {
         return res.status(500).json({ success: false, message: error });
     }
-
 })
 
 //-------------------------------------------------------------------------------------------------------------------------------
