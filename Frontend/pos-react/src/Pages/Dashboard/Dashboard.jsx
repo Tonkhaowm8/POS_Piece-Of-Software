@@ -8,7 +8,7 @@ function Dashboard(props) {
     amountSold: 0,
     totalPeople: 0,
     highestSale: 0,
-    eachMember: [],
+    Ppl: [0],
   });
 
   useEffect(() => {
@@ -19,6 +19,7 @@ function Dashboard(props) {
         if (response.ok) {
           const data = await response.json();
           setDashboardData(data);
+          console.log(data)
         } else {
           console.error('Failed to fetch data');
         }
@@ -26,7 +27,6 @@ function Dashboard(props) {
         console.error('Error fetching data:', error);
       }
     };
-
     // Call the fetchData function when the component mounts
     fetchData();
   }, []);
@@ -134,25 +134,25 @@ function Dashboard(props) {
                       <tr>
                         <th scope="col"><span class="text1">Ranking</span></th>
                         <th scope="col"><span class="text1">Name</span></th>
-                        <th scope="col"><span class="text1">Profit</span></th>
+                        <th scope="col"><span class="text1">No. Sales</span></th>
                       </tr>
                     </thead>
                     <tbody className="table-group-divider">
-                      {Array.isArray(dashboardData.Ppl) ? (
-                        dashboardData.Ppl.map((userName, index) => (
-                          <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>
-                              <i className="bi bi-person-fill"></i> {userName}
-                            </td>
-                            <td>${dashboardData.totalSold}</td>
-                          </tr>
-                        ))
-                      ) : (
-                        <tr>
-                          <td colSpan="3">No data available</td>
+                    {Array.isArray(dashboardData.Ppl) ? (
+                      dashboardData.Ppl.map((user, index) => (
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>
+                            <i className="bi bi-person-fill"></i> {user.username}
+                          </td>
+                          <td>{user.noOfSales}</td>
                         </tr>
-                      )}
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="3">No data available</td>
+                      </tr>
+                    )}
                     </tbody>
                   </table>
                 </div>
@@ -171,9 +171,7 @@ function Dashboard(props) {
               <h6 className="nav-link">Highest sales</h6>
             </div>
           </div>
-        </div>
-
-                        
+        </div>                        
         <div className="container text-center my-4">
           <div className="row">
             <div className="col-md-11 bg1 text-start p-4 radius">
