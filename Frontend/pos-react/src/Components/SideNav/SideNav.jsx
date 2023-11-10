@@ -25,8 +25,8 @@ function Nav({show, children}) {
         }
     }, [location.pathname]);
 
-    // Check if the current path is Stock or Dashboard
-    const isStockOrDashboard = ['/stock', '/dashboard'].includes(location.pathname);
+    // Check if the current path is Stock or Dashboard or Users-Admin
+    const isStockOrDashboard = ['/stock', '/dashboard', '/users'].includes(location.pathname);
 
     // Render the sidebar only if the current route is Stock or Dashboard
     const renderSidebar = isStockOrDashboard || show || expandOnLogout;
@@ -38,7 +38,7 @@ function Nav({show, children}) {
                     <img src={require("../../Images/new_logo.png")} 
                     alt="logo"
                     className="logo"
-                    style={{paddingTop:'50px',height:'120px',width:'230px'}}
+                    style={{paddingTop:'50px',height:'95px',width:'230px'}}
                     />
                     <ul class="fa-ull">
                         {SidebarItems.map((item, index) => (

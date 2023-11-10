@@ -9,6 +9,7 @@ import Login from './Pages/Login/Login';
 import Logout from './Pages/Logout/Logout';
 import Payment from './Pages/Payment/Payment';
 import { UsernameProvider } from './Pages/Login/UsernameContext.jsx'; // Import the UsernameProvider
+import Users from './Pages/Users/User.jsx';
 
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
         <Router>
           <Routes>
             {/* Conditionally render the Appheader that header would appear on every page except for login */}
-            {['/stock', '/dashboard'].map(path => (
+            {['/stock', '/dashboard', 'users'].map(path => (
               <Route
                 key={path}
                 path={path}
@@ -42,6 +43,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/payment" element={<Payment />} />
+            <Route path="/users" element={<Users />} />
           </Routes>
           <Nav show={expanded}>
             <Routes>
@@ -49,6 +51,7 @@ function App() {
               <Route path="/stock" element={<Stock />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/logout" element={<Logout />} />
+              <Route path="/users" element={<Users />} />
             </Routes>
           </Nav>
         </Router>
