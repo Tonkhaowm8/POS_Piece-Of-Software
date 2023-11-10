@@ -102,7 +102,7 @@ router.post('/login', async (req, res) => {
     if (success) {
         // If the operation is successful, return JSON response with retrieved data
         if (password == data.password) {
-            cookie = username;
+            res.cookie("username", username)
             return res.json({login: true, user: data})
         } else {
             return res.json({login: false, reason: "wrong password"})
@@ -119,7 +119,7 @@ router.post('/login', async (req, res) => {
 router.post('/cart', (req, res) => {
     const { username, products, totalPrice } = req.body; // Destructure username and cartData from the request body
 
-    console.log('Received cart data from', username, ':', products, 'Total Price: ', totalPrice);
+    console.log('Received cart data from', req.cookies.username, ':', products, 'Total Price: ', totalPrice);
 
     return res.json({ success: true, received_cart: products }); // Respond with the received cart data
 });
@@ -132,7 +132,7 @@ router.post('/receipt', async (req, res) => {
 
     // change the req data so that it fits the db format
     const receiptData = req.body;
-    receiptData.user = receiptData.username;
+    receiptData.user = req.cookies.username;
     delete receiptData.username;
     //console.log(receiptData);
     const { success: success0, data: data0, error: error0 } = await db.readAllItems("orders");
