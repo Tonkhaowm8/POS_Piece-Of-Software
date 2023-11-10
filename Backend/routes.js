@@ -172,6 +172,8 @@ router.post('/receipt', async (req, res) => {
     }
 })
 
+//-------------------------------------------------------------------------------------------------------------------------------
+
 // API for dashboard
 router.get('/dashboard', async (req, res) => {
     var totalSold = 0;
@@ -237,6 +239,8 @@ router.post('/register', async (req, res) => {
   
     return res.json({ success: true, message: 'User registered successfully', user: newUser });
   });
+
+//-------------------------------------------------------------------------------------------------------------------------------
 
 // Export the Express router for use in other parts of the application
 module.exports = router;
