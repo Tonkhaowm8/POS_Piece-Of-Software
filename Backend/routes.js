@@ -138,8 +138,13 @@ router.post('/receipt', async (req, res) => {
     const { success: success0, data: data0, error: error0 } = await db.readAllItems("orders");
     //console.log(data0.length);
     receiptData.id = data0.length + 1;
-    const { success: success, data: data, error: error } = await db.createOrUpdate(receiptData, 'orders');
+    const { success: success, data: data, error: error } = await db.createOrUpdate(receiptData, 'orders'); //updates the receipt 
     //console.log(data)
+
+    //updates noOfSales
+    const {success: usrSuccess, data: usrData, error: usrError} = await db.getItemById(req.cookies.username, 'username', 'user')
+    usrData.noOfSales += 1;
+    const { success: usrSuccess1, data: usrData1, error: usrError1 } = await db.createOrUpdate(usrData, 'user'); //updates the noOfSales
 
     if (success) {
         for (let i of data['products']) {
