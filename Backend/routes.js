@@ -213,14 +213,13 @@ router.get('/dashboard', async (req, res) => {
 
 //-------------------------------------------------------------------------------------------------------------------------------
 
-// Route to handle new user registration
 router.post('/register', async (req, res) => {
     const { username, password, name } = req.body;
   
     // Check if the username already exists
-    const userExists = db.user.find((user) => user.username === username);
+    const existingUser = db.findUserByUsername(username);
   
-    if (userExists) {
+    if (existingUser) {
       return res.status(400).json({ success: false, message: 'Username already exists' });
     }
   
@@ -234,7 +233,7 @@ router.post('/register', async (req, res) => {
     };
   
     // Save the new user to the database
-    db.users.push(newUser);
+    db.createOrUpdate(newUser, 'user');
   
     return res.json({ success: true, message: 'User registered successfully', user: newUser });
   });

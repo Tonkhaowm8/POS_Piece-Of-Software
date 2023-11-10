@@ -83,10 +83,27 @@ const deleteItemById = async (value, key = 'id') => {
         return { success: false, error: error.message }; // Return error if operation fails
     }
 }
+
+const users = [];
+
+// Function to find a user by username
+function findUserByUsername(username) {
+  return users.find(user => user.username === username);
+}
+
+// Export the necessary functions or data
+module.exports = {
+  users,
+  findUserByUsername,
+};
+
+
 // Export the defined functions for use in other parts of the application
 module.exports = {
     createOrUpdate,
     readAllItems,
     getItemById,
-    deleteItemById
+    deleteItemById,
+    users,
+    findUserByUsername,
 } 
