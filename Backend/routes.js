@@ -178,35 +178,37 @@ router.get('/dashboard', async (req, res) => {
     var amountSold = 0;
     var totalPeople = 0;
     var highestSale = 0;
-    // var itemsWithUsers = [];
 
     // calculate total sold and amount sold
     const {success: succ, data: dat, error: err} = await db.readAllItems("orders");
     const {success: succPpl, data: dataPpl, error: errorPpl} = await db.readAllItems("user")
     console.log(dat)
-    console.log(dataPpl)
 
     if (succ && succPpl) {
-        for (let i of dat[0]['products']) {
-            for (let j of dataPpl) {
-                // Assuming there is a common identifier to match items and users, replace "commonIdentifier" with the actual field that connects items with users
-                if (i['user'] === j['username (String)']) {
-                    amountSold += i['quantity'];
-                    let currentsold = (i['quantity'] * i['price']);
-                    totalSold += currentsold;
-                    if (currentsold > highestSale) {
-                        highestSale = currentsold;
-                    }
-
-                    //itemsWithUsers.push(j);
-                }
+        // Initialize an array to store individual sales amounts
+        const individualSales = [];
+    
+        for (let order of dat) {
+            let orderTotal = 0; // Initialize the total for each order
+    
+            for (let item of order.products) {
+                orderTotal += item.price * item.quantity;
             }
+    
+            individualSales.push({ user: order.user, total: orderTotal });
+            
+            // Update totalSold
+            totalSold += orderTotal;
         }
-
-        // Extract the "name" from each user in "Ppl"
-        const namesFromPpl = dat.map(orders => orders.user);
-
-        return res.json({ totalSold: totalSold, amountSold: amountSold, totalPeople: dataPpl.length, highestSale: highestSale, Ppl: namesFromPpl });
+    
+        // Find the highestSale
+        const highestSaleObj = individualSales.reduce((max, sale) => (sale.total > max.total ? sale : max), { total: 0 });
+        highestSale = highestSaleObj.total;
+    
+        // Update amountSold
+        amountSold = individualSales.length;
+    
+        return res.json({ totalSold, amountSold, totalPeople: dataPpl.length, highestSale, Ppl: dataPpl });
     } else {
         return res.status(500).json({ success: false, message: error });
     }
