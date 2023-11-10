@@ -125,34 +125,44 @@ function Dashboard(props) {
             <div className="col-md-7 bg-white text-start p-4 radius">
               <div>
                 <h3>Staff Performance</h3>
-                <br></br>
+                <br />
               </div>
               <div id="table-wrapper">
                 <div id="table-scroll">
                   <table className="table">
                     <thead>
                       <tr>
-                        <th scope="col"><span class="text1">Ranking</span></th>
-                        <th scope="col"><span class="text1">Name</span></th>
-                        <th scope="col"><span class="text1">No. Sales</span></th>
+                        <th scope="col">
+                          <span className="text1">Ranking</span>
+                        </th>
+                        <th scope="col">
+                          <span className="text1">Name</span>
+                        </th>
+                        <th scope="col">
+                          <span className="text1">No. Sales</span>
+                        </th>
                       </tr>
                     </thead>
                     <tbody className="table-group-divider">
-                    {Array.isArray(dashboardData.Ppl) ? (
-                      dashboardData.Ppl.map((user, index) => (
-                        <tr key={index}>
-                          <td>{index + 1}</td>
-                          <td>
-                            <i className="bi bi-person-fill"></i> {user.username}
-                          </td>
-                          <td>{user.noOfSales}</td>
+                      {Array.isArray(dashboardData.Ppl) ? (
+                        // Sort users based on the number of sales
+                        dashboardData.Ppl
+                          .slice() // Create a copy to avoid modifying the original array
+                          .sort((a, b) => b.noOfSales - a.noOfSales) // Sort in descending order
+                          .map((user, index) => (
+                            <tr key={index}>
+                              <td>{index + 1}</td>
+                              <td>
+                                <i className="bi bi-person-fill"></i> {user.username}
+                              </td>
+                              <td>{user.noOfSales}</td>
+                            </tr>
+                          ))
+                      ) : (
+                        <tr>
+                          <td colSpan="3">No data available</td>
                         </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan="3">No data available</td>
-                      </tr>
-                    )}
+                      )}
                     </tbody>
                   </table>
                 </div>
@@ -161,7 +171,7 @@ function Dashboard(props) {
 
             <div className="col-sm-1"></div>
 
-            <div className="col-md-3  text-start px-4 radius" /* "col-md-3 bg1 text-start px-4 radius" */> 
+            <div className="col-md-3  text-start px-4 radius">
               <div className="fs-2 myIcon1 p-0">
                 <i className="bi bi-bar-chart-fill"></i>
               </div>
@@ -171,7 +181,8 @@ function Dashboard(props) {
               <h6 className="nav-link">Highest sales</h6>
             </div>
           </div>
-        </div>                        
+        </div>  
+
         <div className="container text-center my-4">
           <div className="row">
             <div className="col-md-11 bg1 text-start p-4 radius">
