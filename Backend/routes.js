@@ -191,8 +191,17 @@ router.get('/dashboard', async (req, res) => {
         const individualSales = [];
         for (let order of dat) {
             let orderTotal = 0; // Initialize the total for each order
+
+            // Check if order.product is an array, if not, convert it to an array
+            const productsArray = Array.isArray(order.products) ? order.products : [order.products];
+
+            if (!Array.isArray(order.products)) {
+                // If order.product is not an array, handle it accordingly
+                console.error("order.product is not an array:", order.products);
+                continue; // Skip this order and move on to the next one
+            }
     
-            for (let item of order.products) {
+            for (let item of productsArray) {
                 orderTotal += item.price * item.quantity;
             }
             individualSales.push({ user: order.user, total: orderTotal });
@@ -210,6 +219,29 @@ router.get('/dashboard', async (req, res) => {
         return res.json({ totalSold, amountSold, totalPeople: dataPpl.length, highestSale, Ppl: dataPpl });
     } else {
         return res.status(500).json({ success: false, message: error });
+    }
+})
+
+//-------------------------------------------------------------------------------------------------------------------------------
+
+// Update User Status
+
+router.patch('/api/updateUserStatus/:username', async (req, res) => {
+    const { status } = req.body;
+
+    try {
+        // Update the user status in the database
+        const updatedUser = await db.readAllItems("user", status);
+
+
+        if (!updatedUser) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+        // Respond with the updated user
+        res.json({ success: true, data: updatedUser, message: 'User status updated successfully' });
+    } catch (error) {
+        console.error('Error updating user status:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
     }
 })
 

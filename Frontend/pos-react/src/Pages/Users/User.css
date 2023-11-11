@@ -6,6 +6,10 @@
     display: none;
 }
 
+.list-group-item {
+    background-color: #FFFCFC;
+}
+
 .custom-hover:hover {
     background-color: #d9d9d9; /* Change this to the desired hover color */
     cursor: pointer;
