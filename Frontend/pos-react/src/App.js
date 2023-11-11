@@ -18,7 +18,7 @@ function App() {
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:4000/api')
+    fetch('https://xyql0fuf33.execute-api.us-east-1.amazonaws.com/alphamale/api')
       .then(response => response.json())
       .then(data => setBackendMessage(data.message))
       .catch(error => console.error('Error fetching data:', error));
