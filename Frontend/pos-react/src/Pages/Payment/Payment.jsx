@@ -70,7 +70,7 @@ function Payment(props) {
     const sendDataToServer = () => {
         // Create an object with the data to send
         const dataToSend = {
-            username: username,
+            username: document.cookie,
             totalPrice: totalPrice,
             products: products,
         };

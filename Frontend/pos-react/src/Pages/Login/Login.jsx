@@ -38,6 +38,8 @@ function Login(props) {
                 // Access user data including username and cart
                 const { username, cart } = responseData.user;
                 console.log('Username:', username);
+                document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+                document.cookie = username;
                 console.log('Cart:', cart);
                 console.log('From Login Page')
                 // Redirect to '/stock' or perform other actions
