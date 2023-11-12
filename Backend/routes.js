@@ -274,5 +274,26 @@ router.post('/register', async (req, res) => {
 
 //-------------------------------------------------------------------------------------------------------------------------------
 
+// Delete a user by ID
+router.delete('/user/:username', async (req, res) => {
+    const username = req.params;
+
+    try {
+        // Perform the deletion logic using your database module
+        const deletedUser = db.deleteUserById(username);
+
+        if (deletedUser) {
+            return res.json({ success: true, message: 'User deleted successfully' });
+        } else {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        return res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+});
+
+//-------------------------------------------------------------------------------------------------------------------------------
+
 // Export the Express router for use in other parts of the application
 module.exports = router;

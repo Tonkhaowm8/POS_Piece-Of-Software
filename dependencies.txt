@@ -6,6 +6,7 @@ npm install react-icons
 npm i react-sidebar
 npm install react-draggable
 npm install react-chartjs-2 chart.js
+npm install axios
 
 
 Backend
