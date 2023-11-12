@@ -7,6 +7,9 @@
 .col-md-3 {
     background-color: #d3ddff;
 }
+.col-md-9 {
+    background-color: #f8ecfd;
+}
 .name{
     font-size: 1.5em!important;
     padding-top: 10px!important;

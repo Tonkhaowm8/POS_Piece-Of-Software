@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import Chart from 'chart.js/auto';
 import Nav from "../../Components/SideNav/SideNav.jsx";
 import './Dashboard.css';
 
@@ -30,36 +31,80 @@ function Dashboard(props) {
     // Call the fetchData function when the component mounts
     fetchData();
   }, []);
-
-  // Define data for the chart
-  const chartData = {
-    labels: ['Total Sold'],
-    datasets: [
-      {
-        label: 'Highest Sale',
-        data: [dashboardData ? dashboardData.highestSale : 0], // Use dashboardData to access the value
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const chartOptions = {
-    scales: {
-      x: {
-        type: 'category', // Use 'category' scale for labels
-        labels: ['Total Sold'],
-      },
-      y: {
-        beginAtZero: true,
-      },
-    },
-  };
   
+  // Use a ref to get the canvas element for the chart
+  const chartRef = useRef(null);
+
+  useEffect(() => {
+    // Create the line chart when the component mounts or when the data changes
+    if (dashboardData.highestSale && dashboardData.amountSold) {
+      const ctx = chartRef.current.getContext('2d');
+
+      // Clear any existing chart
+      if (window.myLineChart) {
+        window.myLineChart.destroy();
+      }
+
+      // create arrays for x and y values
+      const xValues = [];
+      const yValues = [dashboardData.highestSale, dashboardData.highestSale];
+      console.log("yVALUES:",yValues)
+
+      for (let i = 0; i < dashboardData.amountSold; i++) {
+        xValues.push(`Order ${i + 1}`);
+      }
+      console.log("xVALUES:",xValues)
+
+      window.myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: xValues,
+          datasets: [
+            {
+              label: 'Sales vs Amount Sold',
+              data: yValues,
+              borderColor: 'rgb(221, 157, 6)',
+              borderWidth: 2,
+              pointRadius: 5,
+              pointBackgroundColor: 'rgba(247, 182, 31, 0.99)',
+            },
+          ],
+        },
+        options: {
+          // plugins: {
+          //   title: {
+          //       display: true,
+          //       text: 'Custom Chart Title'
+          //   }
+          // },
+          scales: {
+            x: {
+              grid: {
+                drawOnChartArea: false
+              },
+              title: {
+                display: true,
+                text: 'Order',
+              },
+              ticks: {
+                fontSize: 24, // Adjust the font size for x-axis labels
+              },
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Total Sales',
+              },
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    }
+  }, [dashboardData]);
 
   return (
-    <div>
+    <div style={{ overflowY: 'scroll', height: '100vh' }}>
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
           <button
@@ -101,7 +146,7 @@ function Dashboard(props) {
               <div className="d-flex mt-3">
                 <h4>{dashboardData.amountSold}</h4>
               </div>
-              <h6 className="nav-link">Item Amount</h6>
+              <h6 className="nav-link">Order Amount</h6>
             </div>
 
             <div className="col-md-1"></div>
@@ -182,6 +227,21 @@ function Dashboard(props) {
             </div>
           </div>
         </div>  
+
+        <br />
+        <br />
+        
+        <div className="container text-center">
+          <div className="row">
+            <div className="col-md-9 bg-white p-4 radius">
+              <canvas ref={chartRef} />
+            </div>
+          </div>
+        </div>
+
+        <br />
+        <br />
+
       </div>
     </div>
   );
